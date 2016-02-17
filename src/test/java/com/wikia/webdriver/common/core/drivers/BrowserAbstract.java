@@ -14,7 +14,7 @@ import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.geoedge.GeoEdgeProxy;
 import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.eventlisteners.BrowserEventListener;
 
 public abstract class BrowserAbstract {
 
@@ -61,7 +61,7 @@ public abstract class BrowserAbstract {
   }
 
   protected void setListeners(WikiaWebDriver webDriver) {
-    webDriver.register(new PageObjectLogging());
+    webDriver.register(new BrowserEventListener());
   }
 
   /**

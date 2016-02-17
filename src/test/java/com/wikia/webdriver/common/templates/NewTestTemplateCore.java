@@ -19,7 +19,7 @@ import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.driverprovider.DriverProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
-@Listeners({com.wikia.webdriver.common.logging.PageObjectLogging.class,
+@Listeners({com.wikia.webdriver.common.eventlisteners.BrowserEventListener.class,
     com.wikia.webdriver.common.testnglisteners.InvokeMethodAdapter.class})
 public class NewTestTemplateCore {
 
@@ -30,7 +30,6 @@ public class NewTestTemplateCore {
   protected String wikiCorpSetupURL;
   protected NetworkTrafficInterceptor networkTrafficInterceptor;
   protected boolean isProxyServerRunning = false;
-  private DesiredCapabilities capabilities;
 
   protected void refreshDriver() {
     driver = DriverProvider.getActiveDriver();
