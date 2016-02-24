@@ -12,36 +12,22 @@ import java.util.List;
 import java.util.TimeZone;
 
 import lombok.Getter;
+
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Cookie;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
-import org.testng.ITestContext;
-import org.testng.ITestListener;
 
-import com.wikia.webdriver.common.core.AlertHandler;
 import com.wikia.webdriver.common.core.CommonUtils;
-import com.wikia.webdriver.common.core.SelectorStack;
-import com.wikia.webdriver.common.core.TestContext;
-import com.wikia.webdriver.common.core.XMLReader;
-import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
-import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.driverprovider.DriverProvider;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 public class PageObjectLogging {
 
