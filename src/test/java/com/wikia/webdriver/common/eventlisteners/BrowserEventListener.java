@@ -44,7 +44,7 @@ public class BrowserEventListener extends AbstractWebDriverEventListener impleme
 
   @Override
   public void onTestFailure(ITestResult result) {
-    PageObjectLogging.log("Eroor", result.getThrowable(), false, DriverProvider.getActiveDriver());
+    PageObjectLogging.logError("Test Failed", result.getThrowable().getMessage());
   }
 
   @Override
@@ -105,7 +105,7 @@ public class BrowserEventListener extends AbstractWebDriverEventListener impleme
   @Override
   public void beforeNavigateTo(String url, WebDriver driver) {
     new JavascriptActions(driver).execute("window.stop()");
-    PageObjectLogging.log("Navigate to", "<a href='" + url + "'>" + url + "</a>", true);
+    PageObjectLogging.log("Navigate to", url, true);
   }
 
   @Override
@@ -113,8 +113,7 @@ public class BrowserEventListener extends AbstractWebDriverEventListener impleme
     String currentUrl = driver.getCurrentUrl();
     if (!AlertHandler.isAlertPresent(driver)) {
       if (url.equals(driver.getCurrentUrl())) {
-        PageObjectLogging.log("Url after navigation",
-            "<a href='" + currentUrl + "'>" + currentUrl + "</a>", true);
+        PageObjectLogging.log("Url after navigation", currentUrl, true);
       } else {
         if (driver.getCurrentUrl().contains("data:text/html,chromewebdata ")) {
           driver.get(url);
@@ -160,8 +159,6 @@ public class BrowserEventListener extends AbstractWebDriverEventListener impleme
         new WikiBasePageObject().loginAs(user);
       }
     }
-
-    PageObjectLogging.logJSError(driver);
   }
 
   @Override
@@ -174,17 +171,15 @@ public class BrowserEventListener extends AbstractWebDriverEventListener impleme
   }
 
   @Override
-  public void beforeClickOn(WebElement element, WebDriver driver) {
-    PageObjectLogging.logJSError(driver);
-  }
+  public void beforeClickOn(WebElement element, WebDriver driver) {}
 
   @Override
   public void afterClickOn(WebElement element, WebDriver driver) {
-    PageObjectLogging.logOnLowLevel("click", lastFindBy.toString(), true);
+    PageObjectLogging.logInfo("click", lastFindBy.toString());
   }
 
   @Override
   public void afterChangeValueOf(WebElement element, WebDriver driver) {
-    PageObjectLogging.logOnLowLevel("ChangeValueOfField", lastFindBy.toString(), true);
+    PageObjectLogging.logInfo("ChangeValueOfField", lastFindBy.toString());
   }
 }

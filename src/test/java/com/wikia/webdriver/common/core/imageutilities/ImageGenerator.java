@@ -60,7 +60,7 @@ public class ImageGenerator {
 
     try {
       if (ImageIO.write(imageBuffer, imageExtension, new File(imagePath))) {
-        PageObjectLogging.logOnLowLevel(actionName, actionDescription, true);
+        PageObjectLogging.logInfo(actionName, actionDescription);
       }
     } catch (IOException e) {
       throw new WebDriverException(ExceptionUtils.getStackTrace(e));

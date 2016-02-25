@@ -109,8 +109,8 @@ public class Helios {
 
       EntityUtils.consume(entity);
 
-      PageObjectLogging.log("LOGIN HEADERS: ", response.toString(), true);
-      PageObjectLogging.log("LOGIN RESPONSE: ", responseValue.toString(), true);
+      PageObjectLogging.logInfo("LOGIN HEADERS: ", response.toString());
+      PageObjectLogging.logInfo("LOGIN RESPONSE: ", responseValue.toString());
 
       token = responseValue.getString("access_token");
       tokenCache.put(userName, token);
