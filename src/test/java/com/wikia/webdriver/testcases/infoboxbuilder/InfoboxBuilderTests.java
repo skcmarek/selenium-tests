@@ -10,6 +10,7 @@ import com.wikia.webdriver.elements.oasis.pages.TemplateEditPage;
 import com.wikia.webdriver.elements.oasis.pages.TemplatePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfobox;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject;
+
 import org.testng.annotations.Test;
 
 @Test(groups = "InfoboxBuilderTests")
@@ -19,7 +20,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   public void verifyDefaultStructure() {
     new InfoboxBuilderPage()
-        .open("InfoboxBuilderVerifyDefaultStructure")
+        .openNew("InfoboxBuilderVerifyDefaultStructure")
         .verifyDefaultTemplateStructure();
   }
 
@@ -27,7 +28,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   public void addingComponents() {
     InfoboxBuilderPage builder = new InfoboxBuilderPage();
 
-    builder.open("InfoboxBuilderAddingComponents");
+    builder.openNew("InfoboxBuilderAddingComponents");
     int rowComponents = builder.countRows();
     int titleComponents = builder.countTitles();
     int imageComponents = builder.countImages();
@@ -44,8 +45,8 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   public void savingTemplate() {
     TemplatePage templatePage = new InfoboxBuilderPage()
-        .open("InfoboxBuilderSavingTemplate")
-        .deleteRowComponentWithIndex(0)
+        .openExisting("InfoboxBuilderSavingTemplate")
+        .deleteRowUsingButton(0)
         .addRowComponent()
         .save();
 
@@ -56,23 +57,39 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   public void deletingDefaultComponents() {
     InfoboxBuilderPage builder = new InfoboxBuilderPage();
-    builder.open("InfoboxBuilderDeletingDefaultComponents");
+    builder.openNew("InfoboxBuilderDeletingDefaultComponents");
     int rowComponents = builder.countRows();
     int titleComponents = builder.countTitles();
     int imageComponents = builder.countImages();
 
     Assertion.assertEquals(rowComponents - 1,
-                           builder.deleteRowComponentWithIndex(0).countRows());
+                           builder.deleteRowUsingButton(0).countRows());
     Assertion.assertEquals(titleComponents - 1,
-                           builder.deleteTitleComponentWithIndex(0).countTitles());
+                           builder.deleteTitleUsingButton(0).countTitles());
     Assertion.assertEquals(imageComponents - 1,
-                           builder.deleteImageComponentWithIndex(0).countImages());
+                           builder.deleteImageUsingButton(0).countImages());
+  }
+
+  @Execute(asUser = User.USER)
+  public void deletingDefaultComponentsUsingPopUp() {
+    InfoboxBuilderPage builder = new InfoboxBuilderPage();
+    builder.openNew("InfoboxBuilderDeletingDefaultComponents");
+    int rowComponents = builder.countRows();
+    int titleComponents = builder.countTitles();
+    int imageComponents = builder.countImages();
+
+    Assertion.assertEquals(rowComponents - 1,
+                           builder.deleteRowUsingPopUp(0).countRows());
+    Assertion.assertEquals(titleComponents - 1,
+                           builder.deleteTitleUsingPopUp(0).countTitles());
+    Assertion.assertEquals(imageComponents - 1,
+                           builder.deleteImageUsingPopUp(0).countImages());
   }
 
   @Execute(asUser = User.USER)
   public void deletingAddedComponents() {
     InfoboxBuilderPage builder = new InfoboxBuilderPage();
-    builder.open("InfoboxBuilderDeletingAddedComponents");
+    builder.openNew("InfoboxBuilderDeletingAddedComponents");
     int rowComponents = builder.countRows();
     int titleComponents = builder.countTitles();
     int imageComponents = builder.countImages();
@@ -82,26 +99,26 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
     /* deleting last (newly added) components */
     Assertion.assertEquals(
-        rowComponents , builder.deleteRowComponentWithIndex(builder.countRows() - 1).countRows()
+        rowComponents, builder.deleteRowUsingButton(builder.countRows() - 1).countRows()
     );
     Assertion.assertEquals(
         titleComponents,
-        builder.deleteTitleComponentWithIndex(builder.countTitles() - 1).countTitles()
+        builder.deleteTitleUsingButton(builder.countTitles() - 1).countTitles()
     );
     Assertion.assertEquals(
         imageComponents,
-        builder.deleteImageComponentWithIndex(builder.countImages() - 1).countImages()
+        builder.deleteImageUsingButton(builder.countImages() - 1).countImages()
     );
     Assertion.assertEquals(
         headerComponents,
-        builder.deleteHeaderComponentWithIndex(builder.countHeaders() - 1).countHeaders()
+        builder.deleteHeaderUsingButton(builder.countHeaders() - 1).countHeaders()
     );
   }
 
   @Execute(asUser = User.USER)
   public void customizingComponents() {
     TemplatePage template = new InfoboxBuilderPage()
-        .open("InfoboxBuilderCustomizingComponents")
+        .openExisting("InfoboxBuilderCustomizingComponents")
         .changeHeaderCollapsibilityState(0)
         .setAndVerifyRowLabel(0, "AutomatedTest")
         .setLongLabelNameAndVerifyBreakLine(1, "AutomatedTestVeryLongName")
@@ -123,18 +140,10 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     Assertion.assertTrue(new InfoboxBuilderPage().isInfoboxBuilderDisplayed());
   }
 
-  @Execute(asUser = User.USER)
-  public void verifyComponentHelpDialog() {
-    new InfoboxBuilderPage().open("InfoboxBuilderVerifyInterfaceFunctionality")
-        .selectRowWithIndex(0).verifyHelpDialog()
-        .selectTitleWithIndex(0).verifyHelpDialog()
-        .selectRowWithIndex(0).verifyHelpDialog()
-        .selectHeaderWithIndex(0).verifyHelpDialog();
-  }
 
   @Execute(asUser = User.USER)
   public void verifySidebarBackArrow() {
-    new InfoboxBuilderPage().open("InfoboxBuilderVerifyInterfaceFunctionality")
+    new InfoboxBuilderPage().openExisting("InfoboxBuilderVerifyInterfaceFunctionality")
         .selectRowWithIndex(0).verifyBackArrowFunctionality()
         .selectTitleWithIndex(0).verifyBackArrowFunctionality()
         .selectImageWithIndex(0).verifyBackArrowFunctionality()
@@ -154,7 +163,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     String invocationBackgroundColor = infobox.open(PageContent.PORTABLE_INFOBOX_01)
         .getBackgroundColor();
 
-    builder.open("InfoboxBuilderVerifyInfoboxTheme")
+    builder.openExisting("InfoboxBuilderVerifyInfoboxTheme")
         .verifyInfoboxPreviewBackgroundColor(invocationBackgroundColor);
 
     /* select dark theme */
@@ -164,7 +173,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     invocationBackgroundColor = infobox.open(PageContent.PORTABLE_INFOBOX_02)
         .getBackgroundColor();
 
-    builder.open("InfoboxBuilderVerifyInfoboxTheme")
+    builder.openExisting("InfoboxBuilderVerifyInfoboxTheme")
         .verifyInfoboxPreviewBackgroundColor(invocationBackgroundColor);
   }
 
@@ -172,7 +181,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   preview is greater than the preview area height. */
   @Execute(asUser = User.USER)
   public void verifyScrolling() {
-    new InfoboxBuilderPage().open("InfoboxBuilderVerifyScrolling")
+    new InfoboxBuilderPage().openExisting("InfoboxBuilderVerifyScrolling")
         .addImageComponent()
         .addImageComponent()
         .addImageComponent()
@@ -185,7 +194,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   public void verifyUserInteractions() {
     InfoboxBuilderPage builder = new InfoboxBuilderPage();
 
-    builder.open("InfoboxBuilderVerifySelectedBorderStyling").verifyTooltipOnHover();
+    builder.openNew("InfoboxBuilderVerifySelectedBorderStyling").verifyTooltipOnHover();
 
     String borderStyle = builder.getBorderStyle();
     Assertion.assertEquals(borderStyle, "1px solid rgb(26, 94, 184)");
@@ -196,7 +205,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
   @Execute(asUser = User.STAFF)
   public void verifyReordering() {
-    new InfoboxBuilderPage().open("InfoboxBuilderVerifyReordering")
+    new InfoboxBuilderPage().openNew("InfoboxBuilderVerifyReordering")
         .dragAndDropToTheTop(2)
         .dragAndDropToTheTop(3)
         .dragAndDropToTheTop(1);
@@ -213,7 +222,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
   @Execute(asUser = User.USER)
   public void immutableSources() {
-    new InfoboxBuilderPage().open("InfoboxBuilderImmutableRows")
+    new InfoboxBuilderPage().openExisting("InfoboxBuilderImmutableRows")
         .setAndVerifyRowLabel(0, "AutomatedTest")
         .save();
 
@@ -222,4 +231,41 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
     Assertion.assertEquals("AutomatedTest", invocationLabelText);
   }
+
+
+  //TODO: add cases for clicking 'yes' and 'no' buttons
+  @Execute(asUser = User.USER)
+  public void verifyGoToSourceEditorClickOnModalBackground() {
+    InfoboxBuilderPage builderPage = new InfoboxBuilderPage().openNew("Infobox_verify_go_to_source")
+        .clickGoToSourceButton();
+
+    Assertion.assertTrue(builderPage.isGoToSourceDialogPresent());
+
+    builderPage.clickGoToSourceModalBackground();
+
+    Assertion.assertTrue(builderPage.isInfoboxBuilderOpened());
+  }
+
+  @Execute(asUser = User.USER)
+  public void verifyGoToSourceEditorNonEditedInfobox() {
+    new InfoboxBuilderPage().openExisting("InfoboxBuilderSavingTemplate")
+        .clickGoToSourceButton();
+
+    Assertion.assertTrue(new TemplateEditPage().isEditAreaDisplayed());
+    Assertion.assertTrue(driver.getCurrentUrl().contains("InfoboxBuilderSavingTemplate"));
+  }
+
+  @Execute(asUser = User.USER)
+  public void verifyIfInputFieldIsFocusedOnSelectItem() {
+    InfoboxBuilderPage builderPage = new InfoboxBuilderPage().openNew("Infobox_verify_focus")
+        .addHeaderComponent()
+        .selectRowWithIndex(0);
+
+    Assertion.assertTrue(builderPage.isLabelInputFocused());
+
+    builderPage.selectHeaderWithIndex(0);
+
+    Assertion.assertTrue(builderPage.isHeaderInputFocused());
+  }
+
 }

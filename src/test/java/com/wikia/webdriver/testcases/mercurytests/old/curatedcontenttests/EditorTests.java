@@ -15,7 +15,7 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
-import com.wikia.webdriver.elements.mercury.Loading;
+import com.wikia.webdriver.elements.mercury.components.Loading;
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.CuratedContentPageObject;
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.CuratedMainPagePageObject;
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.EditorHomePageObject;
@@ -121,7 +121,7 @@ public class EditorTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryCuratedEditorTest_002")
-  @RelatedIssue(issueID = "XW-829", comment = "Unstable when run in parallel")
+  @RelatedIssue(issueID = "XW-829, XW-1281", comment = "Unstable when run in parallel")
   public void MercuryCuratedEditorTest_002_addAndSaveSection() {
     init();
 
@@ -172,7 +172,7 @@ public class EditorTests extends NewTestTemplate {
     Assertion.assertNumber(
         curatedContent.getCuratedContentItemsNumber(),
         1,
-        "New section items"
+        "If error says that 3 elements were found - it means getList API returned cached response - ticket created: XW-1281"
     );
   }
 
