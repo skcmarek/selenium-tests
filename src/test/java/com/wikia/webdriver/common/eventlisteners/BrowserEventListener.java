@@ -24,6 +24,7 @@ import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.driverprovider.DriverProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.logging.TestReport;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 public class BrowserEventListener extends AbstractWebDriverEventListener implements ITestListener {
@@ -35,6 +36,9 @@ public class BrowserEventListener extends AbstractWebDriverEventListener impleme
     String testName = result.getName().toString();
     String className = result.getTestClass().getName().toString();
     System.out.println(className + " " + testName);
+
+    TestReport.startTest();
+    TestReport.setTestName(result.getName().toString());
   }
 
   @Override
@@ -44,7 +48,7 @@ public class BrowserEventListener extends AbstractWebDriverEventListener impleme
 
   @Override
   public void onTestFailure(ITestResult result) {
-    PageObjectLogging.logError("Test Failed", result.getThrowable().getMessage());
+    PageObjectLogging.logError("Test Failed", result.getMethod().toString());
   }
 
   @Override

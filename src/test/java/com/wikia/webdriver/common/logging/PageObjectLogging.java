@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TimeZone;
 
+import freemarker.template.TemplateException;
 import lombok.Getter;
 
 import org.apache.commons.codec.binary.Base64;
@@ -41,6 +42,8 @@ public class PageObjectLogging {
   private static String logPath = reportPath + logFileName;
   private static String jiraPath = "https://wikia-inc.atlassian.net/browse/";
   private static ArrayList<Boolean> logsResults = new ArrayList<>();
+  private static ArrayList<Step> logs = new ArrayList<>();
+  private static TemplateProcessing templateProcessing = new TemplateProcessing().setCfg();
   @Getter
   private static boolean testStarted = false;
 
@@ -186,15 +189,6 @@ public class PageObjectLogging {
     logsResults.clear();
   }
 
-  private static void appendShowHideButtons() {
-    String hideButton = "<button id=\"hideLowLevel\">hide low level actions</button>";
-    String showButton = "<button id=\"showLowLevel\">show low level actions</button>";
-    StringBuilder builder = new StringBuilder();
-    builder.append(hideButton);
-    builder.append(showButton);
-    CommonUtils.appendTextToFile(logPath, builder.toString());
-  }
-
   public static void startReport() {
     CommonUtils.createDirectory(screenDirPath);
     imageCounter = 0;
@@ -221,7 +215,6 @@ public class PageObjectLogging {
         + "<p>Testing environment: " + Configuration.getEnv() + "</p>" + "<p>Tested version: "
         + "TO DO: GET WIKI VERSION HERE" + "</p>" + "<div id='toc'></div>");
     CommonUtils.appendTextToFile(logPath, builder.toString());
-    appendShowHideButtons();
     try {
       FileInputStream input = new FileInputStream("./src/test/resources/script.txt");
       String content = IOUtils.toString(input);
@@ -243,6 +236,17 @@ public class PageObjectLogging {
     }
     String rowFormat = "<tr class=\"%s\"><td>%s</td><td>%s</td><td>%s</td></tr>";
 
+    TestReport.addstep(new Step(command, description, logType));
+
+    logs.add(new Step(command, description, logType));
+    try {
+      new TemplateProcessing().processReport(logs);
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (TemplateException e) {
+      e.printStackTrace();
+    }
+
     return String.format(rowFormat, logType.getLogClass(), command, description, additionalInfo);
   }
 
@@ -257,7 +261,7 @@ public class PageObjectLogging {
     return String.format(format, imageCounter, imageCounter);
   }
 
-  private enum LogType {
+  public enum LogType {
     INFO("info", true), ERROR("error", false), WARNING("warning", true), SUCCESS("success", true);
 
     private String logClass;
