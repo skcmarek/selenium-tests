@@ -19,6 +19,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
   Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = "ForgottenPassword_anonCanRemindPasswordFromLoginDropdown")
+  @RelatedIssue(issueID = "MAIN-6986", comment = "Test manually")
   public void anonCanRemindPasswordFromLoginDropdown() {
     String userName = credentials.userNameForgottenPassword;
     MailFunctions.deleteAllEmails(credentials.email, credentials.emailPassword);
