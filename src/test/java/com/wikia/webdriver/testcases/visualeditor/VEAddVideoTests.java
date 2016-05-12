@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.visualeditor;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertDialog;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -20,6 +21,9 @@ public class VEAddVideoTests extends NewTestTemplate {
   @Test(groups = {"VEAddVideo", "VEAddExternalVideoTests_001", "VEAddExternalVideo",
       "VEAddExternalVideoTests_004"})
   @Execute(asUser = User.USER)
+  @RelatedIssue(issueID = "MAIN-6897", comment = "Please test manually. Test is broken because of"
+                                                 + " Media update tool product code refactoring by CE-3584"
+                                                 + "Test is being fixed by Spitfire Team")
   public void VEAddExternalVideoTests_001_AddNonPremiumVid() {
     VisualEditorPageObject ve =
         new VisualEditorPageObject(driver).openVEOnArticle(wikiURL, PageContent.ARTICLE_NAME_PREFIX
@@ -39,6 +43,9 @@ public class VEAddVideoTests extends NewTestTemplate {
   //AM02
   @Test(groups = {"VEAddVideo", "VEAddExternalVideoTests_002", "VEAddExternalVideo"})
   @Execute(asUser = User.USER)
+  @RelatedIssue(issueID = "MAIN-6897", comment = "Please test manually. Test is broken because of"
+                                                 + "Media update tool product code refactoring by CE-3584"
+                                                 + "test will be fixed by Spitfire team")
   public void VEAddExternalVideoTests_002_AddPremiumVid() {
     VisualEditorPageObject ve =
         new VisualEditorPageObject(driver).openVEOnArticle(wikiURL, PageContent.ARTICLE_NAME_PREFIX

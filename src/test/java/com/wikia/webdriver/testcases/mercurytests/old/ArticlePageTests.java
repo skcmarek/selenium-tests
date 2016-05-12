@@ -14,7 +14,6 @@ import com.wikia.webdriver.elements.mercury.components.Navigation;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
 import com.wikia.webdriver.elements.mercury.old.ArticlePageObject;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
@@ -28,8 +27,6 @@ public class ArticlePageTests extends NewTestTemplate {
   private Navigation navigation;
   private Navigate navigate;
   private Loading loading;
-
-  private static final By WIKIA_MOBILE_WIKI_TITLE = By.cssSelector("#wkWrdMrk");
 
   private static final String[] FOOTER_ELEMENTS =
       {"Games", "Movies", "TV", "Comics", "Music", "Books", "Lifestyle", "Full site", "Licensing",
@@ -232,8 +229,7 @@ public class ArticlePageTests extends NewTestTemplate {
     PageObjectLogging.logWarning("Info", "Accessing article through link in navigation side");
 
     topBar.openNavigation();
-    navigation.openSubMenu(1);
-    navigation.openSubMenu(2);
+    navigation.openSubMenu(3);
     navigation.openPageLink(5);
 
     result = !driver.getCurrentUrl().contains(encodedColonUrl);
@@ -253,8 +249,7 @@ public class ArticlePageTests extends NewTestTemplate {
     );
 
     topBar.openNavigation();
-    navigation.openSubMenu(1);
-    navigation.openSubMenu(2);
+    navigation.openSubMenu(3);
     navigation.openPageLink(4);
 
     result = driver.getCurrentUrl().contains(encodedQuestionMarkUrl);
@@ -276,8 +271,7 @@ public class ArticlePageTests extends NewTestTemplate {
 
     PageObjectLogging.logWarning("Info", "Accessing article through link in search result");
 
-    topBar.openNavigation();
-    navigation.navigateToPage(MercurySubpages.COLON.substring(6));
+    topBar.openSearch().navigateToPage(MercurySubpages.COLON.substring(6));
 
     result = driver.getCurrentUrl().contains(encodedColonUrl);
     PageObjectLogging.log(
@@ -295,8 +289,7 @@ public class ArticlePageTests extends NewTestTemplate {
         result
     );
 
-    topBar.openNavigation();
-    navigation.navigateToPage(MercurySubpages.QUESTION_MARK.substring(6));
+    topBar.openSearch().navigateToPage(MercurySubpages.QUESTION_MARK.substring(6));
 
     result = driver.getCurrentUrl().contains(encodedQuestionMarkUrl);
     PageObjectLogging.log(

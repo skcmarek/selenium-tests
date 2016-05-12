@@ -137,7 +137,7 @@ public class BrowserEventListener extends AbstractWebDriverEventListener impleme
 
       }
 
-      if (TestContext.isIsFirstLoad() && "true".equals(Configuration.getMockAds())) {
+      if (TestContext.isFirstLoad() && "true".equals(Configuration.getMockAds())) {
         driver.manage().addCookie(new Cookie("mock-ads", XMLReader.getValue("mock.ads_token"),
             Configuration.getWikiaDomain(), null, null));
       }
@@ -146,7 +146,7 @@ public class BrowserEventListener extends AbstractWebDriverEventListener impleme
     Method method = TestContext.getCurrentTestMethod();
     Class<?> declaringClass = method.getDeclaringClass();
 
-    if (TestContext.isIsFirstLoad()) {
+    if (TestContext.isFirstLoad()) {
       User user = null;
       TestContext.setFirstLoad(false);
 

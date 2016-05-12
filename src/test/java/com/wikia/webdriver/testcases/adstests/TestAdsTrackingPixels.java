@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.adstests;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
+import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
@@ -13,8 +14,7 @@ public class TestAdsTrackingPixels extends TemplateNoFirstLoad {
   public static final String COMSCORE_PIXEL_URL = "http://b.scorecardresearch.com/b";
   public static final String GA_PIXEL_URL = "http://www.google-analytics.com/collect";
   public static final String KRUX_PIXEL_URL = "http://beacon.krxd.net/pixel.gif";
-  public static final String NIELSEN_PIXEL_URL =
-      "http://secure-dcr-cert.imrworldwide.com/cgi-bin/cfg?pli";
+  public static final String NIELSEN_PIXEL_URL = "http://secure-dcr.imrworldwide.com/cgi-bin/cfg?pli";
   public static final String QUANTQAST_PIXEL_URL = "http://pixel.quantserve.com/";
 
   @NetworkTrafficDump
@@ -42,6 +42,7 @@ public class TestAdsTrackingPixels extends TemplateNoFirstLoad {
     }
   }
 
+  @UseUnstablePageLoadStrategy
   @NetworkTrafficDump
   @Test(
       groups = "AdsTrackingPixels",
@@ -70,6 +71,22 @@ public class TestAdsTrackingPixels extends TemplateNoFirstLoad {
     new AdsBaseObject(driver, testedPage);
 
     assertTrackingPixelsNotSent(pixelUrls);
+  }
+
+  @NetworkTrafficDump
+  @Test(
+      groups = "AdsTrackingPixelsCuratedMainPage",
+      dataProviderClass = AdsDataProvider.class,
+      dataProvider = "adsTrackingPixelsSentCuratedMainPages"
+  )
+  public void adsTrackingPixelSentCuratedMainPages(String wiki, String page, String[] pixelUrls) {
+    networkTrafficInterceptor.startIntercepting();
+
+    // /main/ URLs are not in /wiki/ directory thus we can't use getUrlForPath method and simple concatenation is enough
+    String testedPage = urlBuilder.getUrlForWiki(wiki) + page;
+    AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage);
+
+    assertTrackingPixelsSent(adsBaseObject, pixelUrls);
   }
 
   private void assertTrackingPixelsSent(AdsBaseObject adsBaseObject, String[] pixelUrls) {

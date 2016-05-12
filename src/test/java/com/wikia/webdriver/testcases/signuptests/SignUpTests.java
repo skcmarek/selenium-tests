@@ -8,8 +8,6 @@ import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.toolbars.CustomizedToolbarComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiLogInSignUpPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.AlmostTherePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.ConfirmationPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
@@ -17,7 +15,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.UserProfilePageO
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUserLoginPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject.tabNames;
-
 import org.testng.annotations.Test;
 
 import java.util.Calendar;
@@ -30,8 +27,8 @@ import java.util.Calendar;
 public class SignUpTests extends NewTestTemplate {
   Credentials credentials = Configuration.getCredentials();
 
-  @Test(groups = {"SignUp_001", "SignUp"})
-  public void anonCanNotSignupWithoutFillingCaptcha() {
+  @Test(groups = {"Signup_anonCanNotSignUpWithoutFillingCaptcha", "SignUp"})
+  public void anonCanNotSignUpWithoutFillingCaptcha() {
     WikiBasePageObject base = new WikiBasePageObject();
     SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
     signUp.typeUserName(signUp.getTimeStamp());
@@ -43,8 +40,8 @@ public class SignUpTests extends NewTestTemplate {
     signUp.verifyCaptchaInvalidMessage();
   }
 
-  @Test(groups = {"SignUp_002", "SignUp"})
-  public void anonCanNotSignupIfSheIsYoungerThanTwelve() {
+  @Test(groups = {"Signup_anonCanNotSignUpIfSheIsYoungerThanTwelve", "SignUp"})
+  public void anonCanNotSignUpIfSheIsYoungerThanTwelve() {
     WikiBasePageObject base = new WikiBasePageObject();
     SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
     signUp.typeUserName(signUp.getTimeStamp());
@@ -59,16 +56,16 @@ public class SignUpTests extends NewTestTemplate {
     signUp.verifyTooYoungMessage();
   }
 
-  @Test(groups = {"SignUp_003", "SignUp"})
-  public void anonCanNotSignupIfTheUsernameAlreadyExists() {
+  @Test(groups = {"Signup_anonCanNotSignUpIfTheUsernameAlreadyExists", "SignUp"})
+  public void anonCanNotSignUpIfTheUsernameAlreadyExists() {
     WikiBasePageObject base = new WikiBasePageObject();
     SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
     signUp.typeUserName(credentials.userName);
     signUp.verifyUserExistsMessage();
   }
 
-  @Test(groups = {"SignUp_004", "SignUp", "Smoke4"})
-  public void anonCanSignup() {
+  @Test(groups = {"Signup_anonCanSignUp", "SignUp", "Smoke4"})
+  public void anonCanSignUp() {
     WikiBasePageObject base = new WikiBasePageObject();
     SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
     signUp.disableCaptcha();
@@ -97,37 +94,8 @@ public class SignUpTests extends NewTestTemplate {
     preferences.selectTab(tabNames.EMAIL);
     preferences.verifyEmailMeSection();
   }
-
-  @Test(groups = {"SignUp_005_Forced_Signup_CNW", "SignUp"})
-  public void anonCanSignupWhenCreatingNewWiki() {
-    CreateNewWikiPageObjectStep1 createNewWiki1 = new CreateNewWikiPageObjectStep1(driver).open();
-    createNewWiki1.disableCaptcha();
-    String wikiName = createNewWiki1.getWikiName();
-    createNewWiki1.typeInWikiName(wikiName);
-    createNewWiki1.verifySuccessIcon();
-    CreateNewWikiLogInSignUpPageObject cnwSignUpPage = createNewWiki1.submitToLogInSignUp();
-    SignUpPageObject signUp = cnwSignUpPage.submitSignup();
-    String userName = "User" + signUp.getTimeStamp();
-    String password = "Pass" + signUp.getTimeStamp();
-    String email = credentials.emailQaart2;
-    String emailPassword = credentials.emailPasswordQaart2;
-
-    signUp.typeEmail(email);
-    signUp.typeUserName(userName);
-    signUp.typePassword(password);
-    signUp.enterBirthDate(PageContent.WIKI_SIGN_UP_BIRTHMONTH, PageContent.WIKI_SIGN_UP_BIRTHDAY,
-        PageContent.WIKI_SIGN_UP_BIRTHYEAR);
-    AlmostTherePageObject almostTherePage = signUp.submit(email, emailPassword);
-    almostTherePage.verifyAlmostTherePage();
-    ConfirmationPageObject confirmPageAlmostThere =
-        almostTherePage.enterActivationLink(email, emailPassword, wikiCorporateURL);
-    confirmPageAlmostThere.typeInUserName(userName);
-    confirmPageAlmostThere.typeInPassword(password);
-    createNewWiki1 = confirmPageAlmostThere.CNWSubmitButton(email, emailPassword);
-    createNewWiki1.verifyWikiName(wikiName);
-  }
-
-  @Test(groups = {"SignUp_006", "SignUp"})
+  
+  @Test(groups = {"Signup_userCanLoginWithoutConfirmingVerificationEmail", "SignUp"})
   public void userCanLoginWithoutConfirmingVerificationEmail() {
     WikiBasePageObject base = new WikiBasePageObject();
     SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
@@ -157,10 +125,10 @@ public class SignUpTests extends NewTestTemplate {
    * created account from facebook
    */
 
-  @Test(groups = {"SignUp_007", "SignUp"})
+  @Test(groups = {"Signup_anonCanSignUpWithUsernameContainingJapaneseSpecialCharacters", "SignUp"})
   @Execute(onWikia = "ja.ja-test")
   @RelatedIssue(issueID = "QAART-744", comment = "Mail timeout causes the test to fail. Monitor the ticket status")
-  public void anonCanSignupWithUsernameContainingJapaneseSpecialCharacters() {
+  public void anonCanSignUpWithUsernameContainingJapaneseSpecialCharacters() {
     SignUpPageObject signUp = new WikiBasePageObject().navigateToSpecialSignUpPage(wikiURL);
     signUp.disableCaptcha();
     String userName = "ユーザー" + signUp.getTimeStamp();

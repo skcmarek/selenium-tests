@@ -40,7 +40,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.RenamePageObjec
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.chatpageobject.ChatPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.chatpageobject.ChatPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.FacebookMainPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumPageObject;
@@ -79,6 +79,7 @@ public class WikiBasePageObject extends BasePageObject {
   protected static final By LOGIN_BUTTON_CSS = By.cssSelector("a[data-id='login']");
   private static final String LOGGED_IN_USER_SELECTOR_OASIS =
       ".AccountNavigation a[title*=%userName%]";
+  private static final By MERCURY_NAV_ICON = By.cssSelector(".site-head .site-head-icon-nav");
   private static final String LOGGED_IN_USER_SELECTOR_MONOBOOK = "#pt-userpage a[href*=%userName%]";
   private static final String LOGGED_IN_USER_SELECTOR_MERCURY = ".avatar img[alt*=%userName%]";
   private static final String LOGGED_IN_USER_SELECTOR = LOGGED_IN_USER_SELECTOR_MERCURY + ","
@@ -169,7 +170,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public AuthModal getAuthModal() {
-    return new AuthModal(driver);
+    return new AuthModal();
   }
 
   public String getWikiUrl() {
@@ -467,8 +468,20 @@ public class WikiBasePageObject extends BasePageObject {
       if (driver.findElements(By.cssSelector("#PreviewFrame")).size() > 0) {
         driver.switchTo().frame("PreviewFrame");
       }
+      // open nav if on mercury, required to see login data
+      if (driver.findElements(MERCURY_NAV_ICON).size() > 0) {
+        wait.forElementClickable(MERCURY_NAV_ICON);
+        driver.findElement(MERCURY_NAV_ICON).click();
+      }
+
       wait.forElementPresent(By
           .cssSelector(LOGGED_IN_USER_SELECTOR.replace("%userName%", userName.replace(" ", "_"))));
+
+      // closing menu if mercury
+      if (driver.findElements(MERCURY_NAV_ICON).size() > 0) {
+        wait.forElementClickable(MERCURY_NAV_ICON);
+        driver.findElement(MERCURY_NAV_ICON).click();
+      }
     } finally {
       restoreDeaultImplicitWait();
       driver.switchTo().defaultContent();
@@ -510,11 +523,6 @@ public class WikiBasePageObject extends BasePageObject {
   public BlogPageObject openBlogByName(String wikiURL, String blogTitle, String userName) {
     getUrl(wikiURL + URLsContent.BLOG_NAMESPACE.replace("%userName%", userName) + blogTitle);
     return new BlogPageObject(driver);
-  }
-
-  public ChatPageObject openChat(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_CHAT);
-    return new ChatPageObject(driver);
   }
 
   public ArticlePageObject openMainPage(String wikiURL) {
@@ -718,6 +726,13 @@ public class WikiBasePageObject extends BasePageObject {
 
   public String getNameForArticle() {
     return PageContent.ARTICLE_NAME_PREFIX + getTimeStamp();
+  }
+
+  public String getPseudoElementValue(WebElement element, String pseudoElement, String cssValue) {
+    return driver.executeScript(
+        "return getComputedStyle(arguments[0], arguments[1])[arguments[2]];",
+        element, pseudoElement, cssValue
+    ).toString();
   }
 
   public void openSpecialPromoteOnCurrentWiki() {

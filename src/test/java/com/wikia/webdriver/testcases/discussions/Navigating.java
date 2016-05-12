@@ -12,8 +12,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostsListPa
 
 import org.testng.annotations.Test;
 
-@Execute(onWikia = MercuryWikis.MEDIAWIKI_119)
 @Test(groups = "discussions")
+@Execute(onWikia = MercuryWikis.MEDIAWIKI_119)
 public class Navigating extends NewTestTemplate {
 
   private static final String DESKTOP_RESOLUTION = "1366x768";
@@ -57,21 +57,22 @@ public class Navigating extends NewTestTemplate {
     clickUsernameLoadsUserPage();
   }
 
-  @Test(groups = {"Navigating_005"})
+  @Test(groups = "discussions-anonUserOnDesktopCanSeeAppPromotion")
   @Execute(onWikia = "fallout")
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanSeeAppPromotion() {
     discussionsAppPromotionUnitPresentOnPage();
   }
 
-  @Test(groups = {"Navigating_006"})
+  @Test(groups = "discussions-anonUserOnDesktopCanClickAppleLinkAppPromotion")
   @Execute(onWikia = "fallout")
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  @RelatedIssue(issueID = "MAIN-6970")
   public void anonUserOnDesktopCanClickAppleLinkAppPromotion() {
     appleLinkRedirectsProperly();
   }
 
-  @Test(groups = {"Navigating_007"})
+  @Test(groups = "discussions-anonUserOnDesktopCanClickGooglePlayLinkAppPromotion")
   @Execute(onWikia = "fallout")
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanClickGooglePlayLinkAppPromotion() {
@@ -105,14 +106,14 @@ public class Navigating extends NewTestTemplate {
   }
 
   public void discussionsAppPromotionUnitPresentOnPage() {
-    PostsListPage postsList = new PostsListPage(driver).open();
+    PostsListPage postsList = new PostsListPage(driver).open("3035");
     Assertion.assertTrue(postsList.isAppleLinkDisplayed());
     Assertion.assertTrue(postsList.isGooglePlayLinkDisplayed());
     Assertion.assertEquals(postsList.isPromotionAppTextDisplayed(), "Stay up to date on the go. Get the app now!");
   }
 
   public void appleLinkRedirectsProperly() {
-    PostsListPage postsList = new PostsListPage(driver).open();
+    PostsListPage postsList = new PostsListPage(driver).open("3035");
     postsList.clickAppleLinkInAppPromotion();
     String newWindow = driver.getWindowHandles().toArray()[1].toString();
     driver.switchTo().window(newWindow);
@@ -126,6 +127,4 @@ public class Navigating extends NewTestTemplate {
     driver.switchTo().window(newWindow);
     Assertion.assertTrue(driver.getTitle().contains("Wikia: Fallout"));
   }
-
 }
-

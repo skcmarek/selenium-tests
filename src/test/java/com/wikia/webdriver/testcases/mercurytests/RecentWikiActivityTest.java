@@ -1,4 +1,4 @@
-package com.wikia.webdriver.testcases.mercurytests.recentwikiactivity;
+package com.wikia.webdriver.testcases.mercurytests;
 
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -9,7 +9,6 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.RecentWikiActivity;
 import com.wikia.webdriver.elements.mercury.pages.MainPage;
 import com.wikia.webdriver.elements.mercury.pages.RecentWikiActivityPage;
-
 import org.testng.annotations.Test;
 
 @Execute(onWikia = "aga")

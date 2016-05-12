@@ -1,5 +1,10 @@
 package com.wikia.webdriver.common.dataprovider.mobile;
 
+import com.wikia.webdriver.common.contentpatterns.AdsContent;
+import com.wikia.webdriver.common.core.url.Page;
+
+import com.google.common.collect.ImmutableMap;
+import org.openqa.selenium.Dimension;
 import org.testng.annotations.DataProvider;
 
 import java.util.Arrays;
@@ -7,15 +12,15 @@ import java.util.Collections;
 
 public class MobileAdsDataProvider {
 
-    private MobileAdsDataProvider() {
-    }
+  private MobileAdsDataProvider() {
+  }
 
   @DataProvider
   public static Object[][] leaderboardAndPrefooterSlots() {
     return new Object[][]{
         {
-            "adtest", "SyntheticTests/Slots/leaderboard+prefooter",
-            "wka.life/_adtest//article"
+            "project43", "SyntheticTests/Mercury/Slots/Leaderboard,Prefooter",
+            "wka.life/_project43//article"
         }
     };
   }
@@ -24,8 +29,8 @@ public class MobileAdsDataProvider {
   public static Object[][] leaderboardAndInContentSlots() {
     return new Object[][]{
         {
-            "adtest", "SyntheticTests/Slots/leaderboard+in_content",
-            "wka.life/_adtest//article"
+            "project43", "SyntheticTests/Mercury/Slots/Leaderboard,Incontent",
+            "wka.life/_project43//article"
         }
     };
   }
@@ -34,9 +39,17 @@ public class MobileAdsDataProvider {
   public static Object[][] allSlots() {
     return new Object[][]{
         {
-            "adtest", "SyntheticTests/Slots/leaderboard+in content+prefooter",
-            "wka.life/_adtest//article"
+            "project43", "SyntheticTests/Mercury/Slots/AllSlots",
+            "wka.life/_project43//article"
         }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] kruxIntegration() {
+    return new Object[][]{
+        {"elderscrolls", "Skyrim"},
+        {"wowwiki", "Portal:Main"}
     };
   }
 
@@ -77,12 +90,12 @@ public class MobileAdsDataProvider {
             "yugioh",
             "Dark_Magician",
             null,
-            "wka.ent/_yugioh//article",
+            "wka.gaming/_yugioh//article",
             "MOBILE_TOP_LEADERBOARD",
             Arrays.asList(
-                "\"s0\":\"ent\"",
-                "\"s0v\":\"comics\"",
-                "\"s0c\":[\"gaming\",\"anime\",\"videogames\"]",
+                "\"s0\":\"gaming\"",
+                "\"s0v\":\"games\"",
+                "\"s0c\":[\"gaming\",\"videogames\",\"anime\"]",
                 "\"s1\":\"_yugioh\"",
                 "\"s2\":\"article\"",
                 "\"dmn\":\"wikiacom\"",
@@ -98,10 +111,10 @@ public class MobileAdsDataProvider {
                 "\"lang\":\"en\"",
                 "\"pv\":\"1\"",
                 "\"top\":\"1k\"",
-                "\"esrb\":[\"everyone\"]",
-                "\"age\":[\"teen\",\"kid\",\"18-34\"]",
-                "\"gnre\":[\"anime\",\"fantasy\",\"strategy\",\"comics\"]",
-                "\"media\":[\"tv\",\"cards\"]",
+                "\"esrb\":\"everyone\"",
+                "\"age\":[\"under18\",\"13-17\",\"18-24\",\"kids\",\"teen\",\"yadult\"]",
+                "\"gnre\":[\"action\",\"adventure\",\"anime\",\"comic\",\"fantasy\"]",
+                "\"media\":[\"movies\",\"tv\",\"comics\",\"cards\"]",
                 "\"pform\":[\"pc\",\"psp\"]",
                 "\"sex\":[\"m\"]"
 
@@ -139,12 +152,12 @@ public class MobileAdsDataProvider {
                 "\"pv\":\"1\"",
                 "\"top\":\"1k\"",
                 "\"sex\":[\"m\"]",
-                "\"age\":[\"under18\",\"18-34\",\"18-24\",\"25-34\",\"teen\"]",
-                "\"gnre\":[\"action\",\"adventure\",\"fps\",\"openworld\",\"rpg\",\"scifi\"]",
-                "\"pform\":[\"pc\",\"xbox360\",\"ps3\"]",
-                "\"pub\":[\"bethesda\",\"bethesda\"]",
-                "\"esrb\":[\"mature\"]",
-                "\"theme\":[\"military\",\"postapocalypse\"]"
+                "\"age\":[\"under18\",\"18-24\",\"25-34\",\"18-34\",\"teen\"]",
+                "\"gnre\":[\"3rdpersonshooter\",\"action\",\"adventure\",\"fps\",\"openworld\",\"rpg\",\"scifi\",\"shooter\"]",
+                "\"pform\":[\"xboxone\",\"ps4\",\"pc\",\"xbox360\",\"ps3\",\"mobile\"]",
+                "\"pub\":[\"bethesda\"]",
+                "\"esrb\":\"mature\"",
+                "\"theme\":[\"mature\",\"military\",\"postapocalypse\",\"robots\"]"
 
             ),
             Arrays.asList(
@@ -176,12 +189,11 @@ public class MobileAdsDataProvider {
                 "\"lang\":\"en\"",
                 "\"pv\":\"1\"",
                 "\"top\":\"1k\"",
-                "\"age\":[\"kids\",\"teen\",\"under18\",\"18-24\"]",
-                "\"gnre\":[\"mmo\",\"rpg\",\"action\",\"adventure\",\"free2play\",\"fantasy\",\"mmo\",\"rpg\",\"mmorpg\",\"openworld\"]",
+                "\"age\":[\"under18\",\"13-17\",\"18-24\",\"25-34\",\"18-34\",\"teen\",\"yadult\"]",
+                "\"gnre\":[\"action\",\"adventure\",\"free2play\",\"fantasy\",\"mmo\",\"mmorpg\",\"openworld\",\"rpg\"]",
                 "\"pform\":[\"pc\"]",
-                "\"volum\":[\"l\"]",
                 "\"sex\":[\"m\"]",
-                "\"esrb\":[\"teen\"]",
+                "\"esrb\":\"teen\"",
                 "\"theme\":[\"dragon\",\"heroes\",\"magic\",\"monster\",\"sword\",\"zombie\"]"
 
             ),
@@ -219,7 +231,7 @@ public class MobileAdsDataProvider {
                 "\"pform\":[\"xboxone\",\"ps4\",\"ps3\",\"xbox360\",\"pc\"]",
                 "\"gnre\":[\"adventure\",\"3rdpersonshooter\",\"comedy\",\"casual\",\"platformer\"]",
                 "\"theme\":[\"lego\"]",
-                "\"esrb\":[\"everyone\"]"
+                "\"esrb\":\"everyone\""
             ),
             Arrays.asList(
                 "\"pos\":\"MOBILE_TOP_LEADERBOARD\"",
@@ -252,10 +264,10 @@ public class MobileAdsDataProvider {
                 "\"pv\":\"1\"",
                 "\"top\":\"1k\"",
                 "\"sex\":[\"m\"]",
-                "\"age\":[\"under18\",\"13-17\",\"18-24\",\"25-34\",\"kids\",\"teen\"]",
-                "\"gnre\":[\"rts\",\"strategy\",\"sim\"]",
-                "\"pform\":[\"pc\"]",
-                "\"esrb\":[\"everyone\"]"
+                "\"age\":[\"under18\",\"13-17\",\"18-24\",\"25-34\",\"18-34\",\"kids\",\"teen\"]",
+                "\"gnre\":[\"casual\",\"free2play\",\"facebook\",\"strategy\",\"scifi\",\"sim\",\"war\"]",
+                "\"pform\":[\"pc\",\"xbox360\",\"ps3\",\"mobile\",\"wii\",\"ds\"]",
+                "\"esrb\":\"everyone\""
             ),
             Arrays.asList(
                 "\"pos\":\"MOBILE_TOP_LEADERBOARD\"",
@@ -288,14 +300,14 @@ public class MobileAdsDataProvider {
                 "\"ref\":\"direct\"",
                 "\"pv\":\"1\"",
                 "\"top\":\"1k\"",
-                "\"age\":[\"teen\",\"13-17\",\"18-34\",\"18-24\",\"25-34\"]",
-                "\"esrb\":[\"teen\"]",
-                "\"gnre\":[\"sim\",\"scifi\",\"rts\",\"strategy\"]",
+                "\"age\":[\"13-17\",\"18-24\",\"25-34\",\"18-34\",\"teen\"]",
+                "\"media\":[\"books\",\"comics\"]",
+                "\"esrb\":\"teen\"",
+                "\"gnre\":[\"rpg\",\"rts\",\"strategy\",\"sim\",\"war\"]",
                 "\"pform\":[\"pc\"]",
                 "\"sex\":[\"m\"]",
-                "\"volum\":[\"m\"]",
                 "\"pub\":[\"blizzard\"]",
-                "\"theme\":[\"space\",\"alien\"]"
+                "\"theme\":[\"alien\",\"heroes\",\"military\",\"robots\",\"space\"]"
             ),
             Arrays.asList(
                 "\"pos\":\"MOBILE_TOP_LEADERBOARD\"",
@@ -349,36 +361,36 @@ public class MobileAdsDataProvider {
     };
   }
 
-    @DataProvider
-    public static Object[][] dfpEvolveParamsMercury() {
-        return new Object[][]{
-            {
-                "adtest",
-                "SyntheticTests/DfpParams",
-                4403,
-                "ev/wikia_intl/ros",
-                "MOBILE_TOP_LEADERBOARD",
-                Arrays.asList(
-                    "\"s0\":\"life\"",
-                    "\"s0v\":\"lifestyle\"",
-                    "\"s1\":\"_adtest\"",
-                    "\"s2\":\"article\"",
-                    "\"dmn\":\"wikiacom\"",
-                    "\"hostpre\":\"",
-                    "\"skin\":\"mercury\"",
-                    "\"wpage\":\"synthetictests/dfpparams\"",
-                    "\"ref\":\"direct\"",
-                    "\"lang\":\"en\"",
-                    "\"esrb\":\"teen\""
-                ),
-                Arrays.asList(
-                    "\"pos\":\"a\"",
-                    "\"wpos\":\"MOBILE_TOP_LEADERBOARD\"",
-                    "\"wsrc\":\"mobile_evolve\""
-                )
-            }
-        };
-    }
+  @DataProvider
+  public static Object[][] dfpEvolveParamsMercury() {
+    return new Object[][]{
+        {
+            "adtest",
+            "SyntheticTests/DfpParams",
+            4403,
+            "ev/wikia_intl/ros",
+            "MOBILE_TOP_LEADERBOARD",
+            Arrays.asList(
+                "\"s0\":\"life\"",
+                "\"s0v\":\"lifestyle\"",
+                "\"s1\":\"_adtest\"",
+                "\"s2\":\"article\"",
+                "\"dmn\":\"wikiacom\"",
+                "\"hostpre\":\"",
+                "\"skin\":\"mercury\"",
+                "\"wpage\":\"synthetictests/dfpparams\"",
+                "\"ref\":\"direct\"",
+                "\"lang\":\"en\"",
+                "\"esrb\":\"teen\""
+            ),
+            Arrays.asList(
+                "\"pos\":\"a\"",
+                "\"wpos\":\"MOBILE_TOP_LEADERBOARD\"",
+                "\"wsrc\":\"mobile_evolve\""
+            )
+        }
+    };
+  }
 
   @DataProvider
   public static Object[][] disableGptMercury() {
@@ -394,10 +406,10 @@ public class MobileAdsDataProvider {
   public static Object[][] mercuryConsecutivePageViews() {
     return new Object[][]{
         {
-            "adtest", "SyntheticTests/Slots/MercuryOnConsecutivePageViews1",
-            "SyntheticTests/Slots/MercuryOnConsecutivePageViews2",
-            "SyntheticTests/Slots/MercuryOnConsecutivePageViews3",
-            "wka.life/_adtest//article",
+            "project43", "SyntheticTests/Mercury/Slots/ConsecutivePageViews/1",
+            "SyntheticTests/Mercury/Slots/ConsecutivePageViews/2",
+            "SyntheticTests/Mercury/Slots/ConsecutivePageViews/3",
+            "wka.life/_project43//article",
         }
     };
   }
@@ -405,9 +417,85 @@ public class MobileAdsDataProvider {
   @DataProvider
   public static Object[][] testAdsHopPostMessage() {
     return new Object[][]{
-        {"adtest", "DFP/hop", "mobile", "\"source\":\"mobile/LB\""},
-        {"adtest", "DFP/hophop", "mobile_remnant", "\"source\":\"mobile_remnant/LB\""},
-        {"adtest", "SyntheticTests/Async/Hop/ExtraMarker", "mobile", "\"test-marker\":\"42\""}
+        {"project43", "SyntheticTests/AdType/1xHop", "mobile", "\"source\":\"mobile/LB\""},
+        {"project43", "SyntheticTests/AdType/2xHop", "mobile_remnant", "\"source\":\"mobile_remnant/LB\""},
+        {"project43", "SyntheticTests/AdType/Async/Hop/ExtraMarker", "mobile", "\"test-marker\":\"42\""}
+    };
+  }
+
+  @DataProvider
+  public static Object[][] adsSlotSizeMercury() {
+    return new Object[][]{
+        {
+            new Page("project43", "SyntheticTests/MobileLeaderboard"),
+            "",
+            ImmutableMap.<String, Object>builder()
+                .put("slotName", AdsContent.MOBILETOP_LB)
+                .put("slotSize", new Dimension(320, 100))
+                .put("lineItemId", 272132532)
+                .put("src", "mobile")
+                .build()
+        },
+        {
+            new Page("project43", "SyntheticTests/Slots/Size/320x50"),
+            "",
+            ImmutableMap.<String, Object>builder()
+                .put("slotName", AdsContent.MOBILETOP_LB)
+                .put("slotSize", new Dimension(320, 50))
+                .put("lineItemId", 257602332)
+                .put("src", "mobile")
+                .build()
+        },
+        {
+            new Page("project43", "SyntheticTests/Slots/Size/320x50"),
+            "",
+            ImmutableMap.<String, Object>builder()
+                .put("slotName", AdsContent.MOBILE_AD_IN_CONTENT)
+                .put("slotSize", new Dimension(320, 50))
+                .put("lineItemId", 257602332)
+                .put("src", "mobile")
+                .build()
+        },
+        {
+            new Page("project43", "SyntheticTests/Slots/Size/320x50"),
+            "",
+            ImmutableMap.<String, Object>builder()
+                .put("slotName", AdsContent.MOBILE_PREFOOTER)
+                .put("slotSize", new Dimension(320, 50))
+                .put("lineItemId", 257602332)
+                .put("src", "mobile")
+                .build()
+        },
+        {
+            new Page("project43", "SyntheticTests/Slots/Size/300x50"),
+            "",
+            ImmutableMap.<String, Object>builder()
+                .put("slotName", AdsContent.MOBILETOP_LB)
+                .put("slotSize", new Dimension(300, 50))
+                .put("lineItemId", 257597172)
+                .put("src", "mobile")
+                .build()
+        },
+        {
+            new Page("project43", "SyntheticTests/Slots/Size/300x50"),
+            "",
+            ImmutableMap.<String, Object>builder()
+                .put("slotName", AdsContent.MOBILE_AD_IN_CONTENT)
+                .put("slotSize", new Dimension(300, 50))
+                .put("lineItemId", 257597172)
+                .put("src", "mobile")
+                .build()
+        },
+        {
+            new Page("project43", "SyntheticTests/Slots/Size/300x50"),
+            "",
+            ImmutableMap.<String, Object>builder()
+                .put("slotName", AdsContent.MOBILE_PREFOOTER)
+                .put("slotSize", new Dimension(300, 50))
+                .put("lineItemId", 257597172)
+                .put("src", "mobile")
+                .build()
+        }
     };
   }
 }

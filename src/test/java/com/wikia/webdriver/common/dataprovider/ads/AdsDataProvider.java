@@ -1,6 +1,7 @@
 package com.wikia.webdriver.common.dataprovider.ads;
 
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
+import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.testcases.adstests.TestAdsTrackingPixels;
 
@@ -62,30 +63,12 @@ public class AdsDataProvider {
         {"2007.runescape", "2007scape_Wiki"},
         {"ru.warframe",
          "%D0%97%D0%B0%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F_%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0"},
-        {"gameofthrones", "Daenerys_Targaryen"},
-        {"elderscrolls", "Console_Commands_(Skyrim"},
-        //intentionally without ) sign - there is redirect on page
-        {"naruto", "Naruto_Uzumaki"},
-        {"clashofclans", "Air_Sweeper"},
+        {"gameofthrones", "Aegon_I_Targaryen"},
+        {"elderscrolls", "Nightblade_(Online)"},
+        {"starwars", "Turtle_Tanker/Legends"},
+        {"harrypotter", "Fizzing_Whizzbees"},
         {"leagueoflegends", "Ekko"},
         {"lego", "LEGO"}
-    };
-  }
-
-  @DataProvider
-  public static Object[][] corporatePages() {
-    return new Object[][]{
-        {"es.wikia", "Wikia", "wka.wikia/_corporatespanish//home", "CORP_TOP_LEADERBOARD"},
-        {"fr.wikia", "Wikia", "wka.wikia/_fraccueil//home", "CORP_TOP_LEADERBOARD"},
-        {"pl.wikia", "Wikia", "wka.wikia/_plcorporate//home", "CORP_TOP_LEADERBOARD"},
-        {"gameshub", "Games_Hub", "wka.hub/_gaming_hub//hub", "HUB_TOP_LEADERBOARD"},
-        {"gameshub", "What's_Hot", "wka.hub/_gaming_hub//hub", "HUB_TOP_LEADERBOARD"},
-        {"lifestylehub", "Lifestyle_Hub", "wka.hub/_life_hub//hub", "HUB_TOP_LEADERBOARD"},
-        {"lifestylehub", "From_the_Community", "wka.hub/_life_hub//hub", "HUB_TOP_LEADERBOARD"},
-        {"bookshub", "Mini_Book_Club", "wka.hub/_ent_hub//hub", "HUB_TOP_LEADERBOARD"},
-        {"bookshub", "Portal:YA_Society_Reads", "wka.hub/_ent_hub//hub", "HUB_TOP_LEADERBOARD"},
-        {"movieshub", "Movies_Hub", "wka.hub/_ent_hub//hub", "HUB_TOP_LEADERBOARD"},
-        {"movieshub", "From_the_Community", "wka.hub/_ent_hub//hub", "HUB_TOP_LEADERBOARD"},
     };
   }
 
@@ -364,12 +347,12 @@ public class AdsDataProvider {
             "yugioh",
             "Dark_Magician",
             null,
-            "wka.ent/_yugioh//article",
+            "wka.gaming/_yugioh//article",
             "TOP_LEADERBOARD",
             Arrays.asList(
-                "\"s0\":\"ent\"",
-                "\"s0v\":\"comics\"",
-                "\"s0c\":[\"gaming\",\"anime\",\"videogames\"]",
+                "\"s0\":\"gaming\"",
+                "\"s0v\":\"games\"",
+                "\"s0c\":[\"gaming\",\"videogames\",\"anime\"]",
                 "\"s1\":\"_yugioh\"",
                 "\"s2\":\"article\"",
                 "\"dmn\":\"wikiacom\"",
@@ -382,10 +365,10 @@ public class AdsDataProvider {
                 "\"lang\":\"en\"",
                 "\"pv\":\"1\"",
                 "\"top\":\"1k\"",
-                "\"esrb\":[\"everyone\"]",
-                "\"age\":[\"teen\",\"kid\",\"18-34\"]",
-                "\"gnre\":[\"anime\",\"fantasy\",\"strategy\",\"comics\"]",
-                "\"media\":[\"tv\",\"cards\"]",
+                "\"esrb\":\"everyone\"",
+                "\"age\":[\"under18\",\"13-17\",\"18-24\",\"kids\",\"teen\",\"yadult\"]",
+                "\"gnre\":[\"action\",\"adventure\",\"anime\",\"comic\",\"fantasy\"]",
+                "\"media\":[\"movies\",\"tv\",\"comics\",\"cards\"]",
                 "\"pform\":[\"pc\",\"psp\"]",
                 "\"sex\":[\"m\"]"
             ),
@@ -418,12 +401,12 @@ public class AdsDataProvider {
                 "\"pv\":\"1\"",
                 "\"top\":\"1k\"",
                 "\"sex\":[\"m\"]",
-                "\"age\":[\"under18\",\"18-34\",\"18-24\",\"25-34\",\"teen\"]",
-                "\"gnre\":[\"action\",\"adventure\",\"fps\",\"openworld\",\"rpg\",\"scifi\"]",
-                "\"pform\":[\"pc\",\"xbox360\",\"ps3\"]",
-                "\"pub\":[\"bethesda\",\"bethesda\"]",
-                "\"esrb\":[\"mature\"]",
-                "\"theme\":[\"military\",\"postapocalypse\"]"
+                "\"age\":[\"under18\",\"18-24\",\"25-34\",\"18-34\",\"teen\"]",
+                "\"gnre\":[\"3rdpersonshooter\",\"action\",\"adventure\",\"fps\",\"openworld\",\"rpg\",\"scifi\",\"shooter\"]",
+                "\"pform\":[\"xboxone\",\"ps4\",\"pc\",\"xbox360\",\"ps3\",\"mobile\"]",
+                "\"pub\":[\"bethesda\"]",
+                "\"esrb\":\"mature\"",
+                "\"theme\":[\"mature\",\"military\",\"postapocalypse\",\"robots\"]"
             ),
             Arrays.asList(
                 "\"loc\":\"top\"",
@@ -452,12 +435,11 @@ public class AdsDataProvider {
                 "\"lang\":\"en\"",
                 "\"pv\":\"1\"",
                 "\"top\":\"1k\"",
-                "\"age\":[\"kids\",\"teen\",\"under18\",\"18-24\"]",
-                "\"gnre\":[\"mmo\",\"rpg\",\"action\",\"adventure\",\"free2play\",\"fantasy\",\"mmo\",\"rpg\",\"mmorpg\",\"openworld\"]",
+                "\"age\":[\"under18\",\"13-17\",\"18-24\",\"25-34\",\"18-34\",\"teen\",\"yadult\"]",
+                "\"gnre\":[\"action\",\"adventure\",\"free2play\",\"fantasy\",\"mmo\",\"mmorpg\",\"openworld\",\"rpg\"]",
                 "\"pform\":[\"pc\"]",
-                "\"volum\":[\"l\"]",
                 "\"sex\":[\"m\"]",
-                "\"esrb\":[\"teen\"]",
+                "\"esrb\":\"teen\"",
                 "\"theme\":[\"dragon\",\"heroes\",\"magic\",\"monster\",\"sword\",\"zombie\"]"
             ),
             Arrays.asList(
@@ -487,14 +469,10 @@ public class AdsDataProvider {
                 "\"lang\":\"en\"",
                 "\"pv\":\"1\"",
                 "\"top\":\"1k\"",
-                "\"age\":[\"teen\",\"13-17\",\"under18\",\"18-24\"]",
-                "\"egnre\":[\"anime\",\"fantasy\"]",
+                "\"age\":[\"under18\",\"13-17\",\"18-24\",\"25-34\",\"18-34\",\"teen\",\"yadult\"]",
                 "\"media\":[\"tv\"]",
-                "\"eth\":[\"asian\"]",
-                "\"hhi\":[\"0-30\"]",
-                "\"kids\":[\"0-17\"]",
                 "\"sex\":[\"m\"]",
-                "\"gnre\":[\"action\",\"adventure\",\"fantasy\",\"cartoon\",\"comics\"]",
+                "\"gnre\":[\"action\",\"adventure\",\"cartoon\",\"comic\",\"fantasy\"],\"theme\":[\"magic\"]",
                 "\"theme\":[\"magic\"]",
                 "\"esrb\":\"ec\""
             ),
@@ -525,10 +503,10 @@ public class AdsDataProvider {
                 "\"pv\":\"1\"",
                 "\"top\":\"1k\"",
                 "\"sex\":[\"m\"]",
-                "\"age\":[\"under18\",\"13-17\",\"18-24\",\"25-34\",\"kids\",\"teen\"]",
-                "\"gnre\":[\"rts\",\"strategy\",\"sim\"]",
-                "\"pform\":[\"pc\"]",
-                "\"esrb\":[\"everyone\"]"
+                "\"age\":[\"under18\",\"13-17\",\"18-24\",\"25-34\",\"18-34\",\"kids\",\"teen\"]",
+                "\"gnre\":[\"casual\",\"free2play\",\"facebook\",\"strategy\",\"scifi\",\"sim\",\"war\"]",
+                "\"pform\":[\"pc\",\"xbox360\",\"ps3\",\"mobile\",\"wii\",\"ds\"]",
+                "\"esrb\":\"everyone\""
             ),
             Arrays.asList(
                 "\"loc\":\"top\"",
@@ -557,14 +535,13 @@ public class AdsDataProvider {
                 "\"ref\":\"direct\"",
                 "\"pv\":\"1\"",
                 "\"top\":\"1k\"",
-                "\"age\":[\"teen\",\"13-17\",\"18-34\",\"18-24\",\"25-34\"]",
-                "\"esrb\":[\"teen\"]",
-                "\"gnre\":[\"sim\",\"scifi\",\"rts\",\"strategy\"]",
+                "\"age\":[\"13-17\",\"18-24\",\"25-34\",\"18-34\",\"teen\"]",
+                "\"esrb\":\"teen\"",
+                "\"gnre\":[\"rpg\",\"rts\",\"strategy\",\"sim\",\"war\"]",
                 "\"pform\":[\"pc\"]",
                 "\"sex\":[\"m\"]",
-                "\"volum\":[\"m\"]",
                 "\"pub\":[\"blizzard\"]",
-                "\"theme\":[\"space\",\"alien\"]"
+                "\"theme\":[\"alien\",\"heroes\",\"military\",\"robots\",\"space\"]"
             ),
             Arrays.asList(
                 "\"loc\":\"top\"",
@@ -650,7 +627,7 @@ public class AdsDataProvider {
     return new Object[][]{
         {"pl.assassinscreed", "Ercole_Massimo", "\"top\":\"1k\"", true},
         {"mobileregressiontesting", "PMG", "\"top\":\"1k\"", false},
-        {"assassinscreed", "Tunguska", "\"esrb\":[\"mature\"]", true},
+        {"assassinscreed", "Tunguska", "\"esrb\":\"mature\"", true},
         {"101dalmatians", "Jewel", "\"esrb\":\"ec\"", true},
         {"tardis", "Mang", "\"esrb\":\"teen\"", true},
         {"adtest", "LB", "\"s0v\":\"lifestyle\"", true},
@@ -860,28 +837,28 @@ public class AdsDataProvider {
   public static Object[][] interstitialOasis() {
     return new Object[][]{
         {
-            "adtest",
+            "project43",
             "SyntheticTests/Interstitial",
             new Dimension(1920, 1080),
             new Dimension(600, 590),
             true
         },
         {
-            "adtest",
+            "project43",
             "SyntheticTests/Interstitial/NotScalable",
             new Dimension(1920, 1080),
             new Dimension(300, 343),
             false
         },
         {
-            "adtest",
+            "project43",
             "SyntheticTests/Interstitial",
             new Dimension(800, 800),
             new Dimension(569, 564),
             true
         },
         {
-            "adtest",
+            "project43",
             "SyntheticTests/Interstitial/NotScalable",
             new Dimension(800, 800),
             new Dimension(300, 343),
@@ -894,50 +871,33 @@ public class AdsDataProvider {
   public static Object[][] interstitialMercury() {
     return new Object[][]{
         {
-            "adtest",
+            "project43",
             "SyntheticTests/Interstitial",
             new Dimension(600, 800),
             new Dimension(590, 491),
             true
         },
         {
-            "adtest",
+            "project43",
             "SyntheticTests/Interstitial/NotScalable",
             new Dimension(600, 800),
             new Dimension(300, 258),
             false
         },
         {
-            "adtest",
+            "project43",
             "SyntheticTests/Interstitial",
             new Dimension(800, 500),
             new Dimension(405, 338),
             true
         },
         {
-            "adtest",
+            "project43",
             "SyntheticTests/Interstitial/NotScalable",
             new Dimension(800, 500),
             new Dimension(300, 258),
             false
         },
-    };
-  }
-
-  @DataProvider
-  public static Object[][] adsSynthetic() {
-    return new Object[][]{
-        {
-            new Page("adtest", "SyntheticTests/MobileLeaderboard"),
-            ImmutableMap.<String, Object>builder()
-                .put("slotName", "MOBILE_TOP_LEADERBOARD")
-                .put("slotSize", new Dimension(320, 100))
-                .put("lineItemId", 136987812)
-                .put("src", "mobile")
-                .build(),
-            new Dimension(360, 567),
-            "src/test/resources/adsResources/mobiletl320x100.png"
-        }
     };
   }
 
@@ -1007,6 +967,31 @@ public class AdsDataProvider {
   }
 
   @DataProvider
+  public static Object[][] adsTrackingPixelsSentCuratedMainPages() {
+    return new Object[][]{
+        {
+            MercuryWikis.MERCURY_CC,
+            "main/section/Categories",
+            new String[]{
+                TestAdsTrackingPixels.COMSCORE_PIXEL_URL,
+                TestAdsTrackingPixels.KRUX_PIXEL_URL,
+                TestAdsTrackingPixels.QUANTQAST_PIXEL_URL,
+                TestAdsTrackingPixels.GA_PIXEL_URL
+            }
+        }, {
+            MercuryWikis.MERCURY_CC,
+            "main/category/Articles",
+            new String[]{
+                TestAdsTrackingPixels.COMSCORE_PIXEL_URL,
+                TestAdsTrackingPixels.KRUX_PIXEL_URL,
+                TestAdsTrackingPixels.QUANTQAST_PIXEL_URL,
+                TestAdsTrackingPixels.GA_PIXEL_URL
+            }
+        }
+    };
+  }
+
+  @DataProvider
   public static Object[][] adsTrackingPixelsNotSent() {
     return new Object[][]{
         {
@@ -1019,77 +1004,178 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] adsFloatingMedrec() {
+  public static Object[][] adsSlotSizeOasis() {
     return new Object[][]{
         {
-            "adtest",
-            "SyntheticTests/Oasis/FloatingMedrecOnLongPage",
-            223909212,
-            300,
-            250
+            new Page("project43", "SyntheticTests/INCONTENT_LEADERBOARD/728x90"),
+            "InstantGlobals.wgAdDriverIncontentLeaderboardSlotCountries=[XX]",
+            ImmutableMap.<String, Object>builder()
+                .put("slotName", AdsContent.INCONTENT_LEADERBOARD)
+                .put("slotSize", new Dimension(728, 90))
+                .put("lineItemId", 269658972)
+                .put("src", "gpt")
+                .build()
         },
         {
-            "adtest",
-            "SyntheticTests/Oasis/FloatingMedrecOnLongPage/300x600",
-            223968492,
-            300,
-            600
+            new Page("project43", "SyntheticTests/INCONTENT_LEADERBOARD/468x60"),
+            "InstantGlobals.wgAdDriverIncontentLeaderboardSlotCountries=[XX]",
+            ImmutableMap.<String, Object>builder()
+                .put("slotName", AdsContent.INCONTENT_LEADERBOARD)
+                .put("slotSize", new Dimension(468, 60))
+                .put("lineItemId", 269666292)
+                .put("src", "gpt")
+                .build()
         },
         {
-            "adtest",
-            "SyntheticTests/Oasis/FloatingMedrecOnLongPage/OneSkyscraper",
-            223968492,
-            300,
-            600
+            new Page("project43", "SyntheticTests/INCONTENT_LEADERBOARD/300x250"),
+            "InstantGlobals.wgAdDriverIncontentLeaderboardSlotCountries=[XX]",
+            ImmutableMap.<String, Object>builder()
+                .put("slotName", AdsContent.INCONTENT_LEADERBOARD)
+                .put("slotSize", new Dimension(300, 250))
+                .put("lineItemId", 269672052)
+                .put("src", "gpt")
+                .build()
         },
         {
-            "adtest",
-            "SyntheticTests/Oasis/FloatingMedrecOnLongPage/NoSkyScrapers",
-            223909212,
-            300,
-            250
+            new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage"),
+            "",
+            ImmutableMap.<String, Object>builder()
+                .put("slotName", AdsContent.FLOATING_MEDREC)
+                .put("slotSize", new Dimension(300, 250))
+                .put("lineItemId", 269679732)
+                .put("src", "gpt")
+                .build()
         },
         {
-            "adtest",
-            "SyntheticTests/Oasis/FloatingMedrecOnLongPage/NoSkyScrapersWithJumboMedrec",
-            223909212,
-            300,
-            250
+            new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage/300x600"),
+            "",
+            ImmutableMap.<String, Object>builder()
+                .put("slotName", AdsContent.FLOATING_MEDREC)
+                .put("slotSize", new Dimension(300, 600))
+                .put("lineItemId", 270230292)
+                .put("src", "gpt")
+                .build()
         },
         {
-            "adtest",
-            "SyntheticTests/Oasis/FloatingMedrecOnLongPage/160x600",
-            237935652,
-            160,
-            600
+            new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage/OneSkyscraper"),
+            "",
+            ImmutableMap.<String, Object>builder()
+                .put("slotName", AdsContent.FLOATING_MEDREC)
+                .put("slotSize", new Dimension(300, 600))
+                .put("lineItemId", 270230292)
+                .put("src", "gpt")
+                .build()
+        },
+        {
+            new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage/NoSkyScrapers"),
+            "",
+            ImmutableMap.<String, Object>builder()
+                .put("slotName", AdsContent.FLOATING_MEDREC)
+                .put("slotSize", new Dimension(300, 250))
+                .put("lineItemId", 269679732)
+                .put("src", "gpt")
+                .build()
+        },
+        {
+            new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage/NoSkyScrapersWithJumboMedrec"),
+            "",
+            ImmutableMap.<String, Object>builder()
+                .put("slotName", AdsContent.FLOATING_MEDREC)
+                .put("slotSize", new Dimension(300, 250))
+                .put("lineItemId", 269679732)
+                .put("src", "gpt")
+                .build()
+        },
+        {
+            new Page("project43", "SyntheticTests/Slots/Skyscrapers/1x300x250,1x300x600"),
+            "",
+            ImmutableMap.<String, Object>builder()
+                .put("slotName", AdsContent.LEFT_SKYSCRAPPER_2)
+                .put("slotSize", new Dimension(300, 250))
+                .put("lineItemId", 260204412)
+                .put("src", "gpt")
+                .build()
+        },
+        {
+            new Page("project43", "SyntheticTests/Slots/Skyscrapers/2x300x250"),
+            "",
+            ImmutableMap.<String, Object>builder()
+                .put("slotName", AdsContent.LEFT_SKYSCRAPPER_3)
+                .put("slotSize", new Dimension(300, 250))
+                .put("lineItemId", 260206692)
+                .put("src", "gpt")
+                .build()
+        },
+        {
+            new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage/160x600"),
+            "",
+            ImmutableMap.<String, Object>builder()
+                .put("slotName", AdsContent.FLOATING_MEDREC)
+                .put("slotSize", new Dimension(160, 600))
+                .put("lineItemId", 270616092)
+                .put("src", "gpt")
+                .build()
+        },
+        {
+            new Page("project43", "SyntheticTests/Slots/Size/120x600"),
+            "",
+            ImmutableMap.<String, Object>builder()
+                .put("slotName", AdsContent.LEFT_SKYSCRAPPER_2)
+                .put("slotSize", new Dimension(120, 600))
+                .put("lineItemId", 257673852)
+                .put("src", "gpt")
+                .build()
+        },
+        {
+            new Page("project43", "SyntheticTests/Slots/Size/120x600"),
+            "",
+            ImmutableMap.<String, Object>builder()
+                .put("slotName", AdsContent.FLOATING_MEDREC)
+                .put("slotSize", new Dimension(120, 600))
+                .put("lineItemId", 257673852)
+                .put("src", "gpt")
+                .build()
+        },
+        {
+            new Page("project43", "SyntheticTests/Slots/Size/120x600"),
+            "",
+            ImmutableMap.<String, Object>builder()
+                .put("slotName", AdsContent.LEFT_SKYSCRAPPER_3)
+                .put("slotSize", new Dimension(120, 600))
+                .put("lineItemId", 257673852)
+                .put("src", "gpt")
+                .build()
+        },
+        {
+            new Page("project43", "SyntheticTests/Slots/Size/300x1050"),
+            "",
+            ImmutableMap.<String, Object>builder()
+                .put("slotName", AdsContent.MEDREC)
+                .put("slotSize", new Dimension(300, 1050))
+                .put("lineItemId", 255534972)
+                .put("src", "gpt")
+                .build()
+        },
+        {
+            new Page("project43", "SyntheticTests/Slots/Size/300x1050"),
+            "",
+            ImmutableMap.<String, Object>builder()
+                .put("slotName", AdsContent.LEFT_SKYSCRAPPER_2)
+                .put("slotSize", new Dimension(300, 1050))
+                .put("lineItemId", 255534972)
+                .put("src", "gpt")
+                .build()
         },
     };
   }
 
   @DataProvider
-  public static Object[][] adsIncontentLeaderboard() {
+  public static Object[][] adsAdvertisementText() {
     return new Object[][]{
         {
-            "adtest",
-            "SyntheticTests/INCONTENT_LEADERBOARD/728x90",
-            239961972,
-            728,
-            90
-        },
-        {
-            "adtest",
-            "SyntheticTests/INCONTENT_LEADERBOARD/300x250",
-            239961132,
-            300,
-            250
-        },
-        {
-            "adtest",
-            "SyntheticTests/INCONTENT_LEADERBOARD/468x60",
-            241472412,
-            468,
-            60
-        },
+            "project43",
+            "SyntheticTests/INCONTENT_LEADERBOARD/300x250"
+        }
     };
   }
 }

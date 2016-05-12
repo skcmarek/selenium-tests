@@ -1,7 +1,6 @@
 package com.wikia.webdriver.elements.common;
 
 import com.wikia.webdriver.common.core.url.UrlBuilder;
-
 import org.joda.time.DateTime;
 import org.openqa.selenium.WebDriver;
 
@@ -42,6 +41,11 @@ public class Navigate {
 
     driver.get("http://" + host + pageName + query);
 
+    return this;
+  }
+
+  public Navigate toUrl(String url) {
+    driver.get(url);
     return this;
   }
 }
