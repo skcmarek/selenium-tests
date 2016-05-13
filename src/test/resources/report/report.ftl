@@ -2,30 +2,30 @@
 <head>
   <title>TEST REPORT</title>
 <meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">
-<style>
-table {margin:0 auto;}td:first-child {width:200px;}td:nth-child(2) {width:660px;}td:nth-child(3)
-{width:100px;}tr.success{color:black;background-color:#CCFFCC;}
-tr.warning{color:black;background-color:#FEE01E;}
-tr.error{color:black;background-color:#FFCCCC;}
-tr.info{color:white;background-color:#78a1c0}
-tr.step{color:white;background:grey}
-td { border-top: 1px solid grey; }
-</style>
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<script   src="https://code.jquery.com/jquery-2.2.3.min.js"   integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="   crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 </head>
 <body>
 <button id="hideLowLevel">hide low level actions</button>
 <button id="showLowLevel">show low level actions</button>
-  <ul>
-    <#list logs as log>
-      <li>STEP: ${log_index + 1}. ${log.command} from ${log.description}</li>
+  <ol>
+    <#list tests as test>
+      <li>${test.name}</li>
     </#list>
-  </ul>
+  </ol>
 
- <table border=1>
-    <#list logs as log>
-      <tr calss='${log.result}'><td>${log.command}<td>${log.description}
-    </#list>
+<#list tests as test>
+ <table class="table table-bordered">
+    <thead>
+         <tr><th>${test.name}<th></tr>
+    </thead>
+    <tbody>
+        <#list test.steps as log>
+          <tr class='${log.result}'><td>${log.command}<td>${log.description}
+        </#list>
+    </tbody>
   </table>
+</#list>
 </body>
 </html> 

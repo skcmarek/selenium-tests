@@ -80,7 +80,6 @@ public class PageObjectLogging {
   public static void log(String command, String description, boolean success) {
     LogType logResult = success ? LogType.SUCCESS : LogType.ERROR;
     log(logResult, command, description, false);
-
   }
 
   public static void log(String command, Throwable e, boolean success) {
@@ -240,7 +239,7 @@ public class PageObjectLogging {
 
     logs.add(new Step(command, description, logType));
     try {
-      new TemplateProcessing().processReport(logs);
+      new TemplateProcessing().processReport();
     } catch (IOException e) {
       e.printStackTrace();
     } catch (TemplateException e) {

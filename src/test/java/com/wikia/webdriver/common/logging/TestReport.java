@@ -17,6 +17,9 @@ public class TestReport {
   private DateTime date;
 
   private static Test getLastTest() {
+    if(tests.isEmpty()){
+      tests.add(new Test());
+    }
     return tests.get(tests.size() - 1);
   }
 
