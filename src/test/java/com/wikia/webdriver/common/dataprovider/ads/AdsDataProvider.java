@@ -645,7 +645,7 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] amazonSites() {
     return new Object[][]{
-        {"adtest", "SyntheticTests/Amazon"},
+        {"project43", "SyntheticTests/Amazon"},
     };
   }
 
@@ -714,16 +714,25 @@ public class AdsDataProvider {
   public static Object[][] providersChainOasis() {
     return new Object[][]{
         {
-            "adtest", "SyntheticTests/ProvidersChain",
-            "TOP_LEADERBOARD", "DirectGpt; RemnantGpt; Liftium", 0
+            "project43",
+            "SyntheticTests/ProvidersChain",
+            "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[]",
+            AdsContent.TOP_LB,
+            "DirectGpt; RemnantGpt; Liftium"
         },
         {
-            "adtest", "SyntheticTests/ProvidersChain",
-            "TOP_LEADERBOARD", "DirectGpt; RemnantGpt; Liftium", 3
+            "project43",
+            "SyntheticTests/ProvidersChain",
+            "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[XX]",
+            AdsContent.TOP_LB,
+            "DirectGpt; RemnantGpt; RubiconFastlane"
         },
         {
-            "adtest", "SyntheticTests/ProvidersChain",
-            "INVISIBLE_SKIN", "DirectGpt; RemnantGpt", 0
+            "project43",
+            "SyntheticTests/ProvidersChain",
+            "",
+            AdsContent.INVISIBLE_SKIN,
+            "DirectGpt; RemnantGpt"
         }
     };
   }
@@ -732,8 +741,18 @@ public class AdsDataProvider {
   public static Object[][] disableGptOasis() {
     return new Object[][]{
         {
-            "adtest", "SyntheticTests/ProvidersChain", "InstantGlobals.wgSitewideDisableGpt=1",
-            "TOP_LEADERBOARD", "DirectGpt; RemnantGpt; Liftium", "Liftium"
+            "project43",
+            "SyntheticTests/ProvidersChain",
+            "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[]",
+            AdsContent.TOP_LB,
+            "Liftium"
+        },
+        {
+            "project43",
+            "SyntheticTests/ProvidersChain",
+            "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[XX]",
+            AdsContent.TOP_LB,
+            "RubiconFastlane"
         },
     };
   }
@@ -1004,6 +1023,18 @@ public class AdsDataProvider {
   }
 
   @DataProvider
+  public static Object[][] adsDetection() {
+    return new Object[][]{
+        {
+            "project43",
+        },
+        {
+            "arecovery"
+        }
+    };
+  }
+
+  @DataProvider
   public static Object[][] adsSlotSizeOasis() {
     return new Object[][]{
         {
@@ -1166,6 +1197,42 @@ public class AdsDataProvider {
                 .put("src", "gpt")
                 .build()
         },
+    };
+  }
+
+  @DataProvider
+  public static Object[][] adsRecoveryOasis() {
+    return new Object[][]{
+        {
+            new Page("arecovery", "SyntheticTests/Static_image"),
+            ImmutableMap.<String, Object>builder()
+                .put("slotName", AdsContent.TOP_LB)
+                .put("lineItemId", 277592292)
+                .put("src", "gpt")
+                .build()
+        },
+        {
+            new Page("arecovery", "SyntheticTests/Static_image"),
+            ImmutableMap.<String, Object>builder()
+                .put("slotName", AdsContent.MEDREC)
+                .put("lineItemId", 277592292)
+                .put("src", "gpt")
+                .build()
+        }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] adsRecoveryUnlockCSSOasis() {
+    return new Object[][]{
+        {
+            new Page("project43", "Project43_Wikia"),
+            false
+        },
+        {
+            new Page("arecovery", "SyntheticTests/Static_image"),
+            true
+        }
     };
   }
 
