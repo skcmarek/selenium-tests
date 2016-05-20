@@ -6,7 +6,6 @@ import java.util.Random;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
@@ -19,7 +18,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPage
 
 public class SpecialVideosPage extends SpecialPageObject {
 
-  private static final String SPECIAL_VIDEOS_PATH = "wiki/Special:Videos";
+  private static final String SPECIAL_VIDEOS_PATH = "Special:Videos";
   private static final String NEWEST_VIDEO_CSS = ".special-videos-grid li:nth-child(1) .title a";
   @FindBy(css = ".WikiaPageHeader h1")
   private WebElement h1Header;
@@ -31,7 +30,7 @@ public class SpecialVideosPage extends SpecialPageObject {
   private WebElement newestVideoTitle;
   @FindBy(css = ".special-videos-grid li:nth-child(1) .remove")
   private WebElement newestVideoDeleteIcon;
-  @FindBys(@FindBy(css = ".image.video > img"))
+  @FindBy(css = ".image.video > img")
   private List<WebElement> videos;
   @FindBy(css = ".special-videos-grid a.video")
   private List<WebElement> videoItem;
@@ -56,8 +55,6 @@ public class SpecialVideosPage extends SpecialPageObject {
   public SpecialVideosPage openRecent() {
     return open("sort=recent");
   }
-
-
 
   public String getRandomVideo() {
     List<String> names = new ArrayList();
