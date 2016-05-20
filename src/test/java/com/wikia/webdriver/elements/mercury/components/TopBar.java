@@ -28,7 +28,7 @@ public class TopBar extends WikiBasePageObject {
   @FindBy(css = ".icon-button-icon > use[*|href*='close']")
   private WebElement closeButton;
 
-  private By navigationComponent = By.cssSelector(".side-nav-menu");
+  private By navigationComponent = By.cssSelector(".side-nav-drawer");
 
   @FindBy(css = ".local-nav-menu")
   private WebElement navMenu;

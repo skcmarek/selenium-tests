@@ -12,6 +12,7 @@ import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.components.Search;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
 
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
@@ -48,5 +49,15 @@ public class SearchTests extends NewTestTemplate {
     search.clickClearSearchButton();
 
     Assertion.assertEquals(search.getSearchPhrase(), "");
+  }
+
+  @Test(groups = "mercury_search_verifySearchLayout")
+  public void mercury_search_verifySearchLayout() {
+    init();
+
+    Search search = topBar.openSearch();
+    Assertion.assertTrue(search.isSearchInputFieldVisible());
+    Assertion.assertTrue(search.isClearSearchButtonVisible());
+    Assertion.assertTrue(search.isInputFieldSearchIconVisible());
   }
 }
