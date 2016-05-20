@@ -15,7 +15,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.diffpage.DiffPagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.historypage.HistoryPagePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
 
 import org.testng.annotations.Test;
@@ -82,9 +82,9 @@ public class FilePageTests extends NewTestTemplate {
     // Go to Special:Videos to add a video
     YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("data");
 
-    SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
+    SpecialVideosPage specialVideos = new SpecialVideosPage();
     specialVideos.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-    specialVideos.openSpecialVideoPage(wikiURL);
+    specialVideos.open();
 
     // Add a Youtube video we'll delete
     VetAddVideoComponentObject vetAddingVideo = specialVideos.clickAddAVideo();
@@ -113,9 +113,9 @@ public class FilePageTests extends NewTestTemplate {
     YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("pokemon");
 
     // Go to Special:Videos to add a video
-    SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
+    SpecialVideosPage specialVideos = new SpecialVideosPage();
     specialVideos.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-    specialVideos.openSpecialVideoPage(wikiURL);
+    specialVideos.open();
 
     // Add a Youtube video we'll delete
     VetAddVideoComponentObject vetAddingVideo = specialVideos.clickAddAVideo();

@@ -1,15 +1,16 @@
 package com.wikia.webdriver.testcases.mediatests.providers;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.lightbox.LightboxComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.media.VideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
-import org.testng.annotations.Test;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPage;
 
 public class PlayingVideoTests extends NewTestTemplate {
 
@@ -60,8 +61,7 @@ public class PlayingVideoTests extends NewTestTemplate {
     String providerName = "ign";
     String queryString = "provider=" + providerName;
 
-    SpecialVideosPageObject specialVideos =
-        new SpecialVideosPageObject(driver).openSpecialVideoPage(wikiURL, queryString);
+    SpecialVideosPage specialVideos = new SpecialVideosPage().open(queryString);
     LightboxComponentObject lightbox = specialVideos.openLightboxForGridVideo(itemNumber);
     lightbox.verifyLightboxPopup();
     lightbox.verifyLightboxVideo();
@@ -73,9 +73,10 @@ public class PlayingVideoTests extends NewTestTemplate {
     video.verifyVideoIgnEmbed();
   }
 
-  @Test(enabled = false, groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_005"})
+  @Test(enabled = false,
+      groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_005"})
   @RelatedIssue(issueID = "QAART-750", comment = "Test disabled as Selenium doesn't allow to access"
-                                                + "elements with <object> tag. Check after Selenium update.")
+      + "elements with <object> tag. Check after Selenium update.")
   @Execute(onWikia = "sktest123", disableFlash = "false")
   @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void PlayingVideoTests_005_anyclip() {
@@ -83,8 +84,7 @@ public class PlayingVideoTests extends NewTestTemplate {
     String providerName = "anyclip";
     String queryString = "provider=" + providerName;
 
-    SpecialVideosPageObject specialVideos =
-        new SpecialVideosPageObject(driver).openSpecialVideoPage(wikiURL, queryString);
+    SpecialVideosPage specialVideos = new SpecialVideosPage().open(queryString);
     LightboxComponentObject lightbox = specialVideos.openLightboxForGridVideo(itemNumber);
     lightbox.verifyLightboxPopup();
     lightbox.verifyLightboxVideo();

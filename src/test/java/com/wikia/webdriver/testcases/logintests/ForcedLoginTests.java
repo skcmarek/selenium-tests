@@ -1,5 +1,9 @@
 package com.wikia.webdriver.testcases.logintests;
 
+import junit.framework.Assert;
+
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
@@ -13,11 +17,8 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComp
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUserLoginPageObject;
-
-import junit.framework.Assert;
-import org.testng.annotations.Test;
 
 @Test(groups = "ForcedLogin")
 public class ForcedLoginTests extends NewTestTemplate {
@@ -58,8 +59,7 @@ public class ForcedLoginTests extends NewTestTemplate {
 
   @Test(groups = {"ForcedLogin_anonCanLogInViaForcedLoginPopupWhenAddingVideo", "Media"})
   public void anonCanLogInViaForcedLoginPopupWhenAddingVideo() {
-    WikiBasePageObject base = new WikiBasePageObject();
-    SpecialVideosPageObject specialPage = base.openSpecialVideoPage(wikiURL);
+    SpecialVideosPage specialPage = new SpecialVideosPage().open();
     specialPage.clickAddAVideo();
     specialPage.verifyModalLoginAppeared();
     specialPage.logInViaModal(credentials.userName10, credentials.password10);
@@ -73,8 +73,7 @@ public class ForcedLoginTests extends NewTestTemplate {
   @Test(groups = {"ForcedLogin_anonCanLogInViaAuthModalWhenAddingVideo", "Media"})
   @Execute(onWikia = "agas")
   public void anonCanLogInViaAuthModalWhenAddingVideo() {
-    WikiBasePageObject base = new WikiBasePageObject();
-    SpecialVideosPageObject specialPage = base.openSpecialVideoPage(wikiURL);
+    SpecialVideosPage specialPage = new SpecialVideosPage().open();
     specialPage.clickAddAVideo();
     AuthModal authModal = specialPage.getAuthModal();
     Assert.assertTrue(authModal.isOpened());

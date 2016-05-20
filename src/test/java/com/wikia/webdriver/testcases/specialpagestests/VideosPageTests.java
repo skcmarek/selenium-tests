@@ -1,24 +1,20 @@
 package com.wikia.webdriver.testcases.specialpagestests;
 
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.properties.Credentials;
-import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
-
 import org.testng.annotations.Test;
 
-public class VideosPageTests extends NewTestTemplate {
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPage;
 
-  Credentials credentials = Configuration.getCredentials();
+public class VideosPageTests extends NewTestTemplate {
 
   /**
    * Verify UI elements on the Special:Videos page Logged-Out
    */
   @Test(groups = {"VideosPage", "VideosPageTest_001", "Media"})
   public void VideosPageTest_001() {
-    WikiBasePageObject base = new WikiBasePageObject();
-    SpecialVideosPageObject specialVideos = base.openSpecialVideoPageMostRecent(wikiURL);
+    SpecialVideosPage specialVideos = new SpecialVideosPage().openRecent();
     specialVideos.verifyElementsOnPage();
   }
 
@@ -29,10 +25,9 @@ public class VideosPageTests extends NewTestTemplate {
    * running this test is sustainable).
    */
   @Test(groups = {"VideosPage", "VideosPageTest_002", "Media"})
+  @Execute(asUser = User.STAFF)
   public void VideosPageTest_002() {
-    WikiBasePageObject base = new WikiBasePageObject();
-    base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-    SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
+    SpecialVideosPage specialVideos = new SpecialVideosPage().open();
     specialVideos.verifyDeleteViaGlobalNotifications();
   }
 
@@ -44,10 +39,9 @@ public class VideosPageTests extends NewTestTemplate {
    * video is).
    */
   @Test(groups = {"VideosPage", "VideosPageTest_003", "Media"})
+  @Execute(asUser = User.STAFF)
   public void VideosPageTest_003() {
-    WikiBasePageObject base = new WikiBasePageObject();
-    base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-    SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
+    SpecialVideosPage specialVideos = new SpecialVideosPage().open();
     specialVideos.verifyDeleteViaVideoNotPresent();
   }
 }

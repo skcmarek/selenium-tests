@@ -20,7 +20,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialMostLinkedFilesPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialUncategorizedFilesPage;
@@ -117,8 +117,7 @@ public class LightboxTests extends NewTestTemplate {
   @Test(groups = "Lightbox_006")
   @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void LightboxTest_006_verifyCarousel() {
-    WikiBasePageObject base = new WikiBasePageObject();
-    SpecialVideosPageObject specialVideos = base.openSpecialVideoPage(wikiURL);
+    SpecialVideosPage specialVideos = new SpecialVideosPage().open();
     LightboxComponentObject lightbox = specialVideos.openLightboxForGridVideo(0);
     lightbox.clickPinButton();
     lightbox.clickCarouselRight();
@@ -129,8 +128,7 @@ public class LightboxTests extends NewTestTemplate {
   @Test(groups = "LightboxTest_007")
   @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void LightboxTest_007_specialVideo() {
-    WikiBasePageObject base = new WikiBasePageObject();
-    SpecialVideosPageObject specialVideos = base.openSpecialVideoPage(wikiURL);
+    SpecialVideosPage specialVideos = new SpecialVideosPage().open();
     LightboxComponentObject lightbox = specialVideos.openLightboxForGridVideo(0);
     lightbox.verifyLightboxPopup();
     lightbox.verifyLightboxVideo();
@@ -144,9 +142,7 @@ public class LightboxTests extends NewTestTemplate {
   @Execute(asUser = User.USER, disableFlash = "false")
   @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void LightboxTest_008_filepage_video() {
-    SpecialVideosPageObject specialVideos = new WikiBasePageObject().openSpecialVideoPage(wikiURL);
-
-    LightboxComponentObject lightbox = specialVideos.openLightboxForGridVideo(0);
+    LightboxComponentObject lightbox = new SpecialVideosPage().open().openLightboxForGridVideo(0);
     lightbox.verifyLightboxPopup();
     lightbox.verifyLightboxVideo();
     FilePagePageObject filePage = lightbox.clickTitle();

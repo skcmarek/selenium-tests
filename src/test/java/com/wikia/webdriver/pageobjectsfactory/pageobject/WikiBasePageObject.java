@@ -54,7 +54,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFiles
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPromotePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialRestorePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialUploadPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWhatLinksHerePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapsPageObject;
@@ -221,23 +220,6 @@ public class WikiBasePageObject extends BasePageObject {
   public UserProfilePageObject openProfilePage(String userName, String wikiURL) {
     getUrl(wikiURL + URLsContent.USER_PROFILE.replace("%userName%", userName));
     return new UserProfilePageObject(driver);
-  }
-
-  public SpecialVideosPageObject openSpecialVideoPage(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_VIDEOS);
-    return new SpecialVideosPageObject(driver);
-  }
-
-  public SpecialVideosPageObject openSpecialVideoPage(String wikiURL, String queryString) {
-    String url =
-        urlBuilder.appendQueryStringToURL(wikiURL + URLsContent.SPECIAL_VIDEOS, queryString);
-    getUrl(url);
-    return new SpecialVideosPageObject(driver);
-  }
-
-  public SpecialVideosPageObject openSpecialVideoPageMostRecent(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_VIDEOS + URLsContent.MOST_RECENT);
-    return new SpecialVideosPageObject(driver);
   }
 
   public SpecialNewFilesPageObject openSpecialNewFiles(String wikiURL) {

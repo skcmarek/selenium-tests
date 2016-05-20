@@ -1,15 +1,14 @@
 package com.wikia.webdriver.testcases.followingtests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialFollowPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
-
-import org.testng.annotations.Test;
 
 public class FollowVideosTests extends NewTestTemplate {
 
@@ -18,8 +17,7 @@ public class FollowVideosTests extends NewTestTemplate {
   @Test(groups = "FollowVideo")
   @Execute(asUser = User.USER)
   public void FollowVideo_001_setup() {
-    WikiBasePageObject base = new WikiBasePageObject();
-    SpecialVideosPageObject special = base.openSpecialVideoPage(wikiURL);
+    SpecialVideosPage special = new SpecialVideosPage().open();
     WatchPageObject watch = special.unfollowVideo(wikiURL, special.getRandomVideo());
     watch.confirmWatchUnwatch();
     special.verifyPageUnfollowed();

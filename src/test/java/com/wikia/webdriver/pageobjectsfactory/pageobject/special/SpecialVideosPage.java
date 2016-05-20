@@ -1,5 +1,13 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
+
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.video.YoutubeVideo;
@@ -9,18 +17,10 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.lightbox.LightboxC
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
-import org.openqa.selenium.support.PageFactory;
+public class SpecialVideosPage extends SpecialPageObject {
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
-public class SpecialVideosPageObject extends SpecialPageObject {
-
+  private static final String SPECIAL_VIDEOS_PATH = "wiki/Special:Videos";
+  private static final String NEWEST_VIDEO_CSS = ".special-videos-grid li:nth-child(1) .title a";
   @FindBy(css = ".WikiaPageHeader h1")
   private WebElement h1Header;
   @FindBy(css = "a.button.addVideo")
@@ -40,12 +40,24 @@ public class SpecialVideosPageObject extends SpecialPageObject {
   @FindBy(css = "#sorting-dropdown")
   private WebElement sortDropdown;
 
-  private static final String NEWEST_VIDEO_CSS = ".special-videos-grid li:nth-child(1) .title a";
+  public SpecialVideosPage open() {
+    getUrl(urlBuilder.getUrlForPath(SPECIAL_VIDEOS_PATH));
 
-  public SpecialVideosPageObject(WebDriver driver) {
-    super();
-    PageFactory.initElements(driver, this);
+    return this;
   }
+
+  public SpecialVideosPage open(String queryString) {
+    getUrl(urlBuilder.appendQueryStringToURL(urlBuilder.getUrlForPath(SPECIAL_VIDEOS_PATH),
+        queryString));
+
+    return this;
+  }
+
+  public SpecialVideosPage openRecent() {
+    return open("sort=recent");
+  }
+
+
 
   public String getRandomVideo() {
     List<String> names = new ArrayList();
@@ -102,7 +114,7 @@ public class SpecialVideosPageObject extends SpecialPageObject {
   }
 
   public void deleteVideo() {
-    openSpecialVideoPageMostRecent(getWikiUrl());
+    openRecent();
     jsActions.execute("$('.special-videos-grid .remove').first().show()");
     wait.forElementVisible(newestVideo);
     newestVideoDeleteIcon.click();
@@ -117,8 +129,8 @@ public class SpecialVideosPageObject extends SpecialPageObject {
     deleteVideo();
     String deletedVideo = "\"File:" + video.getTitle() + "\" has been deleted. (undelete)";
     Assertion.assertEquals(getFlashMessageText(), deletedVideo);
-    PageObjectLogging.log("verifyDeleteVideoGlobalNotifications", "verify video " + deletedVideo
-        + " was deleted", true);
+    PageObjectLogging.log("verifyDeleteVideoGlobalNotifications",
+        "verify video " + deletedVideo + " was deleted", true);
   }
 
   public void verifyDeleteViaVideoNotPresent() {
@@ -128,8 +140,8 @@ public class SpecialVideosPageObject extends SpecialPageObject {
     deleteVideo();
     verifyNotificationMessage();
     Assertion.assertNotEquals(getNewestVideoTitle(), video.getTitle());
-    PageObjectLogging.log("verifyDeleteVideoNotPresent", "verify video " + video.getTitle()
-        + " was deleted", true);
+    PageObjectLogging.log("verifyDeleteVideoNotPresent",
+        "verify video " + video.getTitle() + " was deleted", true);
   }
 
   public void verifyElementsOnPage() {
@@ -140,7 +152,7 @@ public class SpecialVideosPageObject extends SpecialPageObject {
     verifySortDropdown();
     PageObjectLogging.log("verifyElementsOnPage", "verify that sort dropdown is present", true);
     verifyNewestVideo();
-    PageObjectLogging.log("verifyElementsOnPage",
-        "verify that there is at least one video present", true);
+    PageObjectLogging.log("verifyElementsOnPage", "verify that there is at least one video present",
+        true);
   }
 }

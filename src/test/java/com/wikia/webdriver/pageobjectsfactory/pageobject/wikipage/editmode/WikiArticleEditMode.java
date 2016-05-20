@@ -9,7 +9,6 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.slider.SliderBuild
 import com.wikia.webdriver.pageobjectsfactory.componentobject.slideshow.SlideshowBuilderComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiArticlePageObject;
 
 import org.openqa.selenium.By;
@@ -84,11 +83,6 @@ public class WikiArticleEditMode extends WikiEditMode {
   public WikiArticleEditMode(WebDriver driver) {
     super(driver);
     PageFactory.initElements(driver, this);
-  }
-
-  public SpecialVideosPageObject openSpecialVideoPage(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_VIDEOS);
-    return new SpecialVideosPageObject(driver);
   }
 
   public void verifyThatThePhotoAppears(String caption) {

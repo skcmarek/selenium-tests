@@ -3,6 +3,8 @@
  */
 package com.wikia.webdriver.testcases.mediatests.addvideo;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.configuration.Configuration;
@@ -13,10 +15,8 @@ import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
-
-import org.testng.annotations.Test;
 
 public class VetSpecialVideosTests extends NewTestTemplate {
 
@@ -27,8 +27,7 @@ public class VetSpecialVideosTests extends NewTestTemplate {
   public void SpecialVideos_001_Provider() {
     YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("cats");
 
-    SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
-    specialVideos.openSpecialVideoPage(wikiURL);
+    SpecialVideosPage specialVideos = new SpecialVideosPage().open();
     VetAddVideoComponentObject vetAddingVideo = specialVideos.clickAddAVideo();
     vetAddingVideo.addVideoByUrl(video.getUrl());
     specialVideos.verifyVideoAdded(video.getTitle());
@@ -47,8 +46,7 @@ public class VetSpecialVideosTests extends NewTestTemplate {
   @Test(enabled = false, groups = {"VetTests002", "VetTests", "SpecialVideo", "Media"})
   @Execute(asUser = User.USER)
   public void SpecialVideos_002_Library() {
-    SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
-    specialVideos.openSpecialVideoPage(wikiURL);
+    SpecialVideosPage specialVideos = new SpecialVideosPage().open();
     VetAddVideoComponentObject vetAddingVideo = specialVideos.clickAddAVideo();
     vetAddingVideo.addVideoByQuery(VideoContent.WIKIA_VIDEO_QUERY, 0);
     specialVideos.verifyVideoAdded(vetAddingVideo.getVideoName());
