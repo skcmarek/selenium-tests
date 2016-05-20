@@ -57,13 +57,8 @@ public class SpecialVideosPage extends SpecialPageObject {
   }
 
   public String getRandomVideo() {
-    List<String> names = new ArrayList();
-    for (WebElement elem : videos) {
-      names.add(elem.getAttribute("data-video-key"));
-    }
-    Random r = new Random();
-    int rnd = r.nextInt(names.size() - 1);
-    return names.get((rnd) + 1);
+    int rnd = new Random().nextInt(videos.size());
+    return videos.get(rnd).getAttribute("data-video-key");
   }
 
   public WatchPageObject unfollowVideo(String wikiURL, String videoName) {
