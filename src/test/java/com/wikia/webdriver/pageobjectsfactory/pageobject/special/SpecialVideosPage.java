@@ -1,6 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
