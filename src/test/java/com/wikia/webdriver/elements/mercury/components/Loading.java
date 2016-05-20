@@ -11,6 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 public class Loading {
 
   private By loadingOverlay = By.cssSelector(".loading-overlay");
+  private By discussionsSpinner = By.cssSelector(".forum-wrapper.discussion.forum .spinner");
 
   private Wait wait;
 
@@ -37,6 +38,26 @@ public class Loading {
     if (spinnerPresent) {
       wait.forElementNotVisible(loadingOverlay, 4, 3000);
       PageObjectLogging.logInfo("Loading overlay is not present");
+    }
+  }
+
+  /**
+   * This method helps handling async page reload on Mercury
+   */
+  public void discussionsPostsLoaded() {
+    boolean spinnerPresent = false;
+
+    try {
+      wait.forElementVisible(discussionsSpinner, 4, 1000);
+      spinnerPresent = true;
+      PageObjectLogging.logInfo("Discussions spinner is present");
+    } catch (TimeoutException e) {
+      PageObjectLogging.logInfo("Discussions spinner is not present");
+    }
+
+    if (spinnerPresent) {
+      wait.forElementNotVisible(discussionsSpinner, 4, 3000);
+      PageObjectLogging.logInfo("Discussions spinner  is not present");
     }
   }
 }

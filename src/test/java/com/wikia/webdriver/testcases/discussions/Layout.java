@@ -39,7 +39,7 @@ public class Layout extends NewTestTemplate {
     postsListLoads();
   }
 
-  @Test(groups = "discussions-anonUserOnMobileCanViewMorePosts")
+  @Test(groups = "discussions-anonUserOnMobileCanViewMorePosts", invocationCount = 10)
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void anonUserOnMobileCanViewMorePosts() {
@@ -64,7 +64,7 @@ public class Layout extends NewTestTemplate {
     postsListLoads();
   }
 
-  @Test(groups = "discussions-anonUserOnDesktopCanViewMorePosts")
+  @Test(groups = "discussions-anonUserOnDesktopCanViewMorePosts", invocationCount = 10)
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanViewMorePosts() {
@@ -130,7 +130,7 @@ public class Layout extends NewTestTemplate {
     PostsListPage postsList = new PostsListPage(driver).open();
     int startingListLength = postsList.getPostsListLength();
     postsList.scrollToBottom(driver);
-    new Loading(driver).handleAsyncPageReload();
+    new Loading(driver).discussionsPostsLoaded();
     Assertion.assertTrue(startingListLength < postsList.getPostsListLength());
   }
 
