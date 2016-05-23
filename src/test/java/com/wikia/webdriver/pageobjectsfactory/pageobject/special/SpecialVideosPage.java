@@ -35,8 +35,6 @@ public class SpecialVideosPage extends SpecialPageObject {
   private List<WebElement> videoItem;
   @FindBy(css = "#WikiaConfirmOk")
   private WebElement deleteConfirmButton;
-  @FindBy(css = "#sorting-dropdown")
-  private WebElement sortDropdown;
 
   public SpecialVideosPage open() {
     getUrl(urlBuilder.getUrlForPath(SPECIAL_VIDEOS_PATH));
@@ -76,10 +74,6 @@ public class SpecialVideosPage extends SpecialPageObject {
 
   private void verifyAddVideoButton() {
     wait.forElementClickable(addVideo);
-  }
-
-  private void verifySortDropdown() {
-    wait.forElementVisible(sortDropdown);
   }
 
   public VetAddVideoComponentObject clickAddAVideo() {
@@ -139,8 +133,6 @@ public class SpecialVideosPage extends SpecialPageObject {
     verifyH1();
     PageObjectLogging.log("verifyElementsOnPage", "verify that H1 is present", true);
     verifyAddVideoButton();
-    PageObjectLogging.log("verifyElementsOnPage", "verify that Add Video button is present", true);
-    verifySortDropdown();
     PageObjectLogging.log("verifyElementsOnPage", "verify that sort dropdown is present", true);
     verifyNewestVideo();
     PageObjectLogging.log("verifyElementsOnPage", "verify that there is at least one video present",
