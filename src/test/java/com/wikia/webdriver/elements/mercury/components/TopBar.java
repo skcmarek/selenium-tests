@@ -33,6 +33,9 @@ public class TopBar extends WikiBasePageObject {
   @FindBy(css = ".local-nav-menu")
   private WebElement navMenu;
 
+  @FindBy(css = ".wikia-search__container input.side-search__input")
+  private WebElement searchInput;
+
   private Wait wait;
 
   public TopBar(WebDriver driver) {
@@ -58,7 +61,7 @@ public class TopBar extends WikiBasePageObject {
     searchIcon.click();
 
     PageObjectLogging.logInfo("Search is opened");
-    wait.forElementVisible(navigationComponent);
+    wait.forElementVisible(searchInput);
 
     return new Search();
   }

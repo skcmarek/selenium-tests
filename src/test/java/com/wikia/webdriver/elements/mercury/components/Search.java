@@ -11,7 +11,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class Search extends BasePageObject {
 
-  @FindBy(css = ".wikia-search__container input")
+  @FindBy(css = ".wikia-search__container input.side-search__input")
   private WebElement searchInput;
 
   @FindBy(css = ".wikia-search__clear")
