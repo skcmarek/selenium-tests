@@ -31,7 +31,7 @@ public class VisualEditorSaveChangesDialog extends VisualEditorDialog {
   private By recaptchaImageBy = By.cssSelector("#recaptcha_challenge_image");
 
   public VisualEditorSaveChangesDialog(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public ArticlePageObject savePage() {

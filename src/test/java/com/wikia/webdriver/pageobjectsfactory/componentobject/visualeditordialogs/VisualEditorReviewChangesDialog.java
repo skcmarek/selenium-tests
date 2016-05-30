@@ -26,7 +26,7 @@ public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
   private static final int INSERT = 1;
 
   public VisualEditorReviewChangesDialog(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public VisualEditorSaveChangesDialog clickReturnToSaveFormButton() {

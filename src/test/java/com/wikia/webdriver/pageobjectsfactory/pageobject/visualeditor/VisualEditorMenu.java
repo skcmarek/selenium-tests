@@ -1,11 +1,21 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor;
 
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Formatting;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Indentation;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertDialog;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertList;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Style;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.elements.oasis.components.visualeditor.VideoDialog;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorAddMapDialog;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorAddMediaDialog;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorDialog;
@@ -20,29 +30,19 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialog
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorSourceEditorDialog;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
-
-import java.util.List;
-
 public class VisualEditorMenu extends WikiBasePageObject {
 
   private static final int STYLE_LIST = 1;
   private static final int INSERT_LIST = 2;
   private static final int HAMBURGER_LIST = 0;
-
+  @FindBy(css = ".oo-ui-frame")
+  protected WebElement linkIframe;
   @FindBy(css = ".oo-ui-icon-bold-b")
   private WebElement boldButton;
   @FindBy(css = ".oo-ui-icon-italic-i")
   private WebElement italicButton;
   @FindBy(css = ".oo-ui-icon-link")
   private WebElement linkButton;
-  @FindBy(css = ".oo-ui-frame")
-  protected WebElement linkIframe;
   @FindBy(css = ".oo-ui-icon-code")
   private WebElement codeButton;
   @FindBy(css = ".oo-ui-icon-clear")
@@ -57,6 +57,8 @@ public class VisualEditorMenu extends WikiBasePageObject {
   private List<WebElement> toolListItems;
   @FindBy(css = ".ve-ui-toolbar-saveButton.oo-ui-widget-enabled")
   private WebElement enabledPublishButton;
+  @FindBy(css = ".oo-ui-iconElement-icon.oo-ui-icon-video")
+  private WebElement addVidoeButton;
 
   private By strikeStyleBy = By.cssSelector(".oo-ui-icon-strikethrough-s");
   private By underlineStyleBy = By.cssSelector(".oo-ui-icon-underline-u");
@@ -64,8 +66,8 @@ public class VisualEditorMenu extends WikiBasePageObject {
   private By superscriptStyleBy = By.cssSelector(".oo-ui-icon-superscript");
   private By indentBy = By.cssSelector(".oo-ui-icon-indent-list");
   private By outdentBy = By.cssSelector(".oo-ui-icon-outdent-list");
-  private By publishButtonDisabled = By
-      .cssSelector(".oo-ui-toolbar-saveButton.ve-ui-widget-disabled");
+  private By publishButtonDisabled =
+      By.cssSelector(".oo-ui-toolbar-saveButton.ve-ui-widget-disabled");
   private By mapBy = By.cssSelector(".oo-ui-tool-name-wikiaMapInsert .oo-ui-tool-title");
   private By mediaBy = By.cssSelector(".oo-ui-tool-name-wikiaMediaInsert .oo-ui-tool-title");
   private By numberbedListBy = By.cssSelector(".oo-ui-icon-number-list");
@@ -172,6 +174,12 @@ public class VisualEditorMenu extends WikiBasePageObject {
       default:
         throw new NoSuchElementException("Non-existing indentation selected");
     }
+  }
+
+  public VideoDialog openVideoDialog() {
+    addVidoeButton.click();
+
+    return new VideoDialog().waitForDialogVisible();
   }
 
   public VisualEditorDialog openDialogFromMenu(InsertDialog insert) {

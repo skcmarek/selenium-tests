@@ -47,7 +47,7 @@ public class VisualEditorOptionsDialog extends VisualEditorDialog {
   private String menuSectionItemText = "oo-ui-menuSectionOptionWidget";
 
   public VisualEditorOptionsDialog(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public void selectPageSettings() {

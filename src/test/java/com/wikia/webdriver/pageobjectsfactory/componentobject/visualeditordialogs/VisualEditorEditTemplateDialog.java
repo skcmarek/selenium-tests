@@ -1,20 +1,23 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs;
 
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
 import com.wikia.webdriver.common.core.interactions.Elements;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
+public class VisualEditorEditTemplateDialog
+    extends VisualEditorDialog<VisualEditorEditTemplateDialog> {
 
-import java.util.List;
-
-public class VisualEditorEditTemplateDialog extends VisualEditorDialog {
-
+  private static final By PARAM_LABEL_BY = By.cssSelector(".ve-ui-mwParameterPage-label");
+  private static final By PARAM_INPUT_BY = By.cssSelector(".ve-ui-mwParameterPage-field textarea");
+  private static final By TEMPLATE_PARAMS_BY = By.cssSelector(".ve-ui-mwParameterPage");
   // outside of iframe
   @FindBy(css = ".ve-ui-wikiaTemplateGetInfoWidget-templateInfoButton a")
   private WebElement getInfoLink;
@@ -27,18 +30,12 @@ public class VisualEditorEditTemplateDialog extends VisualEditorDialog {
   @FindBy(css = ".ve-ui-wikiaFocusWidget-node")
   private WebElement templateFocusedMode;
 
-  private static final By PARAM_LABEL_BY = By.cssSelector(".ve-ui-mwParameterPage-label");
-  private static final By PARAM_INPUT_BY = By.cssSelector(".ve-ui-mwParameterPage-field textarea");
-  private static final By TEMPLATE_PARAMS_BY = By.cssSelector(".ve-ui-mwParameterPage");
-
-  public VisualEditorEditTemplateDialog(WebDriver driver) {
-    super(driver);
-  }
-
   @Override
-  public void waitForDialogVisible() {
+  public VisualEditorEditTemplateDialog waitForDialogVisible() {
     super.waitForDialogVisible();
     wait.forElementVisible(templateFocusedMode);
+
+    return this;
   }
 
   @Override
@@ -62,7 +59,8 @@ public class VisualEditorEditTemplateDialog extends VisualEditorDialog {
   public void typeInParam(String paramName, String text) {
     waitForDialogVisible();
     if (isElementOnPage(TEMPLATE_PARAMS_BY)) {
-      WebElement targetParam = Elements.getElementByChildText(templateParams, PARAM_LABEL_BY, paramName);
+      WebElement targetParam =
+          Elements.getElementByChildText(templateParams, PARAM_LABEL_BY, paramName);
       WebElement targetParamInput = targetParam.findElement(PARAM_INPUT_BY);
       targetParamInput.sendKeys(text);
       waitForValueToBePresentInElementsAttributeByElement(targetParamInput, "value", text);

@@ -1,5 +1,8 @@
 package com.wikia.webdriver.testcases.visualeditor;
 
+import org.joda.time.DateTime;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -7,13 +10,11 @@ import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertDialog;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.oasis.components.visualeditor.VideoDialog;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorAddMediaDialog;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorSaveChangesDialog;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
-
-import org.joda.time.DateTime;
-import org.testng.annotations.Test;
 
 public class VEAddVideoTests extends NewTestTemplate {
 
@@ -21,18 +22,17 @@ public class VEAddVideoTests extends NewTestTemplate {
   @Test(groups = {"VEAddVideo", "VEAddExternalVideoTests_001", "VEAddExternalVideo",
       "VEAddExternalVideoTests_004"})
   @Execute(asUser = User.USER)
-  @RelatedIssue(issueID = "MAIN-6897", comment = "Please test manually. Test is broken because of"
-                                                 + " Media update tool product code refactoring by CE-3584"
-                                                 + "Test is being fixed by Spitfire Team")
+  @RelatedIssue(issueID = "MAIN-6897",
+      comment = "Please test manually. Test is broken because of"
+          + " Media update tool product code refactoring by CE-3584"
+          + "Test is being fixed by Spitfire Team")
   public void VEAddExternalVideoTests_001_AddNonPremiumVid() {
-    VisualEditorPageObject ve =
-        new VisualEditorPageObject(driver).openVEOnArticle(wikiURL, PageContent.ARTICLE_NAME_PREFIX
-            + DateTime.now().getMillis());
+    VisualEditorPageObject ve = new VisualEditorPageObject(driver).openVEOnArticle(wikiURL,
+        PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis());
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
-    VisualEditorAddMediaDialog mediaDialog =
-        (VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
-    VisualEditorPageObject veNew = mediaDialog.addMediaByURL(VideoContent.NON_PREMIUM_VIDEO_URL);
+    VideoDialog mediaDialog = ve.openVideoDialog();
+    VisualEditorPageObject veNew = mediaDialog.addVideoByURL(VideoContent.NON_PREMIUM_VIDEO_URL);
     veNew.verifyVideos(1);
     veNew.verifyVEToolBarPresent();
     VisualEditorSaveChangesDialog save = veNew.clickPublishButton();
@@ -40,16 +40,16 @@ public class VEAddVideoTests extends NewTestTemplate {
     article.verifyVEPublishComplete();
   }
 
-  //AM02
+  // AM02
   @Test(groups = {"VEAddVideo", "VEAddExternalVideoTests_002", "VEAddExternalVideo"})
   @Execute(asUser = User.USER)
-  @RelatedIssue(issueID = "MAIN-6897", comment = "Please test manually. Test is broken because of"
-                                                 + "Media update tool product code refactoring by CE-3584"
-                                                 + "test will be fixed by Spitfire team")
+  @RelatedIssue(issueID = "MAIN-6897",
+      comment = "Please test manually. Test is broken because of"
+          + "Media update tool product code refactoring by CE-3584"
+          + "test will be fixed by Spitfire team")
   public void VEAddExternalVideoTests_002_AddPremiumVid() {
-    VisualEditorPageObject ve =
-        new VisualEditorPageObject(driver).openVEOnArticle(wikiURL, PageContent.ARTICLE_NAME_PREFIX
-            + DateTime.now().getMillis());
+    VisualEditorPageObject ve = new VisualEditorPageObject(driver).openVEOnArticle(wikiURL,
+        PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis());
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     VisualEditorAddMediaDialog mediaDialog =
@@ -66,9 +66,8 @@ public class VEAddVideoTests extends NewTestTemplate {
   @Test(groups = {"VEAddVideo", "VEAddExternalVideoTests_003", "VEAddExistingVideo"})
   @Execute(asUser = User.USER)
   public void VEAddExternalVideoTests_003_AddExistingVid() {
-    VisualEditorPageObject ve =
-        new VisualEditorPageObject(driver).openVEOnArticle(wikiURL, PageContent.ARTICLE_NAME_PREFIX
-            + DateTime.now().getMillis());
+    VisualEditorPageObject ve = new VisualEditorPageObject(driver).openVEOnArticle(wikiURL,
+        PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis());
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     VisualEditorAddMediaDialog mediaDialog =

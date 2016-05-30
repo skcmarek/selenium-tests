@@ -18,7 +18,7 @@ public class VisualEditorSourceEditorDialog extends VisualEditorDialog {
   private By editAreaBy = By.cssSelector(".oo-ui-widget-enabled.oo-ui-textInputWidget textarea");
 
   public VisualEditorSourceEditorDialog(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public VisualEditorPageObject clickApplyChangesButton() {

@@ -30,7 +30,7 @@ public class VisualEditorAddMapDialog extends VisualEditorDialog {
   private By mediaResultsBy = By.cssSelector(".ve-ui-mwMediaResultWidget.map");
 
   public VisualEditorAddMapDialog(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public void clickLearnMoreLink() {

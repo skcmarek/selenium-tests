@@ -38,7 +38,7 @@ public class VisualEditorInsertTemplateDialog extends VisualEditorDialog {
                    + " .ve-ui-wikiaTemplateOptionWidget");
 
   public VisualEditorInsertTemplateDialog(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public void typeInSearchInput(String searchString) {
@@ -68,7 +68,7 @@ public class VisualEditorInsertTemplateDialog extends VisualEditorDialog {
         "Suggested template selected: " + selected.getText(),
         true
     );
-    return new VisualEditorEditTemplateDialog(driver);
+    return new VisualEditorEditTemplateDialog();
   }
 
   public VisualEditorEditTemplateDialog selectResultTemplate(String searchString, int index) {
@@ -82,7 +82,7 @@ public class VisualEditorInsertTemplateDialog extends VisualEditorDialog {
         "Search result template selected: " + selected.getText(),
         true
     );
-    return new VisualEditorEditTemplateDialog(driver);
+    return new VisualEditorEditTemplateDialog();
   }
 
   public int getNumberOfResultTemplates() {

@@ -89,7 +89,6 @@ public class VEGalleryTests extends NewTestTemplate {
     galleryDialog.removeMediaFromCart(numOfMediaToRemoveSecond);
     expectedNumOfMedia = expectedNumOfMedia - numOfMediaToRemoveSecond;
     galleryDialog.verifyNumOfCartItems(expectedNumOfMedia);
-    galleryDialog.logOut(wikiURL);
   }
 
   //AG03

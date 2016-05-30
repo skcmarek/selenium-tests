@@ -66,7 +66,7 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
   }
 
   public VisualEditorAddMediaDialog(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   private void typeInSearchTextField(String input) {

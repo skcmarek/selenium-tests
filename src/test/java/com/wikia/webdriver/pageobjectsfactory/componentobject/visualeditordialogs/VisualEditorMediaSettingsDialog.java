@@ -29,7 +29,7 @@ public class VisualEditorMediaSettingsDialog extends VisualEditorDialog {
   private By labelElementBy = By.cssSelector(".oo-ui-labelElement-label");
 
   public VisualEditorMediaSettingsDialog(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public void selectSettings(Setting setting) {

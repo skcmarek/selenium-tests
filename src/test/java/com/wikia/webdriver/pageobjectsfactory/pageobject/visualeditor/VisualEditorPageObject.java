@@ -465,7 +465,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     wait.forElementVisible(editArea);
     wait.forElementVisible(focusedNode);
     clickContextMenu();
-    return new VisualEditorEditTemplateDialog(driver);
+    return new VisualEditorEditTemplateDialog();
   }
 
   public VisualEditorPageObject clickInsertToolButton() {

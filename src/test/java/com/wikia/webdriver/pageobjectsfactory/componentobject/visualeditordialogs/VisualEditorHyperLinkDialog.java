@@ -34,7 +34,7 @@ public class VisualEditorHyperLinkDialog extends VisualEditorDialog {
   private static final int REDIRECT_PAGE_INDEX = 3;
 
   public VisualEditorHyperLinkDialog(WebDriver driver) {
-    super(driver);
+    super();
     pageCategoryIndex[NEW_PAGE_INDEX] = -1;
     pageCategoryIndex[MATCHING_PAGE_INDEX] = -1;
     pageCategoryIndex[EXTERNAL_LINK_INDEX] = -1;

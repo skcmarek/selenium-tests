@@ -41,7 +41,7 @@ public class VisualEditorInsertGalleryDialog extends VisualEditorDialog {
   private static final By MEDIA_META_BY = By.cssSelector(".ve-ui-wikiaMediaOptionWidget-metaData");
 
   public VisualEditorInsertGalleryDialog(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   private void typeInSearchTextField(String input) {
