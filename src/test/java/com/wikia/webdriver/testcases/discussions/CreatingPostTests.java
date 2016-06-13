@@ -9,6 +9,7 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.PostsCreatorDesktop;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.PostsCreatorMobile;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
@@ -19,7 +20,6 @@ import org.testng.annotations.Test;
 public class CreatingPostTests extends NewTestTemplate {
 
   private static final String DESKTOP_RESOLUTION = "1920x1080";
-  private static final String MOBILE_RESOLUTION = "600x800";
 
   /**
    * ANONS ON MOBILE SECTION
@@ -46,8 +46,21 @@ public class CreatingPostTests extends NewTestTemplate {
   }
 
   /**
+   * LOGGED IN USER ON DESKTOP SECTION
+   */
+
+  @Test(groups = "discussions-loggedInUserOnDesktopCanAddNewPost")
+  @Execute(asUser = User.USER_3)
+  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+
+  public void loggedInUserOnDesktopCanAddNewPost() {
+    userOnDesktopAddsNewPost();
+  }
+
+  /**
    * TESTING METHODS SECTION
    */
+
 
   private void userOnMobileMustBeLoggedInToUsePostCreator() {
     PostsCreatorMobile postsCreator = new PostsListPage().open().getPostsCreatorMobile();
@@ -66,16 +79,35 @@ public class CreatingPostTests extends NewTestTemplate {
   private void userOnDesktopMustBeLoggedInToUsePostCreator() {
     PostsCreatorDesktop postsCreator = new PostsListPage().open().getPostCreatorDesktop();
 
-    Assertion.assertTrue(postsCreator.clickPostCreator().isModalDialogVisible());
+    Assertion.assertTrue(postsCreator.clickPostCreatorWrapped().isModalDialogVisible());
 
     postsCreator.clickOkButtonInSignInDialog();
 
-    Assertion.assertTrue(postsCreator.clickPostCreator().isModalDialogVisible());
+    Assertion.assertTrue(postsCreator.clickPostCreatorWrapped().isModalDialogVisible());
 
     postsCreator.clickSignInButtonInSignInDialog();
 
     Assertion.assertTrue(driver.getCurrentUrl().contains(MercurySubpages.REGISTER_PAGE));
   }
 
+  private void userOnDesktopAddsNewPost() {
+    PostsListPage postsListPage = new PostsListPage().open();
+    PostsCreatorDesktop postsCreator = postsListPage.getPostCreatorDesktop();
+    postsCreator.clickPostCreatorWrapped();
+
+    Assertion.assertFalse(postsCreator.isPostButtonActive());
+
+    postsCreator.clickPostCreatorUnwrapped().typePlainText(PostsCreatorDesktop.getTimeStamp());
+    Assertion.assertTrue(postsCreator.isPostButtonActive());
+
+    String postText = PostsCreatorDesktop.getTimeStamp();
+
+    Assertion.assertFalse(postsCreator.deleteText().isPostButtonActive());
+
+    postsCreator.typePlainText(postText).clickPostButton();
+
+    Post post = postsListPage.getPost();
+    Assertion.assertEquals(post.getTextFromFirstPost(), postText);
+  }
 
 }

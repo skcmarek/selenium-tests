@@ -9,7 +9,10 @@ import org.openqa.selenium.support.FindBy;
 public class PostsCreatorDesktop extends BasePageObject {
 
   @FindBy (css = ".editor-container.pinned-top .editor-wrapper")
-  private WebElement postCreator;
+  private WebElement postCreatorWrapped;
+
+  @FindBy (css = ".editor-container.pinned-top .editor-wrapper .editor-textarea")
+  private WebElement postCreatorUnwrapped;
 
   @FindBy (css = ".modal-dialog-wrapper:not(.discussion-editor-dialog) .modal-dialog")
   private WebElement dialogSignIn;
@@ -20,9 +23,17 @@ public class PostsCreatorDesktop extends BasePageObject {
   @FindBy (css = ".modal-dialog-content + footer > :last-child")
   private WebElement signInButtonInSignInDialog;
 
-  public PostsCreatorDesktop clickPostCreator() {
-    postCreator.click();
+  @FindBy (css = ".pinned-top .active-element-theme-color")
+  private WebElement postButton;
+
+
+  public PostsCreatorDesktop clickPostCreatorWrapped() {
+    postCreatorWrapped.click();
     return this;
+  }
+
+  public static String getTimeStamp() {
+    return BasePageObject.getTimeStamp();
   }
 
   public boolean isModalDialogVisible() {
@@ -36,6 +47,30 @@ public class PostsCreatorDesktop extends BasePageObject {
 
   public PostsCreatorDesktop clickSignInButtonInSignInDialog() {
     signInButtonInSignInDialog.click();
+    return this;
+  }
+
+  public PostsCreatorDesktop clickPostCreatorUnwrapped() {
+    postCreatorUnwrapped.click();
+    return this;
+  }
+
+  public PostsCreatorDesktop typePlainText(String text){
+    postCreatorUnwrapped.sendKeys(text);
+    return this;
+  }
+
+  public boolean isPostButtonActive() {
+    return postButton.isEnabled();
+  }
+
+  public PostsCreatorDesktop deleteText() {
+    postCreatorUnwrapped.clear();
+    return this;
+  }
+
+  public PostsCreatorDesktop clickPostButton() {
+    postCreatorUnwrapped.click();
     return this;
   }
 

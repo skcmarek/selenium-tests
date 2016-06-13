@@ -41,6 +41,9 @@ public class Post extends BasePageObject {
   @FindBy(css = "svg.upvote")
   private WebElement upvoteButton;
 
+  @FindBy(css = ".post-detail:nth-of-type(2)")
+  private WebElement firstPostDetails;
+
   public boolean isPostListEmpty() {
     return postList.isEmpty();
   }
@@ -150,5 +153,9 @@ public class Post extends BasePageObject {
 
   public String[] getSocialNetworkIconsClasses() {
     return getSocialNetworkIconClasses(0);
+  }
+
+  public String getTextFromFirstPost(){
+    return driver.findElement(By.cssSelector(".post-detail:nth-of-type(2)")).getText();
   }
 }
