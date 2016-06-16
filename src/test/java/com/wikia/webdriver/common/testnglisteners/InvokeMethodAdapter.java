@@ -1,15 +1,19 @@
 package com.wikia.webdriver.common.testnglisteners;
 
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.exceptions.TestFailedException;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.List;
 
 import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;
 import org.testng.ITestResult;
 
-import java.util.List;
-
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.DontRun;
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.exceptions.MethodIsExcludedFromRunningOnEnv;
+import com.wikia.webdriver.common.core.exceptions.TestFailedException;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 public class InvokeMethodAdapter implements IInvokedMethodListener {
 
@@ -34,6 +38,18 @@ public class InvokeMethodAdapter implements IInvokedMethodListener {
 
   @Override
   public void beforeInvocation(IInvokedMethod method, ITestResult testResult) {
-    // TODO Auto-generated method stub
+    if (isTestExcludedFromEnv(method.getTestMethod().getConstructorOrMethod().getMethod())) {
+      throw new MethodIsExcludedFromRunningOnEnv("this test is not supported in this environment");
+    }
+  }
+
+  private boolean isTestExcludedFromEnv(Method method) {
+    if (method.isAnnotationPresent(DontRun.class)) {
+      if (Arrays.asList(method.getAnnotation(DontRun.class).env())
+          .contains(Configuration.getEnvType())) {
+        return true;
+      }
+    }
+    return false;
   }
 }

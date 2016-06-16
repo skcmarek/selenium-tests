@@ -23,7 +23,7 @@ public class NonSpecificMapTests extends NewTestTemplate {
   Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"NonSpecificMapTests_001", "NonSpecificMapTests", "InteractiveMaps"})
-  @DontRun(env = {"dev", "sandbox", "preview"})
+  @DontRun(env = {"dev", "staging"})
   @Execute(asUser = User.USER)
   @RelatedIssue(issueID = "QAART-690", comment = "functionality status is deprecated, " +
           "monitor the issue to find out resolution")
@@ -64,7 +64,7 @@ public class NonSpecificMapTests extends NewTestTemplate {
   }
 
   @RelatedIssue(issueID = "", comment = "Functionaliy will be deprecated. No need to test manually")
-  @DontRun(env = {"dev", "sandbox", "preview"})
+  @DontRun(env = {"dev", "staging"})
   @Test(groups = {"NonSpecificMapTests_004", "NonSpecificMapTests", "InteractiveMaps"})
   @Execute(asUser = User.USER)
   public void NonSpecificMapTests_004_VerifyMapZoomOptions() {
@@ -79,7 +79,7 @@ public class NonSpecificMapTests extends NewTestTemplate {
   }
 
   @Test(groups = {"NonSpecificMapTests_005", "NonSpecificMapTests", "InteractiveMaps"})
-  @DontRun(env = {"dev", "sandbox", "preview"})
+  @DontRun(env = {"dev", "staging"})
   @Execute(asUser = User.USER)
   @RelatedIssue(issueID = "QAART-690", comment = "functionality status is deprecated, " +
           "monitor the issue to find out resolution")
@@ -115,7 +115,7 @@ public class NonSpecificMapTests extends NewTestTemplate {
   }
 
   @Test(groups = {"NonSpecificMapTests_008", "NonSpecificMapTests", "InteractiveMaps"})
-  @DontRun(env = {"dev", "sandbox", "preview"})
+  @DontRun(env = {"dev", "staging"})
   @RelatedIssue(issueID = "QAART-690", comment = "functionality status is deprecated, " +
           "monitor the issue to find out resolution")
   public void NonSpecificMapTests_008_VerifyMapIsDisplayedForAnons() {
@@ -147,7 +147,7 @@ public class NonSpecificMapTests extends NewTestTemplate {
   }
 
   @Test(groups = {"NonSpecificMapTests_011", "NonSpecificMapTests", "InteractiveMaps"})
-  @DontRun(env = {"dev", "sandbox", "preview"})
+  @DontRun(env = {"dev", "staging"})
   @RelatedIssue(issueID = "QAART-690", comment = "functionality status is deprecated, " +
           "monitor the issue to find out resolution")
   public void NonSpecificMapTests_011_VerifyEscapedFragmentPageContent() {

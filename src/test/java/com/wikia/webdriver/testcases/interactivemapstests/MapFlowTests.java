@@ -46,7 +46,7 @@ public class MapFlowTests extends NewTestTemplate {
     createdMap.verifyControlButtonsAreVisible();
   }
 
-  @DontRun(env = {"dev", "sandbox", "preview"})
+  @DontRun(env = {"dev", "staging"})
   @Test(groups = {"MapFlowTests_002", "MapFlowTests", "InteractiveMaps"})
   @Execute(asUser = User.USER)
   @RelatedIssue(issueID = "MAIN-5732", comment = "Not possible to test manually in preview environment")
@@ -73,7 +73,7 @@ public class MapFlowTests extends NewTestTemplate {
     createdMap.verifyControlButtonsAreVisible();
   }
 
-  @DontRun(env = {"dev", "sandbox", "preview"})
+  @DontRun(env = {"dev", "staging"})
   @Test(groups = {"MapFlowTests_003", "MapFlowTests", "InteractiveMaps"})
   @Execute(asUser = User.USER)
   @RelatedIssue(issueID = "MAIN-5732", comment = "Not possible to test manually in preview environment")

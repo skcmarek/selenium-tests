@@ -37,7 +37,7 @@ public class PinMapTests extends NewTestTemplate {
     selectedMap = pinDialog.clickCancelButton();
   }
 
-  @DontRun(env = {"dev", "sandbox", "preview"})
+  @DontRun(env = {"dev", "staging"})
   @Test(enabled = false, groups = {"PinMapTests_002", "PinMapTests", "InteractiveMaps"})
   @Execute(asUser = User.USER)
   public void PinMapTests_002_VerifySuggestionsAndAssociatedImage() {
@@ -81,7 +81,7 @@ public class PinMapTests extends NewTestTemplate {
 
   @RelatedIssue(issueID = " ",
       comment = "This maps test should not fail")
-  @DontRun(env = {"dev", "sandbox", "preview"})
+  @DontRun(env = {"dev", "staging"})
   @Test(groups = {"PinMapTests_004", "PinMapTests", "InteractiveMaps"})
   @Execute(asUser = User.USER)
   public void PinMapTests_004_VerifyPopUpAfterClickPin() {
@@ -95,7 +95,7 @@ public class PinMapTests extends NewTestTemplate {
     selectedMap.verifyPopUpVisible();
   }
 
-  @DontRun(env = {"dev", "sandbox", "preview"})
+  @DontRun(env = {"dev", "staging"})
   @Test(enabled = false, groups = {"PinMapTests_005", "PinMapTests", "InteractiveMaps"})
   @Execute(asUser = User.USER)
   public void PinMapTests_005_VerifyDeletePin() {
@@ -114,7 +114,7 @@ public class PinMapTests extends NewTestTemplate {
     selectedMap.verifyPinNotExists(pinName);
   }
 
-  @DontRun(env = {"dev", "sandbox", "preview"})
+  @DontRun(env = {"dev", "staging"})
   @Test(enabled = false, groups = {"PinMapTests_006", "PinMapTests", "InteractiveMaps", "PinMapTests_004"})
   @Execute(asUser = User.USER)
   public void PinMapTests_006_VerifyChangePinData() {
@@ -143,7 +143,7 @@ public class PinMapTests extends NewTestTemplate {
     selectedMap.clickOnPin(0);
   }
 
- @DontRun(env = {"dev", "sandbox", "preview"})
+ @DontRun(env = {"dev", "staging"})
   @Test(enabled = false, groups = {"PinMapTests_007", "PinMapTests", "InteractiveMaps"})
   @Execute(asUser = User.USER)
   public void PinMapTests_007_VerifyValidExternalUrlCanBeAdded() {
@@ -164,7 +164,7 @@ public class PinMapTests extends NewTestTemplate {
   }
 
   @Test(enabled = false, groups = {"PinMapTests_008", "PinMapTests", "InteractiveMaps"})
-  @DontRun(env = {"dev", "sandbox", "preview"})
+  @DontRun(env = {"dev", "staging"})
   @Execute(asUser = User.USER)
   public void PinMapTests_008_VerifyErrorMessageWhenAssociatedArticleNotExist() {
     WikiBasePageObject base = new WikiBasePageObject();

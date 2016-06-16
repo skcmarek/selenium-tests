@@ -4,7 +4,6 @@ import java.io.File;
 import java.lang.reflect.Method;
 
 import org.openqa.selenium.Dimension;
-import org.testng.SkipException;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
@@ -13,7 +12,6 @@ import org.testng.annotations.Listeners;
 import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.WikiaWebDriver;
-import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
@@ -59,10 +57,6 @@ public abstract class CoreTestTemplate {
     }
 
     prepareURLs();
-
-    if (isTestExcludedFromEnv(method)) {
-      throw new SkipException("Test can't be run on " + Configuration.getEnv() + " environment");
-    }
 
     driver = DriverProvider.getActiveDriver();
     networkTrafficInterceptor = driver.getProxy();
@@ -118,22 +112,6 @@ public abstract class CoreTestTemplate {
           String.valueOf(method.getAnnotation(NetworkTrafficDump.class).networkTrafficDump()));
       setTestProperty("useProxy", "true");
     }
-  }
-
-  /**
-   * Return false if test is excluded from running on current test environment
-   */
-  protected boolean isTestExcludedFromEnv(Method method) {
-    if (method.isAnnotationPresent(DontRun.class)) {
-      String[] excludedEnvs = method.getAnnotation(DontRun.class).env();
-
-      for (String excludedEnv : excludedEnvs) {
-        if (Configuration.getEnv().contains(excludedEnv)) {
-          return true;
-        }
-      }
-    }
-    return false;
   }
 
   protected boolean isNonAnonUserOnDeclaringClass(Class<?> declaringClass) {

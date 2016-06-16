@@ -25,7 +25,7 @@ public class BlockedUserMapTests extends NewTestTemplate {
   Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"BlockedUserMapTests_001", "BlockedUserMapTests", "InteractiveMaps"})
-  @DontRun(env = {"dev", "sandbox", "preview"})
+  @DontRun(env = {"dev", "staging"})
   public void BlockedUserMapTests_001_VerifyBlockedUserCannotEditPinTypes() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userNameBlockedAccount, credentials.passwordBlockedAccount,
@@ -42,7 +42,7 @@ public class BlockedUserMapTests extends NewTestTemplate {
 
   @RelatedIssue(issueID = "",
       comment = "Functionality is being depracated NO need to test manually")
-  @DontRun(env = {"dev", "sandbox", "preview"})
+  @DontRun(env = {"dev", "staging"})
   @Test(groups = {"BlockedUserMapTests_002", "BlockedUserMapTests", "InteractiveMaps"})
   public void BlockedUserMapTests_002_VerifyUserCannotAddPin() {
     WikiBasePageObject base = new WikiBasePageObject();

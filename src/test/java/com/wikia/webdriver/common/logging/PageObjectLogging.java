@@ -7,11 +7,11 @@ import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.core.SelectorStack;
 import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.XMLReader;
-import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
+import com.wikia.webdriver.common.core.exceptions.MethodIsExcludedFromRunningOnEnv;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
@@ -36,7 +36,6 @@ import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
-import org.testng.SkipException;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -394,14 +393,12 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     if (!testStarted) {
       start(result.getMethod().getConstructorOrMethod().getMethod());
     }
-    if (result.getMethod().getConstructorOrMethod().getMethod()
-        .isAnnotationPresent(DontRun.class)) {
-      log("Test SKIPPED", "this test is not supported in this environment", true);
+    if(result.getThrowable() instanceof MethodIsExcludedFromRunningOnEnv){
       result.setStatus(ITestResult.SUCCESS);
+      log("Test SKIPPED", "this test is not supported in this environment", true);
       onTestSuccess(result);
-    } else {
+    }else {
       result.setStatus(ITestResult.FAILURE);
-      result.setThrowable(new SkipException("TEST SKIPPED"));
       onTestFailure(result);
     }
     if (testStarted) {
