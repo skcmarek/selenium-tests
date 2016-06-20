@@ -67,7 +67,7 @@ public class ArticleContent extends ApiCall {
     return this;
   }
 
-  public  void clear() {
+  public void clear() {
     push("", TestContext.getCurrentMethodName());
   }
 }
