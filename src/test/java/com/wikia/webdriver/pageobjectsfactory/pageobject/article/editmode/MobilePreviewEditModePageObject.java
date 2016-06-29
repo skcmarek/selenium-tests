@@ -49,6 +49,7 @@ public class MobilePreviewEditModePageObject extends BasePageObject {
     new ArticlePageObject()
         .open(articleName)
         .navigateToArticleEditPage()
+        .verifyContentLoaded()
         .openMobilePreviewArticle();
     wait.forElementVisible(previewModal);
     driver.switchTo().frame(mobilePreviewIframe);

@@ -156,11 +156,13 @@ public class VisualEditModePageObject extends EditMode {
     verifyComponent(video);
   }
 
-  public void verifyContentLoaded() {
+  public VisualEditModePageObject verifyContentLoaded() {
     driver.switchTo().frame(iframe);
     wait.forElementVisible(contentInput);
     PageObjectLogging.log("verifyContentLoaded", "RTE editor loaded", true, driver);
     driver.switchTo().defaultContent();
+
+    return this;
   }
 
   public void verifyVideoPosition(PositionsVideo position) {
