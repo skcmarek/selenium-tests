@@ -293,11 +293,11 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
             new Cookie("cpBenefitsModalShown", "1", Configuration.getWikiaDomain(), null, null));
       }
 
-      if (TestContext.isFirstLoad() && "true".equals(Configuration.getMockAds())) {
-        driver.manage().addCookie(
-            new Cookie("mock-ads", XMLReader.getValue("mock.ads_token"),
-                       Configuration.getWikiaDomain(), null, null));
-      }
+//      if (TestContext.isFirstLoad() && "true".equals(Configuration.getMockAds())) {
+//        driver.manage().addCookie(
+//            new Cookie("mock-ads", XMLReader.getValue("mock.ads_token"),
+//                       Configuration.getWikiaDomain(), null, null));
+//      }
     }
 
     Method method = TestContext.getCurrentTestMethod();

@@ -3,7 +3,10 @@ package com.wikia.webdriver.common.core.drivers;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
+import net.lightbody.bmp.filters.ResponseFilter;
 import net.lightbody.bmp.proxy.CaptureType;
+import net.lightbody.bmp.util.HttpMessageContents;
+import net.lightbody.bmp.util.HttpMessageInfo;
 
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
@@ -12,11 +15,15 @@ import org.openqa.selenium.logging.LoggingPreferences;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
+import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.WikiaWebDriver;
+import com.wikia.webdriver.common.core.XMLReader;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.geoedge.GeoEdgeProxy;
 import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+
+import io.netty.handler.codec.http.HttpResponse;
 
 public abstract class BrowserAbstract {
 
@@ -83,18 +90,30 @@ public abstract class BrowserAbstract {
    * Set Proxy instance for a Browser instance
    */
   protected void setProxy() {
-    if (Configuration.useProxy()) {
-      server = new NetworkTrafficInterceptor();
-      String countryCode = Configuration.getCountryCode();
-      server.setTrustAllServers(true);
-      server.setMitmDisabled(true);
-      server.setRequestTimeout(90, TimeUnit.SECONDS);
-      server.enableHarCaptureTypes(CaptureType.REQUEST_CONTENT, CaptureType.RESPONSE_CONTENT);
-      if (StringUtils.isNotBlank(countryCode)) {
-        server.setProxyServer(GeoEdgeProxy.getProxyAddress(countryCode));
-      }
+    server = new NetworkTrafficInterceptor();
+    String countryCode = Configuration.getCountryCode();
+    server.setTrustAllServers(true);
+    server.setMitmDisabled(true);
+    server.setRequestTimeout(90, TimeUnit.SECONDS);
+    server.enableHarCaptureTypes(CaptureType.REQUEST_CONTENT, CaptureType.RESPONSE_CONTENT);
 
-      caps.setCapability(CapabilityType.PROXY, server.startSeleniumProxyServer());
+    server.addResponseFilter(new ResponseFilter() {
+      @Override
+      public void filterResponse(HttpResponse response, HttpMessageContents contents,
+          HttpMessageInfo messageInfo) {
+
+        if (messageInfo.getUrl().contains(Configuration.getWikiaDomain()) && TestContext.isFirstRequest()) {
+          response.headers().add("Set-Cookie", String.format("%s=%s; Domain=%s", "mock-ads",
+              XMLReader.getValue("mock.ads_token"), Configuration.getWikiaDomain()));
+          TestContext.setFirstRequest(false);
+        }
+      }
+    });
+
+    if (StringUtils.isNotBlank(countryCode)) {
+      server.setProxyServer(GeoEdgeProxy.getProxyAddress(countryCode));
     }
+
+    caps.setCapability(CapabilityType.PROXY, server.startSeleniumProxyServer());
   }
 }
