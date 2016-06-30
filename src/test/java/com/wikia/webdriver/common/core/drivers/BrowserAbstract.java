@@ -3,6 +3,7 @@ package com.wikia.webdriver.common.core.drivers;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
+import io.netty.handler.codec.http.HttpResponseStatus;
 import net.lightbody.bmp.filters.ResponseFilter;
 import net.lightbody.bmp.proxy.CaptureType;
 import net.lightbody.bmp.util.HttpMessageContents;
@@ -97,15 +98,16 @@ public abstract class BrowserAbstract {
     server.setRequestTimeout(90, TimeUnit.SECONDS);
     server.enableHarCaptureTypes(CaptureType.REQUEST_CONTENT, CaptureType.RESPONSE_CONTENT);
 
+//    server.blacklistRequests(".*__varnish_liftium.*", 404);
+
     server.addResponseFilter(new ResponseFilter() {
       @Override
       public void filterResponse(HttpResponse response, HttpMessageContents contents,
           HttpMessageInfo messageInfo) {
 
-        if (messageInfo.getUrl().contains(Configuration.getWikiaDomain()) && TestContext.isFirstRequest()) {
-          response.headers().add("Set-Cookie", String.format("%s=%s; Domain=%s", "mock-ads",
-              XMLReader.getValue("mock.ads_token"), Configuration.getWikiaDomain()));
-          TestContext.setFirstRequest(false);
+        if (messageInfo.getUrl().contains("__varnish_liftium") ) {
+          response.setStatus(HttpResponseStatus.NOT_FOUND);
+          contents.setTextContents("");
         }
       }
     });
@@ -115,5 +117,6 @@ public abstract class BrowserAbstract {
     }
 
     caps.setCapability(CapabilityType.PROXY, server.startSeleniumProxyServer());
+    server.startIntercepting();
   }
 }
