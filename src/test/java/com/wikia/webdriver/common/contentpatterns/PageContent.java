@@ -53,6 +53,7 @@ public class PageContent {
   public static final String FILEPNG = "Image001.png";
   public static final String FILE2PNG = "Image002.png";
   public static final String SMALLFILE = "Image011-Small-image.png";
+  public static final String HUGEFILE = "HugeImage.jpg";
   public static final String BROKENEXTENSIONFILE = "broken-extension-image.fer";
 
   //image storage
