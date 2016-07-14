@@ -131,7 +131,7 @@ public class CommunityPageSalesPitchDialogTests extends NewTestTemplate {
     Assertion.assertTrue(new SalesPitchDialog().getImageSource().contains(DIALOG_IMAGE_NAME));
   }
 
-  @Test(dependsOnMethods = {"verifySettingDialogImage"})
+  @Test(dependsOnMethods = {"verifySettingCustomDialogImage"})
   @Execute(disableCommunityPageSalesPitchDialog = "false", asUser = User.USER)
   public void verifyDeletingCustomDialogImage() {
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + ArticlePageObject.getTimeStamp();
