@@ -10,6 +10,9 @@ public class SalesPitchDialog extends WikiBasePageObject {
 
   private By salesPitchDialog = By.cssSelector("#CommunityPageBenefitsModal");
 
+  @FindBy (css = ".community-page-benefits-image")
+  private WebElement image;
+
   @FindBy(css = "#CommunityPageBenefitsModal .community-page-entry-point-button")
   private WebElement entryPointButton;
 
@@ -32,6 +35,12 @@ public class SalesPitchDialog extends WikiBasePageObject {
     entryPointButton.click();
 
     return true;
+  }
+
+  public String getImageSource() {
+    wait.forElementVisible(image);
+
+    return image.getAttribute("src");
   }
 
 }
