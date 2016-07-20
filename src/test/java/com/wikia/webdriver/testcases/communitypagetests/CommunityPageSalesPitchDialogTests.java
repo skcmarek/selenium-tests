@@ -115,7 +115,7 @@ public class CommunityPageSalesPitchDialogTests extends NewTestTemplate {
     SpecialNewFilesPageObject filesPage =
         new SpecialNewFilesPageObject(driver).openSpecialNewFiles(wikiURL);
     filesPage.addPhoto();
-    filesPage.selectFileToUpload(PageContent.HUGEFILE);
+    filesPage.selectFileToUpload(PageContent.BIGFILE);
     filesPage.clickOnMoreOptions();
     filesPage.setFileName(DIALOG_IMAGE_NAME);
     filesPage.checkIgnoreAnyWarnings();
@@ -131,7 +131,7 @@ public class CommunityPageSalesPitchDialogTests extends NewTestTemplate {
   }
 
   @Test(dependsOnMethods = {"verifyImageIsNotSetByDefault", "verifySettingCustomDialogImage"})
-  @Execute(disableCommunityPageSalesPitchDialog = "false", asUser = User.USER, onWikia = "aga")
+  @Execute(disableCommunityPageSalesPitchDialog = "false", asUser = User.STAFF)
   public void verifyDeletingCustomDialogImage() {
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + ArticlePageObject.getTimeStamp();
     ArticlePageObject article = new ArticlePageObject();
