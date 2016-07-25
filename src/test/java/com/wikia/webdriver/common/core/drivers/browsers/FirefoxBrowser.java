@@ -2,10 +2,14 @@ package com.wikia.webdriver.common.core.drivers.browsers;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.wikia.webdriver.common.core.ExtHelper;
 import com.wikia.webdriver.common.core.WikiaWebDriver;
@@ -49,26 +53,37 @@ public class FirefoxBrowser extends BrowserAbstract {
         }
       }
       tmpFile.delete();
-    }
 
-    firefoxProfile = new FirefoxProfile(
-        new File(ClassLoader.getSystemResource("FirefoxProfiles/Default").getPath()));
+  }
 
-    if ("true".equals(Configuration.getPageLoadStrategy())) {
-      firefoxProfile.setPreference("webdriver.load.strategy", "unstable");
-    }
+    caps = DesiredCapabilities.firefox();
 
-    if ("true".equals(Configuration.getDisableFlash())) {
-      firefoxProfile.setPreference("plugin.state.flash", 0);
-    }
+
+//    firefoxProfile = new FirefoxProfile(
+//        new File(ClassLoader.getSystemResource("FirefoxProfiles/Default").getPath()));
+
+//    if ("true".equals(Configuration.getPageLoadStrategy())) {
+//      firefoxProfile.setPreference("webdriver.load.strategy", "unstable");
+//    }
+//
+//    if ("true".equals(Configuration.getDisableFlash())) {
+//      firefoxProfile.setPreference("plugin.state.flash", 0);
+//    }
   }
 
   @Override
   public WikiaWebDriver create() {
-    caps.setCapability(FirefoxDriver.PROFILE, firefoxProfile);
-    caps.setCapability("marionette", true);
+//    caps.setCapability(FirefoxDriver.PROFILE, firefoxProfile);
+//    caps.setCapability("marionette", true);
 
-    return new WikiaWebDriver(new FirefoxDriver(caps), server, false);
+//    System.setProperty("webdriver.gecko.driver", "aaa");
+
+    try {
+      return new WikiaWebDriver(new RemoteWebDriver(new URL("http://dev-ludwikk:4444/wd/hub"), caps), server, false);
+    } catch (MalformedURLException e) {
+      e.printStackTrace();
+      return new WikiaWebDriver(new FirefoxDriver(caps), server, false);
+    }
   }
 
   @Override
