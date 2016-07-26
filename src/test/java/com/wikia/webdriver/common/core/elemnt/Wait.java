@@ -273,7 +273,7 @@ public class Wait {
   /**
    * Wait for element to not be present in DOM
    */
-  public boolean forElementNotPresent(By selector) {
+  public boolean forElementNotPresent(final By selector) {
     changeImplicitWait(1, TimeUnit.SECONDS);
     try {
       return wait.until(new ExpectedCondition<Boolean>() {
