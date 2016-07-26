@@ -12,6 +12,7 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
+import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
@@ -33,6 +34,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -49,6 +52,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
+
+import javax.annotation.Nullable;
 
 public class PageObjectLogging extends AbstractWebDriverEventListener implements ITestListener {
 
@@ -276,9 +281,21 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     }
 
     if (driver.getCurrentUrl().contains(Configuration.getWikiaDomain())) {
+
+      new WebDriverWait(DriverProvider.getActiveDriver(), 15).until(new ExpectedCondition<Boolean>() {
+        @Nullable
+        @Override
+        public Boolean apply(@Nullable WebDriver input) {
+          try {
+            return ((JavascriptExecutor) input).executeScript("return $()") != null;
+          }catch (WebDriverException e){
+            return false;
+          }
+        }
+      });
       //HACK FOR DISABLING NOTIFICATIONS
       try {
-        new JavascriptActions(driver).execute("$(\".sprite.close-notification\")[0].click()");
+        DriverProvider.getActiveDriver().executeAsyncScript("$('.sprite.close-notification')[0].click()");
       }catch (WebDriverException e){
 
       }

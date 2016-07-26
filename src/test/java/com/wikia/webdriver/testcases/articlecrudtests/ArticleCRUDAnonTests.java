@@ -17,7 +17,6 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
 
   @Test(groups = {"ArticleCRUDAnon_001"})
   public void articleCRUDAnon_addBySpecialPage() {
-    WikiBasePageObject base = new WikiBasePageObject();
     String articleContent = PageContent.ARTICLE_TEXT;
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
     SpecialCreatePage specialCreatePage = new SpecialCreatePage().open();

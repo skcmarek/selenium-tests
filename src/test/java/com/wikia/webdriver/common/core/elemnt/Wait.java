@@ -86,7 +86,7 @@ public class Wait {
    * @param element The element to be checked
    */
   public WebElement forElementClickable(WebElement element) {
-    changeImplicitWait(0, TimeUnit.MILLISECONDS);
+    changeImplicitWait(50, TimeUnit.MILLISECONDS);
     try {
       element.getTagName();
     } catch (WebDriverException e) {
@@ -105,7 +105,7 @@ public class Wait {
   }
 
   public WebElement forElementClickable(WebElement element, int timeout) {
-    changeImplicitWait(0, TimeUnit.MILLISECONDS);
+    changeImplicitWait(50, TimeUnit.MILLISECONDS);
     try {
       element.getTagName();
     } catch (WebDriverException e) {
@@ -123,7 +123,7 @@ public class Wait {
   }
 
   public WebElement forElementClickable(List<WebElement> elements, int index, int timeout) {
-    changeImplicitWait(0, TimeUnit.MILLISECONDS);
+    changeImplicitWait(50, TimeUnit.MILLISECONDS);
     try {
       elements.get(index).getTagName();
     } catch (WebDriverException e) {
@@ -169,7 +169,7 @@ public class Wait {
    * @param element The element to be checked
    */
   public WebElement forElementVisible(WebElement element) {
-    changeImplicitWait(0, TimeUnit.MILLISECONDS);
+    changeImplicitWait(50, TimeUnit.MILLISECONDS);
     try {
       element.getTagName();
     } catch (WebDriverException e) {
@@ -259,7 +259,7 @@ public class Wait {
 
   public boolean forValueToBeNotPresentInElementsAttribute(
       WebElement element, String attribute, String value) {
-    changeImplicitWait(0, TimeUnit.SECONDS);
+    changeImplicitWait(50, TimeUnit.SECONDS);
     try {
       return wait.until(CommonExpectedConditions.valueToBeNotPresentInElementsAttribute(
           element, attribute, value));
@@ -272,7 +272,7 @@ public class Wait {
    * Wait for element to not be present in DOM
    */
   public boolean forElementNotPresent(By selector) {
-    changeImplicitWait(0, TimeUnit.SECONDS);
+    changeImplicitWait(50, TimeUnit.SECONDS);
     try {
       return wait.until(CommonExpectedConditions.elementNotPresent(selector));
     } finally {
@@ -286,7 +286,7 @@ public class Wait {
     } catch (WebDriverException e) {
       PageObjectLogging.log(INIT_MESSAGE, INIT_ERROR_MESSAGE, true);
     }
-    changeImplicitWait(0, TimeUnit.SECONDS);
+    changeImplicitWait(50, TimeUnit.SECONDS);
     try {
       if (SelectorStack.isContextSet()) {
         SelectorStack.contextRead();
@@ -300,7 +300,7 @@ public class Wait {
   }
 
   public boolean forTextNotInElement(By by, String text) {
-    changeImplicitWait(0, TimeUnit.SECONDS);
+    changeImplicitWait(50, TimeUnit.SECONDS);
     try {
       return wait.until(CommonExpectedConditions.textToBeNotPresentInElement(by, text));
     } finally {
@@ -309,7 +309,7 @@ public class Wait {
   }
 
   public boolean forTextInElement(By by, String text) {
-    changeImplicitWait(0, TimeUnit.SECONDS);
+    changeImplicitWait(50, TimeUnit.SECONDS);
     try {
       return wait.until(CommonExpectedConditions.textToBePresentInElement(by, text));
     } finally {
@@ -318,7 +318,7 @@ public class Wait {
   }
 
   public boolean forTextInElement(By by, int index, String text) {
-    changeImplicitWait(0, TimeUnit.SECONDS);
+    changeImplicitWait(50, TimeUnit.SECONDS);
     try {
       return wait.until(CommonExpectedConditions.textToBePresentInElement(by, index, text));
     } finally {
@@ -332,7 +332,7 @@ public class Wait {
     } catch (WebDriverException e) {
       PageObjectLogging.log(INIT_MESSAGE, INIT_ERROR_MESSAGE, true);
     }
-    changeImplicitWait(0, TimeUnit.SECONDS);
+    changeImplicitWait(50, TimeUnit.SECONDS);
     try {
       if (SelectorStack.isContextSet()) {
         SelectorStack.contextRead();
@@ -351,7 +351,7 @@ public class Wait {
     } catch (WebDriverException e) {
       PageObjectLogging.log(INIT_MESSAGE, INIT_ERROR_MESSAGE, true);
     }
-    changeImplicitWait(0, TimeUnit.SECONDS);
+    changeImplicitWait(50, TimeUnit.SECONDS);
     try {
       if (SelectorStack.isContextSet()) {
         SelectorStack.contextRead();
@@ -371,7 +371,7 @@ public class Wait {
    */
   public void forSuccessfulResponse(final NetworkTrafficInterceptor networkTrafficInterceptor,
                                     final String url) {
-    changeImplicitWait(0, TimeUnit.SECONDS);
+    changeImplicitWait(50, TimeUnit.SECONDS);
 
     try {
 
@@ -404,7 +404,7 @@ public class Wait {
 
   public void forSuccessfulResponseByUrlPattern(final NetworkTrafficInterceptor trafficInterceptor,
                                                 final String pattern) {
-    changeImplicitWait(0, TimeUnit.SECONDS);
+    changeImplicitWait(50, TimeUnit.SECONDS);
     try {
       wait.until(
           new ExpectedCondition<Boolean>() {

@@ -30,7 +30,7 @@ public class BannerNotifications extends BasePageObject{
     try {
       wait.forElementVisible(bannerNotification);
     } finally {
-      driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+      driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
     }
   }
 

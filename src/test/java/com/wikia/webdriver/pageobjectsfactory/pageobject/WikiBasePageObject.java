@@ -406,7 +406,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public void verifyUserLoggedIn(final String userName) {
-    changeImplicitWait(0, TimeUnit.MILLISECONDS);
+    changeImplicitWait(50, TimeUnit.MILLISECONDS);
     try {
       if (driver.findElements(By.cssSelector("#PreviewFrame")).size() > 0) {
         driver.switchTo().frame("PreviewFrame");

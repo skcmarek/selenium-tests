@@ -1,11 +1,15 @@
 package com.wikia.webdriver.common.core.drivers.browsers;
 
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.wikia.webdriver.common.core.ExtHelper;
 import com.wikia.webdriver.common.core.WikiaWebDriver;
@@ -27,6 +31,7 @@ public class ChromeBrowser extends BrowserAbstract {
 
   @Override
   public void setOptions() {
+    caps = DesiredCapabilities.chrome();
     String chromeBinaryPath = "";
     String osName = System.getProperty("os.name").toUpperCase();
     String emulator = Configuration.getEmulator();
@@ -70,7 +75,12 @@ public class ChromeBrowser extends BrowserAbstract {
   public WikiaWebDriver create() {
     caps.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
 
-    return new WikiaWebDriver(new ChromeDriver(caps), server, useMobile);
+    try {
+      return new WikiaWebDriver(new RemoteWebDriver(new URL("http://dev-ludwikk:4444/wd/hub"), caps), server, useMobile);
+    } catch (MalformedURLException e) {
+      e.printStackTrace();
+      return new WikiaWebDriver(new ChromeDriver(caps), server, useMobile);
+    }
   }
 
   @Override

@@ -93,7 +93,7 @@ public class BasePageObject {
    * us no need for waiting 30 seconds
    */
   protected boolean isElementOnPage(By by) {
-    changeImplicitWait(500, TimeUnit.MILLISECONDS);
+    changeImplicitWait(50, TimeUnit.MILLISECONDS);
     try {
       return driver.findElements(by).size() > 0;
     } finally {
@@ -106,7 +106,7 @@ public class BasePageObject {
    * us no need for waiting 30 seconds
    */
   protected boolean isElementOnPage(WebElement element) {
-    changeImplicitWait(500, TimeUnit.MILLISECONDS);
+    changeImplicitWait(50, TimeUnit.MILLISECONDS);
     boolean isElementOnPage = true;
     try {
       // Get location on WebElement is rising exception when element is not present
@@ -135,7 +135,7 @@ public class BasePageObject {
    * no need for waiting 30 seconds
    */
   protected int getNumOfElementOnPage(By cssSelectorBy) {
-    changeImplicitWait(500, TimeUnit.MILLISECONDS);
+    changeImplicitWait(50, TimeUnit.MILLISECONDS);
     int numElementOnPage;
     try {
       numElementOnPage = driver.findElements(cssSelectorBy).size();
@@ -148,7 +148,7 @@ public class BasePageObject {
   }
 
   protected boolean isElementInContext(String cssSelector, WebElement element) {
-    changeImplicitWait(500, TimeUnit.MILLISECONDS);
+    changeImplicitWait(50, TimeUnit.MILLISECONDS);
     boolean isElementInElement = true;
     try {
       if (element.findElements(By.cssSelector(cssSelector)).size() < 1) {
