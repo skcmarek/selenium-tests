@@ -18,6 +18,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import javax.annotation.Nullable;
+
 public class Wait {
 
   /**
@@ -272,9 +274,21 @@ public class Wait {
    * Wait for element to not be present in DOM
    */
   public boolean forElementNotPresent(By selector) {
-    changeImplicitWait(50, TimeUnit.SECONDS);
+    changeImplicitWait(1, TimeUnit.SECONDS);
     try {
-      return wait.until(CommonExpectedConditions.elementNotPresent(selector));
+      return wait.until(new ExpectedCondition<Boolean>() {
+        @Nullable
+        @Override
+        public Boolean apply(@Nullable WebDriver input) {
+          try {
+            driver.findElement(selector);
+            return false;
+          }catch(WebDriverException e) {
+            return true;
+          }
+        }
+      });
+      return wait.until(CommonExpectedConditions.e(selector));
     } finally {
       restoreDeaultImplicitWait();
     }
