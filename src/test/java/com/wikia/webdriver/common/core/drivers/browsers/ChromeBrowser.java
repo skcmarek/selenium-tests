@@ -76,7 +76,7 @@ public class ChromeBrowser extends BrowserAbstract {
     caps.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
 
     try {
-      return new WikiaWebDriver(new RemoteWebDriver(new URL("http://dev-ludwikk:4444/wd/hub"), caps), server, useMobile);
+      return new WikiaWebDriver(new RemoteWebDriver(new URL("http://qa-s3:4444/wd/hub"), caps), server, useMobile);
     } catch (MalformedURLException e) {
       e.printStackTrace();
       return new WikiaWebDriver(new ChromeDriver(caps), server, useMobile);
