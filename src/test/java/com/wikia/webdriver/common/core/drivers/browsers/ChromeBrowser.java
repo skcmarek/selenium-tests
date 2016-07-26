@@ -53,8 +53,8 @@ public class ChromeBrowser extends BrowserAbstract {
 
     chromeOptions.addArguments("start-maximized");
     chromeOptions.addArguments("disable-notifications");
-    chromeOptions.addArguments("process-per-site");
-    chromeOptions.addArguments("dns-prefetch-disable");
+//    chromeOptions.addArguments("process-per-site");
+//    chromeOptions.addArguments("dns-prefetch-disable");
 
     if ("true".equals(Configuration.getDisableFlash())) {
       chromeOptions.addArguments("disable-bundled-ppapi-flash");
