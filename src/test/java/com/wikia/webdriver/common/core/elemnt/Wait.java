@@ -288,7 +288,6 @@ public class Wait {
           }
         }
       });
-      return wait.until(CommonExpectedConditions.e(selector));
     } finally {
       restoreDeaultImplicitWait();
     }
