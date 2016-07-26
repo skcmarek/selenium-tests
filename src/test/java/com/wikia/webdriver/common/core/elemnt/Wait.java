@@ -142,7 +142,7 @@ public class Wait {
    * Checks if the element is clickable on the browser
    */
   public WebElement forElementClickable(By by) {
-    changeImplicitWait(250, TimeUnit.MILLISECONDS);
+      changeImplicitWait(50, TimeUnit.MILLISECONDS);
     try {
       return wait.until(ExpectedConditions.elementToBeClickable(by));
     } finally {
