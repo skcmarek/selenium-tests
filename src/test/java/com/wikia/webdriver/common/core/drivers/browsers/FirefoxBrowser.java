@@ -58,13 +58,15 @@ public class FirefoxBrowser extends BrowserAbstract {
 
     caps = DesiredCapabilities.firefox();
 
+    firefoxProfile = new FirefoxProfile();
+
 
 //    firefoxProfile = new FirefoxProfile(
 //        new File(ClassLoader.getSystemResource("FirefoxProfiles/Default").getPath()));
 
-//    if ("true".equals(Configuration.getPageLoadStrategy())) {
-//      firefoxProfile.setPreference("webdriver.load.strategy", "unstable");
-//    }
+    if ("true".equals(Configuration.getPageLoadStrategy())) {
+      firefoxProfile.setPreference("webdriver.load.strategy", "unstable");
+    }
 //
 //    if ("true".equals(Configuration.getDisableFlash())) {
 //      firefoxProfile.setPreference("plugin.state.flash", 0);
