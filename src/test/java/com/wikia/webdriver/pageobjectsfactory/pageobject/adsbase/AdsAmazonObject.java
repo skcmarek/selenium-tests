@@ -52,7 +52,7 @@ public class AdsAmazonObject extends AdsBaseObject {
   }
 
   private void waitForAmazonResponse() {
-    driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
+//    driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
     driver.manage().timeouts().setScriptTimeout(20, TimeUnit.SECONDS);
 
     try {

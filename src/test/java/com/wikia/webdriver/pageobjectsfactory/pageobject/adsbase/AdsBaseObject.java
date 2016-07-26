@@ -419,7 +419,7 @@ public class AdsBaseObject extends WikiBasePageObject {
    * best way to make sure we can move on with our tests.
    */
   public void waitTitleChangesTo(String desiredArticleTitle) {
-    driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
+//    driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
     try {
       waitFor.until(
           ExpectedConditions.titleContains(desiredArticleTitle)

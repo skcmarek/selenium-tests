@@ -147,7 +147,7 @@ public class JavascriptActions {
   }
 
   public void waitForJavaScriptTruthy(final String script) {
-    driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
+//    driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
     try {
       new WebDriverWait(driver, WEBDRIVER_WAIT_TIMEOUT_SEC).until(new ExpectedCondition<Boolean>() {
         public Boolean apply(WebDriver driver) {
@@ -160,7 +160,7 @@ public class JavascriptActions {
         }
       });
     } finally {
-      driver.manage().timeouts().implicitlyWait(WEBDRIVER_WAIT_TIMEOUT_SEC, TimeUnit.MILLISECONDS);
+//      driver.manage().timeouts().implicitlyWait(WEBDRIVER_WAIT_TIMEOUT_SEC, TimeUnit.MILLISECONDS);
     }
   }
 

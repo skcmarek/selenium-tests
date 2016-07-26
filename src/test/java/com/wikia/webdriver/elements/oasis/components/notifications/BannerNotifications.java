@@ -26,11 +26,11 @@ public class BannerNotifications extends BasePageObject{
   }
 
   public void verifyNotificationMessage() {
-    driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
+//    driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
     try {
       wait.forElementVisible(bannerNotification);
     } finally {
-      driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+//      driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
     }
   }
 

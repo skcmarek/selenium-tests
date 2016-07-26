@@ -363,16 +363,16 @@ public class CommonExpectedConditions {
     return new ExpectedCondition<Boolean>() {
       public Boolean apply(WebDriver driver) {
         try {
-          driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
+//          driver.manage().timeouts().implicitlyWait(1500, TimeUnit.MILLISECONDS);
           Boolean isDisplayed = element.isDisplayed();
-          driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+//          driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
           return !isDisplayed;
         } catch (StaleElementReferenceException e) {
           // Returns true because stale element reference implies that element
           // is no longer visible.
           return true;
         } catch (NoSuchElementException e) {
-          driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+//          driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
           return true;
         }
       }

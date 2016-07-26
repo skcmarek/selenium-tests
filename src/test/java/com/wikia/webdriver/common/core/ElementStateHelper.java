@@ -16,14 +16,14 @@ public class ElementStateHelper {
   }
 
   public static boolean isElementVisible(WebElement element, WebDriver webDriver) {
-    webDriver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
+//    webDriver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
 
     try {
       return element.isDisplayed();
     } catch (NoSuchElementException | StaleElementReferenceException e) {
       return false;
     } finally {
-      webDriver.manage().timeouts().implicitlyWait(TIMEOUT, TimeUnit.SECONDS);
+//      webDriver.manage().timeouts().implicitlyWait(TIMEOUT, TimeUnit.SECONDS);
     }
   }
 }

@@ -31,7 +31,7 @@ public class DropDownComponentObject extends WikiBasePageObject {
    * the event
    */
   public DropDownComponentObject openDropDown() {
-    driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
+//    driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
     try {
       new WebDriverWait(driver, 20, 2000).until(new ExpectedCondition<Boolean>() {
         @Override

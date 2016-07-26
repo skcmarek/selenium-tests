@@ -59,7 +59,7 @@ public abstract class BrowserAbstract {
   }
 
   protected void setTimeputs(WebDriver webDriver) {
-    webDriver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+    webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
   }
 
   protected void setListeners(WikiaWebDriver webDriver) {

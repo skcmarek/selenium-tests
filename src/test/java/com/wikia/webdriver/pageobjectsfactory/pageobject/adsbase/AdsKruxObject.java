@@ -70,7 +70,7 @@ public class AdsKruxObject extends AdsBaseObject {
 
   public void waitForKrux() {
     PageObjectLogging.log("waitForKrux", "Waiting for Krux", true);
-    driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
+//    driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
     try {
       String script =
           "return !!localStorage.kxsegs || !!localStorage.kxkuid || !!localStorage.kxuser;";
