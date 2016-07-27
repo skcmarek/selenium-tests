@@ -61,16 +61,13 @@ public class FirefoxBrowser extends BrowserAbstract {
     firefoxProfile = new FirefoxProfile();
 
 
-//    firefoxProfile = new FirefoxProfile(
-//        new File(ClassLoader.getSystemResource("FirefoxProfiles/Default").getPath()));
-
     if ("true".equals(Configuration.getPageLoadStrategy())) {
       firefoxProfile.setPreference("webdriver.load.strategy", "unstable");
     }
-//
-//    if ("true".equals(Configuration.getDisableFlash())) {
-//      firefoxProfile.setPreference("plugin.state.flash", 0);
-//    }
+
+    if ("true".equals(Configuration.getDisableFlash())) {
+      firefoxProfile.setPreference("plugin.state.flash", 0);
+    }
   }
 
   @Override
@@ -78,10 +75,8 @@ public class FirefoxBrowser extends BrowserAbstract {
 //    caps.setCapability(FirefoxDriver.PROFILE, firefoxProfile);
     caps.setCapability("marionette", true);
 
-//    System.setProperty("webdriver.gecko.driver", "aaa");
-
     try {
-      return new WikiaWebDriver(new RemoteWebDriver(new URL("http://dev-ludwikk:4444/wd/hub"), caps), server, false);
+      return new WikiaWebDriver(new RemoteWebDriver(new URL("http://qa-s3:4444/wd/hub"), caps), server, false);
     } catch (MalformedURLException e) {
       e.printStackTrace();
       return new WikiaWebDriver(new FirefoxDriver(caps), server, false);
