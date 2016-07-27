@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -103,9 +104,13 @@ public class VisualEditorInsertTemplateDialog extends VisualEditorDialog {
     PageObjectLogging.log("verifyNoResultTemplate", "No result templates found", true);
   }
 
-  public void verifyIsSuggestedTemplate() {
-    Assertion
-        .assertTrue(isElementOnPage(suggestedTemplatesBy), "No suggested template shown.");
-    PageObjectLogging.log("verifyIsSuggestedTemplate", "Suggested templates found", true);
+  public boolean areSuggestedTemplateDisplayed() {
+    try {
+      wait.forElementVisible(suggestedTemplatesBy);
+      return true;
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.log("Suggested templates found", e, false);
+      return false;
+    }
   }
 }

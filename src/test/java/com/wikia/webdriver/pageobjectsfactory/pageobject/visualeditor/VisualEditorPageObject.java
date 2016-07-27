@@ -399,17 +399,6 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     return getNumOfElementOnPage(inlineTransclusionBy);
   }
 
-  public void verifyNumberOfBlockTransclusion(int expected) {
-    Assertion.assertNumber(getNumOfElementOnPage(blockTransclusionBy), expected,
-                           "The number of blocked transclusion node is not equal");
-  }
-
-  public void verifyNumberOfInlineTransclusion(int expected) {
-    Assertion.assertNumber(getNumOfElementOnPage(inlineTransclusionBy), expected,
-                           "The number of inline transclusion node is not equal");
-  }
-
-
   public void selectGallery(int index) {
     WebElement selectedGallery = galleryNodes.get(index);
     wait.forElementClickable(selectedGallery);

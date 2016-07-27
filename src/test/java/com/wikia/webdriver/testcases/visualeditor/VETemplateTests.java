@@ -4,11 +4,9 @@ import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VEContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertDialog;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Transclusion;
-import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorEditTemplateDialog;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorInsertTemplateDialog;
@@ -16,10 +14,8 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialog
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorSaveChangesDialog;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -27,22 +23,14 @@ import java.util.List;
 
 public class VETemplateTests extends NewTestTemplate {
 
-  Credentials credentials = Configuration.getCredentials();
-  WikiBasePageObject base;
-  String articleName, mapID;
-  InteractiveMapPageObject createdMap;
-
-  @BeforeMethod(alwaysRun = true)
-  public void setup_VEPreferred() {
-    base = new WikiBasePageObject();
-//    base.loginAs(credentials.userName8, credentials.password8, wikiURL);
-  }
 
   @Execute(asUser = User.USER)
   @Test(groups = {"VETemplate", "VETemplateTests_001", "VETemplateSearch"})
   public void VETemplateTests_001_SearchTemplate() {
-    articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
+    WikiBasePageObject base = new WikiBasePageObject();
+    String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
+
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     VisualEditorInsertTemplateDialog templateDialog =
@@ -59,50 +47,59 @@ public class VETemplateTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   @Test(groups = {"VETemplate", "VETemplateTests_002", "VETemplateSuggestion"})
   public void VETemplateTests_002_SuggestedTemplate() {
-    articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
+    WikiBasePageObject base = new WikiBasePageObject();
+    String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
+
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
+
     VisualEditorInsertTemplateDialog templateDialog =
         (VisualEditorInsertTemplateDialog) ve.openDialogFromMenu(InsertDialog.TEMPLATE);
-    templateDialog.verifyNoResultTemplate();
-    templateDialog.verifyIsSuggestedTemplate();
-    templateDialog.logOut(wikiURL);
+    Assertion.assertEquals(templateDialog.getNumberOfResultTemplates(), 0);
+
+    Assertion.assertTrue(templateDialog.areSuggestedTemplateDisplayed());
   }
 
   @Execute(asUser = User.USER)
   @Test(groups = {"VETemplate", "VETemplateTests_003", "VEAddTemplate"})
   public void VETemplateTests_003_AddTemplates() {
-    articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
+    WikiBasePageObject base = new WikiBasePageObject();
+    String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
+
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     int numBlockTransclusion = ve.getNumberOfBlockTransclusion();
     int numInlineTransclusion = ve.getNumberOfInlineTransclusion();
     VisualEditorInsertTemplateDialog templateDialog =
         (VisualEditorInsertTemplateDialog) ve.openDialogFromMenu(InsertDialog.TEMPLATE);
+
     VisualEditorEditTemplateDialog editTemplateDialog = templateDialog.selectSuggestedTemplate(0);
     ve = editTemplateDialog.clickDone();
-    ve.verifyNumberOfBlockTransclusion(numBlockTransclusion);
-    ve.verifyNumberOfInlineTransclusion(++numInlineTransclusion);
+
+    Assertion.assertEquals(ve.getNumberOfBlockTransclusion(), numBlockTransclusion);
+    Assertion.assertEquals(ve.getNumberOfInlineTransclusion(), ++numInlineTransclusion);
+
     templateDialog =
         (VisualEditorInsertTemplateDialog) ve.openDialogFromMenu(InsertDialog.TEMPLATE);
     editTemplateDialog =
         templateDialog.selectResultTemplate(VEContent.TEMPLATE_SEARCH_PARTIALMATCH, 1);
     ve = editTemplateDialog.closeDialog();
-    ve.verifyNumberOfBlockTransclusion(++numBlockTransclusion);
-    ve.verifyNumberOfInlineTransclusion(numInlineTransclusion);
+    Assertion.assertEquals(ve.getNumberOfBlockTransclusion(), ++numBlockTransclusion);
+    Assertion.assertEquals(ve.getNumberOfInlineTransclusion(), numInlineTransclusion);
+
     VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
     ArticlePageObject article = saveDialog.savePage();
     article.verifyVEPublishComplete();
-    article.logOut(wikiURL);
   }
 
   @Execute(asUser = User.USER)
   @Test(groups = {"VETemplate", "VETemplateTests_004", "VEAddTemplate", "VETemplateTests_005",
                 "VETemplateTests_006"})
   public void VETemplateTests_004_CheckBlockedTransclusion() {
-    articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
+    WikiBasePageObject base = new WikiBasePageObject();
+    String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
@@ -116,15 +113,17 @@ public class VETemplateTests extends NewTestTemplate {
     VisualEditorEditTemplateDialog editTemplateDialog =
         templateDialog.selectResultTemplate(VEContent.TEMPLATE_SEARCH_EXACTMATCH, 0);
     ve = editTemplateDialog.clickDone();
-    ve.verifyNumberOfBlockTransclusion(numBlockTransclusion);
-    ve.verifyNumberOfInlineTransclusion(++numInlineTransclusion);
+
+    Assertion.assertEquals(ve.getNumberOfBlockTransclusion(), numBlockTransclusion);
+    Assertion.assertEquals(ve.getNumberOfInlineTransclusion(), ++numInlineTransclusion);
     templateDialog =
         (VisualEditorInsertTemplateDialog) ve.openDialogFromMenu(InsertDialog.TEMPLATE);
     editTemplateDialog =
         templateDialog.selectResultTemplate(VEContent.TEMPLATE_SEARCH_EXACTMATCH, 0);
     ve = editTemplateDialog.clickDone();
-    ve.verifyNumberOfBlockTransclusion(numBlockTransclusion);
-    ve.verifyNumberOfInlineTransclusion(++numInlineTransclusion);
+
+    Assertion.assertEquals(ve.getNumberOfBlockTransclusion(), numBlockTransclusion);
+    Assertion.assertEquals(ve.getNumberOfInlineTransclusion(), ++numInlineTransclusion);
     VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
     ArticlePageObject article = saveDialog.savePage();
     article.verifyVEPublishComplete();
@@ -135,14 +134,17 @@ public class VETemplateTests extends NewTestTemplate {
   @Test(groups = {"VETemplate", "VETemplateTests_005", "VEDeleteTemplate"},
       dependsOnGroups = "VETemplateTests_004")
   public void VETemplateTests_005_DeleteTemplates() {
+    WikiBasePageObject base = new WikiBasePageObject();
+    String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     int numBlockTransclusion = ve.getNumberOfBlockTransclusion();
     int numInlineTransclusion = ve.getNumberOfInlineTransclusion();
     ve.deleteTransclusion(1, Transclusion.INLINE);
-    ve.verifyNumberOfBlockTransclusion(numBlockTransclusion);
-    ve.verifyNumberOfInlineTransclusion(--numInlineTransclusion);
+
+    Assertion.assertEquals(ve.getNumberOfBlockTransclusion(), numBlockTransclusion);
+    Assertion.assertEquals(ve.getNumberOfInlineTransclusion(), --numInlineTransclusion);
     VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
     ArticlePageObject article = saveDialog.savePage();
     article.verifyVEPublishComplete();
@@ -153,8 +155,10 @@ public class VETemplateTests extends NewTestTemplate {
   @Test(groups = {"VETemplate", "VETemplateTests_006", "VEAddTemplate"},
       dependsOnGroups = "VETemplateTests_004")
   public void VETemplateTests_006_EditTemplate() {
+    WikiBasePageObject base = new WikiBasePageObject();
     List<String> templateWikiTexts = new ArrayList<>();
     templateWikiTexts.add(VEContent.TEMPLATE_WIKITEXT);
+    String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
