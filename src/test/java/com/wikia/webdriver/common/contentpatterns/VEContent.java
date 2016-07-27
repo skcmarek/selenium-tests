@@ -2,9 +2,8 @@ package com.wikia.webdriver.common.contentpatterns;
 
 public class VEContent {
 
-  public static final String TEMPLATE_SEARCH_1CHAR_NOMATCH = "a";
-  public static final String TEMPLATE_SEARCH_2CHARS_NOMATCH = "ab";
-  public static final String TEMPLATE_SEARCH_3CHARS_PARTIALMATCH = "per";
+  public static final String TEMPLATE_SEARCH_NOMATCH = "ab";
+  public static final String TEMPLATE_SEARCH_PARTIALMATCH = "per";
   public static final String TEMPLATE_SEARCH_MATCH_ARTICLE = "templatetest";
   public static final String TEMPLATE_SEARCH_EXACTMATCH = "book";
 

@@ -86,6 +86,8 @@ public class VisualEditorInsertTemplateDialog extends VisualEditorDialog {
   }
 
   public int getNumberOfResultTemplates() {
+    waitForElementNotVisibleByElement(queryPending);
+
     return getNumOfElementOnPage(resulteTemplateBy);
   }
 
@@ -97,7 +99,6 @@ public class VisualEditorInsertTemplateDialog extends VisualEditorDialog {
   }
 
   public void verifyNoResultTemplate() {
-    waitForElementNotVisibleByElement(queryPending);
     Assertion.assertTrue(getNumberOfResultTemplates() == 0, "There is result template shown.");
     PageObjectLogging.log("verifyNoResultTemplate", "No result templates found", true);
   }

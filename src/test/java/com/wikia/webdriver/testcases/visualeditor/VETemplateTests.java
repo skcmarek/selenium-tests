@@ -2,7 +2,10 @@ package com.wikia.webdriver.testcases.visualeditor;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VEContent;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertDialog;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Transclusion;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -32,13 +35,11 @@ public class VETemplateTests extends NewTestTemplate {
   @BeforeMethod(alwaysRun = true)
   public void setup_VEPreferred() {
     base = new WikiBasePageObject();
-    base.loginAs(credentials.userName8, credentials.password8, wikiURL);
+//    base.loginAs(credentials.userName8, credentials.password8, wikiURL);
   }
 
-  //AT01
-  @Test(
-      groups = {"VETemplate", "VETemplateTests_001", "VETemplateSearch"}
-  )
+  @Execute(asUser = User.USER)
+  @Test(groups = {"VETemplate", "VETemplateTests_001", "VETemplateSearch"})
   public void VETemplateTests_001_SearchTemplate() {
     articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
@@ -46,28 +47,17 @@ public class VETemplateTests extends NewTestTemplate {
     ve.verifyEditorSurfacePresent();
     VisualEditorInsertTemplateDialog templateDialog =
         (VisualEditorInsertTemplateDialog) ve.openDialogFromMenu(InsertDialog.TEMPLATE);
-    //1 character search 'a', not matching article name, no result
-    templateDialog.typeInSearchInput(VEContent.TEMPLATE_SEARCH_1CHAR_NOMATCH);
-    templateDialog.verifyNoResultTemplate();
-    //2 characters search 'ab', not matching article name, no result
-    templateDialog.clearSearchInput();
-    templateDialog.typeInSearchInput(VEContent.TEMPLATE_SEARCH_2CHARS_NOMATCH);
-    templateDialog.verifyNoResultTemplate();
-    //3 characters search 'per', not matching article name, 2 results on template name
-    templateDialog.clearSearchInput();
-    templateDialog.typeInSearchInput(VEContent.TEMPLATE_SEARCH_3CHARS_PARTIALMATCH);
-    templateDialog.verifyIsResultTemplate();
-    //2 characters search 'ar', matching article name, 3 results on the article
+
+    templateDialog.typeInSearchInput(VEContent.TEMPLATE_SEARCH_NOMATCH);
+    Assertion.assertEquals(templateDialog.getNumberOfResultTemplates(), 0);
+
     templateDialog.clearSearchInput();
     templateDialog.typeInSearchInput(VEContent.TEMPLATE_SEARCH_MATCH_ARTICLE);
-    templateDialog.verifyIsResultTemplate();
-    templateDialog.logOut(wikiURL);
+    Assertion.assertTrue(templateDialog.getNumberOfResultTemplates() > 0);
   }
 
-  //AT02
-  @Test(
-      groups = {"VETemplate", "VETemplateTests_002", "VETemplateSuggestion"}
-  )
+  @Execute(asUser = User.USER)
+  @Test(groups = {"VETemplate", "VETemplateTests_002", "VETemplateSuggestion"})
   public void VETemplateTests_002_SuggestedTemplate() {
     articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
@@ -80,10 +70,8 @@ public class VETemplateTests extends NewTestTemplate {
     templateDialog.logOut(wikiURL);
   }
 
-  //AT03
-  @Test(
-      groups = {"VETemplate", "VETemplateTests_003", "VEAddTemplate"}
-  )
+  @Execute(asUser = User.USER)
+  @Test(groups = {"VETemplate", "VETemplateTests_003", "VEAddTemplate"})
   public void VETemplateTests_003_AddTemplates() {
     articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
@@ -100,7 +88,7 @@ public class VETemplateTests extends NewTestTemplate {
     templateDialog =
         (VisualEditorInsertTemplateDialog) ve.openDialogFromMenu(InsertDialog.TEMPLATE);
     editTemplateDialog =
-        templateDialog.selectResultTemplate(VEContent.TEMPLATE_SEARCH_3CHARS_PARTIALMATCH, 1);
+        templateDialog.selectResultTemplate(VEContent.TEMPLATE_SEARCH_PARTIALMATCH, 1);
     ve = editTemplateDialog.closeDialog();
     ve.verifyNumberOfBlockTransclusion(++numBlockTransclusion);
     ve.verifyNumberOfInlineTransclusion(numInlineTransclusion);
@@ -110,11 +98,9 @@ public class VETemplateTests extends NewTestTemplate {
     article.logOut(wikiURL);
   }
 
-  //AT04
-  @Test(
-      groups = {"VETemplate", "VETemplateTests_004", "VEAddTemplate", "VETemplateTests_005",
-                "VETemplateTests_006"}
-  )
+  @Execute(asUser = User.USER)
+  @Test(groups = {"VETemplate", "VETemplateTests_004", "VEAddTemplate", "VETemplateTests_005",
+                "VETemplateTests_006"})
   public void VETemplateTests_004_CheckBlockedTransclusion() {
     articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
@@ -145,11 +131,9 @@ public class VETemplateTests extends NewTestTemplate {
     article.logOut(wikiURL);
   }
 
-  //ES05
-  @Test(
-      groups = {"VETemplate", "VETemplateTests_005", "VEDeleteTemplate"},
-      dependsOnGroups = "VETemplateTests_004"
-  )
+  @Execute(asUser = User.USER)
+  @Test(groups = {"VETemplate", "VETemplateTests_005", "VEDeleteTemplate"},
+      dependsOnGroups = "VETemplateTests_004")
   public void VETemplateTests_005_DeleteTemplates() {
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
     ve.verifyVEToolBarPresent();
@@ -165,11 +149,9 @@ public class VETemplateTests extends NewTestTemplate {
     article.logOut(wikiURL);
   }
 
-  //ET01
-  @Test(
-      groups = {"VETemplate", "VETemplateTests_006", "VEAddTemplate"},
-      dependsOnGroups = "VETemplateTests_004"
-  )
+  @Execute(asUser = User.USER)
+  @Test(groups = {"VETemplate", "VETemplateTests_006", "VEAddTemplate"},
+      dependsOnGroups = "VETemplateTests_004")
   public void VETemplateTests_006_EditTemplate() {
     List<String> templateWikiTexts = new ArrayList<>();
     templateWikiTexts.add(VEContent.TEMPLATE_WIKITEXT);
