@@ -73,7 +73,7 @@ public class FirefoxBrowser extends BrowserAbstract {
   @Override
   public WikiaWebDriver create() {
 //    caps.setCapability(FirefoxDriver.PROFILE, firefoxProfile);
-    caps.setCapability("marionette", true);
+//    caps.setCapability("marionette", true);
 
     try {
       return new WikiaWebDriver(new RemoteWebDriver(new URL("http://qa-s3:4444/wd/hub"), caps), server, false);
