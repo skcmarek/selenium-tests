@@ -589,6 +589,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     extractGptInfo(slotSelector);
 
     if (!adVisible) {
+      PageObjectLogging.log("ScreenshotsComparison", "Ad is not present in " + slotSelector, false);
       throw new WebDriverException("Ad is not present in " + slotSelector);
     }
 

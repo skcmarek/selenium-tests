@@ -2,12 +2,11 @@ package com.wikia.webdriver.testcases.adstests;
 
 import com.google.common.collect.ImmutableMap;
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsRecoveryObject;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.testng.annotations.Test;
 
 import java.util.Map;
@@ -17,8 +16,7 @@ public class TestAdsRecoveryMetricsOasis extends NewTestTemplate {
   private static Dimension DESKTOP_SIZE = new Dimension(1920, 1080);
 
   @Test(
-          groups = "AdsRecoveryMetricsOasis",
-          invocationCount = 5
+          groups = "AdsRecoveryMetricsOasis"
   )
   public void adsRecoveryMetricsOasis() {
     Page page = new Page("arecovery", "SyntheticTests/Static_image");
@@ -37,10 +35,16 @@ public class TestAdsRecoveryMetricsOasis extends NewTestTemplate {
 
     String recoveredAdUnitIdSelectorLeaderboard = "#" + adsBaseObject.getRecoveredAdUnitId(adUnitIdLeaderboard);
     WebElement recoveredSlotLeaderboard = driver.findElement(By.cssSelector(recoveredAdUnitIdSelectorLeaderboard));
+    boolean resultLeaderboard = true;
+    boolean resultMedrec = true;
 
-    adsBaseObject.triggerAdSlot(slotNameLeaderboard)
-            .verifyLineItemId(slotNameLeaderboard, Integer.valueOf(leaderBoardSlot.get("lineItemId").toString()))
-            .verifyExpandedAdVisibleInSlot(recoveredAdUnitIdSelectorLeaderboard, recoveredSlotLeaderboard);
+    try {
+      adsBaseObject.triggerAdSlot(slotNameLeaderboard)
+              .verifyLineItemId(slotNameLeaderboard, Integer.valueOf(leaderBoardSlot.get("lineItemId").toString()))
+              .verifyExpandedAdVisibleInSlot(recoveredAdUnitIdSelectorLeaderboard, recoveredSlotLeaderboard);
+    } catch (WebDriverException e) {
+      resultLeaderboard = false;
+    }
 
     //MEDREC
     Map<String, Object> slotInfo = ImmutableMap.<String, Object>builder()
@@ -55,8 +59,14 @@ public class TestAdsRecoveryMetricsOasis extends NewTestTemplate {
     String recoveredAdUnitIdSelector = "#" + adsBaseObject.getRecoveredAdUnitId(adUnitId);
     WebElement recoveredSlot = driver.findElement(By.cssSelector(recoveredAdUnitIdSelector));
 
-    adsBaseObject.triggerAdSlot(slotName)
-            .verifyLineItemId(slotName, Integer.valueOf(slotInfo.get("lineItemId").toString()))
-            .verifyExpandedAdVisibleInSlot(recoveredAdUnitIdSelector, recoveredSlot);
+    try {
+      adsBaseObject.triggerAdSlot(slotName)
+              .verifyLineItemId(slotName, Integer.valueOf(slotInfo.get("lineItemId").toString()))
+              .verifyExpandedAdVisibleInSlot(recoveredAdUnitIdSelector, recoveredSlot);
+    } catch (WebDriverException e) {
+      resultMedrec = false;
+    }
+
+    Assertion.assertEquals(resultLeaderboard || resultMedrec, true, "Both Slots were not visible");
   }
 }
