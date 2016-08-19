@@ -69,5 +69,6 @@ public class TestAdsRecoveryMetricsOasis extends NewTestTemplate {
     }
 
     Assertion.assertEquals(resultLeaderboard || resultMedrec, true, "Both Slots were not visible");
+    Assertion.assertEquals(resultLeaderboard && resultMedrec, true, "Neither of slots was visible");
   }
 }
