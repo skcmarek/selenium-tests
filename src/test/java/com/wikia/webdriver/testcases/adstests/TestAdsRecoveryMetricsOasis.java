@@ -22,6 +22,7 @@ public class TestAdsRecoveryMetricsOasis extends NewTestTemplate {
     Page page = new Page("arecovery", "SyntheticTests/Static_image");
     String url = urlBuilder.getUrlForPage(page);
     AdsRecoveryObject adsBaseObject = new AdsRecoveryObject(driver, url, DESKTOP_SIZE);
+    driver.manage().window().setSize(DESKTOP_SIZE);
 
     //TOP_LEADERBOARD
     Map<String, Object> leaderBoardSlot = ImmutableMap.<String, Object>builder()
