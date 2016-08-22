@@ -8,6 +8,7 @@ public class UrlBuilder {
 
   private static final String WOW_WIKI = "wowwiki";
   private static final String SANDBOX_MERCURY_DEV = "sandbox-mercurydev";
+  private static final int DEVBOX_PREFIX_INDEX = 4;
   private String browser;
   private String env;
 
@@ -109,6 +110,10 @@ public class UrlBuilder {
   public static String getHostForWiki() {
     String environment = Configuration.getEnv();
     String wikiName = Configuration.getWikiName();
+
+    if ("dev".equals(Configuration.getEnvType())) {
+      return wikiName + "." + environment.substring(DEVBOX_PREFIX_INDEX) + ".wikia-dev.com";
+    }
 
     environment = environment.equals("prod") ? "" : environment + ".";
     wikiName = wikiName.equals("wikia") ? "www." : wikiName + ".";
