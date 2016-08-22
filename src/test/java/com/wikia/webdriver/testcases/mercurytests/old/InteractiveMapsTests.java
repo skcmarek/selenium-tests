@@ -31,7 +31,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryInteractiveMapsTest_001")
-  @DontRun(env={"dev", "sandbox", "preview"})
+  @DontRun(env={"sandbox", "preview"})
   public void MercuryInteractiveMapsTest_001_MapModal_Url_Title_PinPopUp_Close() {
     init();
 
