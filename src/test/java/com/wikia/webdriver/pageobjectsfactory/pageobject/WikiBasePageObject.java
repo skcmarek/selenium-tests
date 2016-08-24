@@ -9,6 +9,7 @@ import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.core.Helios;
 import com.wikia.webdriver.common.core.MailFunctions;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.configuration.EnvType;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
@@ -35,7 +36,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.UserProfilePageO
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialEditHubPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialMultipleUploadPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPromotePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialUploadPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
@@ -60,7 +61,6 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -252,9 +252,9 @@ public class WikiBasePageObject extends BasePageObject {
     return new SpecialVideosPageObject(driver);
   }
 
-  public SpecialNewFilesPageObject openSpecialNewFiles(String wikiURL) {
+  public SpecialNewFilesPage openSpecialNewFiles(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_NEW_FILES);
-    return new SpecialNewFilesPageObject(driver);
+    return new SpecialNewFilesPage();
   }
 
   public SpecialUploadPageObject openSpecialUpload(String wikiURL) {
@@ -536,32 +536,11 @@ public class WikiBasePageObject extends BasePageObject {
     }
   }
 
-  public void logOut(WebDriver driver) {
-    try {
-      driver.manage().deleteAllCookies();
-      driver.get(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.LOGOUT);
-    } catch (TimeoutException e) {
-      PageObjectLogging.log("logOut", "page loads for more than 30 seconds", true);
-    }
-    wait.forElementPresent(LOGIN_BUTTON_CSS);
-    PageObjectLogging.log("logOut", "user is logged out", true, driver);
-  }
-
-  public void logOut(String wikiURL) {
-    try {
-      getUrl(wikiURL + URLsContent.LOGOUT);
-    } catch (TimeoutException e) {
-      PageObjectLogging.log("logOut", "page loads for more than 30 seconds", true);
-    }
-    wait.forElementPresent(LOGIN_BUTTON_CSS);
-    PageObjectLogging.log("logOut", "user is logged out", true, driver);
-  }
-
   public String loginAs(String userName, String password, String wikiURL) {
     String token = Helios.getAccessToken(userName, password);
-    String domian = "dev".equals(Configuration.getEnvType()) ? ".wikia-dev.com" : ".wikia.com";
+    String domain = Configuration.getEnvType().getWikiaDomain();
 
-    driver.manage().addCookie(new Cookie("access_token", token, domian, null, null));
+    driver.manage().addCookie(new Cookie("access_token", token, domain, null, null));
 
     if (driver.getCurrentUrl().contains("Logout")) {
       driver.get(wikiURL);
@@ -662,13 +641,6 @@ public class WikiBasePageObject extends BasePageObject {
         .executeScript("return getComputedStyle(arguments[0], arguments[1])[arguments[2]];",
             element, pseudoElement, cssValue)
         .toString();
-  }
-
-  public void openSpecialPromoteOnCurrentWiki() {
-    JavascriptExecutor js = (JavascriptExecutor) driver;
-    String url = (String) js.executeScript("return wgServer");
-    getUrl(url + "/" + URLsContent.SPECIAL_PROMOTE);
-    PageObjectLogging.log("openSpecialPromote", "special promote page opened", true);
   }
 
   public VisualEditorPageObject openNewArticleEditModeVisual(String wikiURL) {

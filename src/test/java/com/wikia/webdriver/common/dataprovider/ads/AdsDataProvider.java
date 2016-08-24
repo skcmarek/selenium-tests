@@ -160,6 +160,8 @@ public class AdsDataProvider {
 
   @DataProvider
   public static Object[][] skin() {
+    final String wikiName = "project43";
+    final String pageName = "SyntheticTests/Skin";
     return new Object[][]{
         {
             "adtest-pluto", "Skin",
@@ -190,21 +192,21 @@ public class AdsDataProvider {
             "AAAAAA",
             "FFFFFF"
         }, {
-            "adtest", "Skin",
+            wikiName, pageName,
             new Dimension(1600, 900),
             "src/test/resources/adsResources/wikia_skin_left.png",
             "src/test/resources/adsResources/wikia_skin_right.png",
             "AAAAAA",
             "FFFFFF"
         }, {
-            "adtest", "Skin",
+            wikiName, pageName,
             new Dimension(1920, 1080),
             "src/test/resources/adsResources/wikia_skin_left.png",
             "src/test/resources/adsResources/wikia_skin_right.png",
             "AAAAAA",
             "FFFFFF"
         }, {
-            "adtest", "Skin",
+            wikiName, pageName,
             new Dimension(2400, 1080),
             "src/test/resources/adsResources/wikia_skin_left.png",
             "src/test/resources/adsResources/wikia_skin_right.png",
@@ -707,7 +709,7 @@ public class AdsDataProvider {
   public static Object[][] kruxSegments() {
     return new Object[][]{
         {
-            "J-RIfJI0",
+            "KtCsDKll",
             "pqdapsy7l",
             new Page("vim", "Vim_Tips_Wiki"),
             // Standard segment for visiting adtest before
