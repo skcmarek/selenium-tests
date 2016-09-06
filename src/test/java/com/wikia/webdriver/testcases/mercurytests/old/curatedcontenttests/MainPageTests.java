@@ -37,7 +37,7 @@ public class MainPageTests extends NewTestTemplate {
     FEATURED_CONTENT("Featured Content", ".featured-content"),
     CURATED_CONTENT("Curated Content", ".curated-content"),
     IN_CONTENT("In Content AD", ".mobile-in-content"),
-    TRENDING_ARTICLES("Trending Articles", ".trending-articles"),
+    TRENDING_ARTICLES("Trending Fandom Articles", ".footer"),
     PREFOOTER("Prefooter AD", ".mobile-prefooter"),
     TRENDING_VIDEOS("Trending Videos", ".trending-videos");
 

@@ -27,7 +27,7 @@ public class CuratedMainPagePageObject {
   private WebElement curatedContent;
   @FindBy(css = ".mobile-in-content")
   private WebElement mobileInContent;
-  @FindBy(css = ".trending-articles")
+  @FindBy(css = ".footer")
   private WebElement trendingArticles;
   @FindBy(css = ".trending-videos")
   private WebElement trendingVideos;
