@@ -158,7 +158,7 @@ public class InteractiveMapPageObject extends BasePageObject {
     wait.forElementVisible(mapFrame);
     driver.switchTo().frame(mapFrame);
     wait.forElementClickable(zoomOutButton);
-    zoomOutButton.click();
+    scrollAndClick(zoomOutButton);
     driver.switchTo().defaultContent();
     PageObjectLogging.log("clickZoomOutButton", "Map zoom out was clicked", true, driver);
   }
