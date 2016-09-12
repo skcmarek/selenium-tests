@@ -7,6 +7,7 @@ import com.wikia.webdriver.common.core.geoedge.GeoEdgeBrowserMobProxy;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsEvolveObject;
 
 import org.testng.annotations.Test;
@@ -14,6 +15,8 @@ import org.testng.annotations.Test;
 @Test(groups = "AdsEvolveMercury")
 @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
 public class TestAdsEvolveMercury extends TemplateNoFirstLoad {
+
+  private AdsBaseObject ads;
 
   @GeoEdgeBrowserMobProxy(country = CountryCode.CANADA)
   @Test(
@@ -46,6 +49,7 @@ public class TestAdsEvolveMercury extends TemplateNoFirstLoad {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsEvolveObject wikiPage = new AdsEvolveObject(driver);
     wikiPage.getUrl(testedPage);
+    ads.waitForPageLoaded();
     wikiPage.verifyEvolveCallMercury();
   }
 }
