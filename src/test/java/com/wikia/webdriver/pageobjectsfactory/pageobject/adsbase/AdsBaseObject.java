@@ -809,4 +809,39 @@ public class AdsBaseObject extends WikiBasePageObject {
     }
   }
 
+  public void waitForBFAA() {
+    wait.forElementVisible(By.cssSelector("#DirectGptMobile_MOBILE_TOP_LEADERBOARD"));
+    try {
+      Thread.sleep(7000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+  }
+
+  public void waitForMobileInContent() {
+    wait.forElementNotVisible(By.cssSelector("[id='wikia_gpt/5441/wka.life/_project43//article/mobile/MOBILE_IN_CONTENT']"));
+    try {
+      Thread.sleep(7000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+  }
+
+  public void waitForMobilePrefooter() {
+    wait.forElementVisible(By.cssSelector("[id='wikia_gpt/5441/wka.life/_project43//article/mobile/MOBILE_PREFOOTER']"));
+    try {
+      Thread.sleep(7000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+  }
+
+  public void waitForBFAB() {
+    wait.forElementVisible(By.cssSelector("[id='wikia_gpt/5441/wka.life/_project43//article/mobile/MOBILE_BOTTOM_LEADERBOARD']"));
+    try {
+      Thread.sleep(7000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+  }
 }
