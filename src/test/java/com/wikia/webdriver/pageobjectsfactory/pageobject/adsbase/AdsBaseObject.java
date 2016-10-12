@@ -848,6 +848,6 @@ public class AdsBaseObject extends WikiBasePageObject {
   public void clickLink() {
     JavascriptExecutor js = driver;
     js.executeScript("document.querySelector(\"[href='/wiki/Monitoring/UAP_2']\").scrollIntoView()");
-    js.executeScript("$(\"[href='/wiki/SyntheticTests/UAP']\").click()");
+    js.executeScript("$(\"[href='/wiki/Monitoring/UAP_2']\").click()");
   }
 }
