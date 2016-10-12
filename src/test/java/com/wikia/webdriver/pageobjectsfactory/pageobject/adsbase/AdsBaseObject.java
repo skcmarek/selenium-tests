@@ -837,11 +837,17 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public void waitForBFAB() {
-    wait.forElementVisible(By.cssSelector("[id='wikia_gpt/5441/wka.life/_project43//article/mobile/MOBILE_BOTTOM_LEADERBOARD']"));
+    wait.forElementVisible(By.cssSelector("[id='google_ads_iframe_/5441/wka.life/_project43//article/mobile/MOBILE_BOTTOM_LEADERBOARD_0']"));
     try {
       Thread.sleep(7000);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
+  }
+
+  public void clickLink() {
+    JavascriptExecutor js = driver;
+    js.executeScript("document.querySelector(\"[href='/wiki/SyntheticTests/UAP']\").scrollIntoView()");
+    js.executeScript("$(\"[href='/wiki/SyntheticTests/UAP']\").click()");
   }
 }

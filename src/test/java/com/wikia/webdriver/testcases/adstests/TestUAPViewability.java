@@ -30,7 +30,7 @@ public class TestUAPViewability extends NewTestTemplate {
     js.executeScript("document.querySelector('.mobile-bottom-leaderboard').scrollIntoView()");
     ads.waitForBFAB();
 
-    driver.findElement(By.cssSelector("[href='/wiki/SyntheticTests/UAP']")).click();
+    ads.clickLink();
     Loading loading = new Loading(driver);
     loading.handleAsyncPageReload();
     ads.waitForPageLoaded();
