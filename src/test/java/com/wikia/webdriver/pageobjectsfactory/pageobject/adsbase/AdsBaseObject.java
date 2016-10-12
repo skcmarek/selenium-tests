@@ -819,7 +819,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public void waitForMobileInContent() {
-    wait.forElementNotVisible(By.cssSelector("[id='wikia_gpt/5441/wka.life/_project43//article/mobile/MOBILE_IN_CONTENT']"));
+    wait.forElementVisible(By.cssSelector("[id='wikia_gpt/5441/wka.life/_project43//article/mobile/MOBILE_IN_CONTENT']"));
     try {
       Thread.sleep(7000);
     } catch (InterruptedException e) {
