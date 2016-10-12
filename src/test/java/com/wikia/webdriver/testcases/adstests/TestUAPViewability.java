@@ -19,7 +19,7 @@ public class TestUAPViewability extends NewTestTemplate {
           browser = Browser.CHROME
   )
   public void testUAPViewability() {
-    driver.get("http://project43.wikia.com/wiki/SyntheticTests/UAP/Infobox");
+    driver.get("http://project43.wikia.com/wiki/Monitoring/UAP_1");
     JavascriptExecutor js = driver;
     AdsBaseObject ads = new AdsBaseObject(driver);
     ads.waitForBFAA();
