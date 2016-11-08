@@ -814,6 +814,14 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public void waitForDesktopLeaderboard() {
-    wait.forElementPresent(By.cssSelector(("#DirectGpt_TOP_LEADERBOARD")));
+    wait.forElementPresent(By.cssSelector("#DirectGpt_TOP_LEADERBOARD"));
+  }
+
+  public void waitForMobilePrefooter() {
+    wait.forElementPresent(By.id("wikia_gpt/5441/wka.life/_project43//article/mobile/MOBILE_PREFOOTER"));
+  }
+
+  public void waitForMedrec() {
+    wait.forElementPresent(By.id("wikia_gpt/5441/wka.life/_project43//article/gpt/TOP_RIGHT_BOXAD"));
   }
 }

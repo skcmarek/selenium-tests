@@ -19,7 +19,15 @@ public class TestMoat extends NewTestTemplate {
     AdsBaseObject ads = new AdsBaseObject(driver);
     ads.waitForMobileLeaderboard();
     try {
-      Thread.sleep(5000);
+      Thread.sleep(2000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+
+    ads.scrollToPosition(".mobile-prefooter");
+    ads.waitForMobilePrefooter();
+    try {
+      Thread.sleep(2000);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
@@ -31,7 +39,14 @@ public class TestMoat extends NewTestTemplate {
     AdsBaseObject ads = new AdsBaseObject(driver);
     ads.waitForDesktopLeaderboard();
     try {
-      Thread.sleep(5000);
+      Thread.sleep(2000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+
+    ads.waitForMedrec();
+    try {
+      Thread.sleep(2000);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
