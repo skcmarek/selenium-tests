@@ -808,4 +808,12 @@ public class AdsBaseObject extends WikiBasePageObject {
       return false;
     }
   }
+
+  public void waitForMobileLeaderboard() {
+    wait.forElementPresent(By.cssSelector("#DirectGptMobile_MOBILE_TOP_LEADERBOARD"));
+  }
+
+  public void waitForDesktopLeaderboard() {
+    wait.forElementPresent(By.cssSelector(("#DirectGpt_TOP_LEADERBOARD")));
+  }
 }
