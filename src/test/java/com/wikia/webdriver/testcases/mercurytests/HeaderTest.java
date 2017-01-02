@@ -2,11 +2,16 @@ package com.wikia.webdriver.testcases.mercurytests;
 
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.api.ArticleContent;
+import com.wikia.webdriver.common.core.api.TemplateContent;
 import com.wikia.webdriver.common.core.drivers.Browser;
+import com.wikia.webdriver.common.core.helpers.ContentLoader;
 import com.wikia.webdriver.common.core.helpers.Emulator;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.Header;
 import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
@@ -15,10 +20,20 @@ import org.testng.annotations.Test;
 
 import java.util.HashMap;
 import java.util.Map;
+
 @Test(groups = "Mercury_Header")
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
 public class HeaderTest extends NewTestTemplate {
+
+  private static final String ARTICLE_WITHOUT_INFOBOX = ContentLoader
+      .loadWikiTextContent("Article_without_infobox");
+
+  private static final String TEMPLATE_INFOBOX1_NAME = "InfoboxAutomation";
+  private static final String TEMPLATE_INFOBOX1 = ContentLoader
+      .loadWikiTextContent("Template_MercuryInfoboxAutomation");
+  private static final String ARTICLE_INFOBOX1 = ContentLoader
+      .loadWikiTextContent("Mercury_Infobox1");
 
   private static final String HEADER_MESSAGE = "Header";
   private static final String PAGE_TITLE_MESSAGE = "Page title";
@@ -33,6 +48,8 @@ public class HeaderTest extends NewTestTemplate {
 
   @Test(groups = "mercury_header_checkElementsVisibilityWithoutInfobox")
   public void mercury_header_checkElementsVisibilityWithoutInfobox() {
+    new ArticleContent().push(ARTICLE_WITHOUT_INFOBOX, "Article_without_infobox");
+
     Header header =
         new ArticlePage()
             .open(MercurySubpages.NO_INFOBOX)
@@ -54,9 +71,11 @@ public class HeaderTest extends NewTestTemplate {
 
   @Test(groups = "mercury_header_checkElementsVisibilityWithInfoboxAndWithHeroImage")
   public void mercury_header_checkElementsVisibilityWithInfoboxAndWithHeroImage() {
-    Header header =
-        new ArticlePage()
-            .open(MercurySubpages.INFOBOX_1)
+    new TemplateContent().push(TEMPLATE_INFOBOX1, TEMPLATE_INFOBOX1_NAME);
+    new ArticleContent().push(ARTICLE_INFOBOX1);
+
+    Header header = new ArticlePage()
+            .open()
             .getHeader();
 
     Assertion.assertTrue(

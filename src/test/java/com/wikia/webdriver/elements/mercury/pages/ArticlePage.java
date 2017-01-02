@@ -1,7 +1,10 @@
 package com.wikia.webdriver.elements.mercury.pages;
 
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.TestContext;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.components.Header;
@@ -9,6 +12,7 @@ import com.wikia.webdriver.elements.mercury.components.Loading;
 import com.wikia.webdriver.elements.mercury.components.Navigation;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 
 import lombok.Getter;
 import org.openqa.selenium.WebElement;
@@ -53,6 +57,13 @@ public class ArticlePage extends WikiBasePageObject {
     PageObjectLogging.logInfo("URL contains pattern: /wiki/Category:");
 
     return new CategoryPage();
+  }
+
+  public ArticlePage open() {
+    getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.WIKI_DIR
+           + TestContext.getCurrentMethodName());
+
+    return this;
   }
 
   public ArticlePage open(String pageName){
