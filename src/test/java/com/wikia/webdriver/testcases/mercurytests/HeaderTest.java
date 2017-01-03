@@ -48,11 +48,10 @@ public class HeaderTest extends NewTestTemplate {
 
   @Test(groups = "mercury_header_checkElementsVisibilityWithoutInfobox")
   public void mercury_header_checkElementsVisibilityWithoutInfobox() {
-    new ArticleContent().push(ARTICLE_WITHOUT_INFOBOX, "Article_without_infobox");
+    new ArticleContent().push(ARTICLE_WITHOUT_INFOBOX);
 
-    Header header =
-        new ArticlePage()
-            .open(MercurySubpages.NO_INFOBOX)
+    Header header = new ArticlePage()
+            .open()
             .getHeader();
 
     Assertion.assertTrue(
