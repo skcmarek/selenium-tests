@@ -1,6 +1,5 @@
 package com.wikia.webdriver.testcases.mercurytests;
 
-import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -10,6 +9,7 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
 import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
+
 import org.testng.annotations.Test;
 
 @Test(groups = "Mercury_TopBar")
@@ -19,10 +19,9 @@ public class TopBarTests extends NewTestTemplate {
 
   @Test(groups = "mercury_topbar_topBarIsAlwaysVisible")
   public void mercury_topbar_topBarIsAlwaysVisible() {
-    TopBar topBar =
-        new ArticlePage()
-            .open(MercurySubpages.MAIN_PAGE)
-            .getTopBar();
+    TopBar topBar = new ArticlePage()
+        .open()
+        .getTopBar();
 
     Assertion.assertTrue(topBar.isNavigationBarVisible());
     Assertion.assertTrue(topBar.isLogoVisible());
@@ -39,10 +38,9 @@ public class TopBarTests extends NewTestTemplate {
 
   @Test(groups = "mercury_topbar_closeButtonAppears")
   public void mercury_topbar_closeButtonAppears() {
-    TopBar topBar =
-        new ArticlePage()
-            .open(MercurySubpages.MAIN_PAGE)
-            .getTopBar();
+    TopBar topBar = new ArticlePage()
+        .open()
+        .getTopBar();
 
     topBar.openSearch();
     Assertion.assertTrue(topBar.isCloseIconVisible());
@@ -59,10 +57,9 @@ public class TopBarTests extends NewTestTemplate {
 
   @Test(groups = "mercury_topbar_switchBetweenSearchAndNavigation")
   public void mercury_topbar_switchBetweenSearchAndNavigation() {
-    TopBar topBar =
-        new ArticlePage()
-            .open(MercurySubpages.MAIN_PAGE)
-            .getTopBar();
+    TopBar topBar = new ArticlePage()
+        .open()
+        .getTopBar();
 
     topBar.openSearch();
     Assertion.assertTrue(topBar.isCloseIconVisible());
@@ -75,10 +72,9 @@ public class TopBarTests extends NewTestTemplate {
 
   @Test(groups = "mercury_topbar_wikiaLogoRedirectsToFandomPage")
   public void mercury_topbar_wikiaLogoRedirectsToFandomPage() {
-    TopBar topBar =
-        new ArticlePage()
-            .open(MercurySubpages.MAIN_PAGE)
-            .getTopBar();
+    TopBar topBar = new ArticlePage()
+        .open()
+        .getTopBar();
 
     topBar.clickWikiaLogo();
 

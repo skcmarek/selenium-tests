@@ -2,7 +2,6 @@ package com.wikia.webdriver.testcases.mercurytests;
 
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
-import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -11,7 +10,6 @@ import com.wikia.webdriver.common.core.api.TemplateContent;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.ContentLoader;
 import com.wikia.webdriver.common.core.helpers.Emulator;
-import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.Header;
 import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
@@ -51,8 +49,8 @@ public class HeaderTest extends NewTestTemplate {
     new ArticleContent().push(ARTICLE_WITHOUT_INFOBOX);
 
     Header header = new ArticlePage()
-            .open()
-            .getHeader();
+        .open()
+        .getHeader();
 
     Assertion.assertTrue(
         header.isHeaderVisible(),
@@ -74,8 +72,8 @@ public class HeaderTest extends NewTestTemplate {
     new ArticleContent().push(ARTICLE_INFOBOX1);
 
     Header header = new ArticlePage()
-            .open()
-            .getHeader();
+        .open()
+        .getHeader();
 
     Assertion.assertTrue(
         header.isHeaderVisible(),
