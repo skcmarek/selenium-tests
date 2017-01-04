@@ -1,0 +1,12 @@
+{{InfoboxAutomation
+|Tytuł = Wide hero image
+|Obraz = [[File:Long222.png]]
+|Gatunek = <poem>
+200 (Txt)
+420 ([[Infobox1]]-internal link))
+400 ([[Infobox8903]] -internal red link)
+300 ([https://www.wikipedia.org] -external link)
+600 ([[https://www.wikia.com]] -ref)
+1200 ([[Infobox1]] and [[Infobox2]])
+</poem>
+}}
