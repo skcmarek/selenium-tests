@@ -11,6 +11,8 @@ public class AdsRecoveryObject extends AdsBaseObject {
 
   public String getRecoveredAdUnitId(String adUnitId) {
     String getIdScript = String.format("window._sp_.getElementId('%s')", adUnitId);
+    jsActions.waitForJavaScriptTruthy("window._sp_");
+    jsActions.waitForJavaScriptTruthy("window._sp_ && window._sp_.getElementId");
     jsActions.waitForJavaScriptTruthy(String.format("window._sp_ && window._sp_.getElementId && %s", getIdScript));
     return jsActions.execute(getIdScript).toString();
   }
