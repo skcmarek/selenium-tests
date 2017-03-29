@@ -863,26 +863,26 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] adsTrackingPixelsSent() {
     return new Object[][]{
-//        {
-//            "project43",
-//            new String[]{
-//                TestAdsTrackingPixels.COMSCORE_PIXEL_URL,
-//                TestAdsTrackingPixels.KRUX_PIXEL_URL,
-//                TestAdsTrackingPixels.QUANTQAST_PIXEL_URL
-//            }
-//        },
+        {
+            "project43",
+            new String[]{
+                TestAdsTrackingPixels.COMSCORE_PIXEL_URL,
+                TestAdsTrackingPixels.KRUX_PIXEL_URL,
+                TestAdsTrackingPixels.QUANTQAST_PIXEL_URL
+            }
+        },
         {
             "angrybirds",
             new String[]{
-                "http://www.google-analytics.com/collect?"
+                TestAdsTrackingPixels.GA_PIXEL_URL
+            }
+        },
+        {
+            "lego",
+            new String[]{
+                TestAdsTrackingPixels.NIELSEN_PIXEL_URL
             }
         }
-//        {
-//            "lego",
-//            new String[]{
-//                TestAdsTrackingPixels.NIELSEN_PIXEL_URL
-//            }
-//        }
     };
   }
 
