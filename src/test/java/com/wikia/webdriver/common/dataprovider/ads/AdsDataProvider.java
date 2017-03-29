@@ -871,12 +871,13 @@ public class AdsDataProvider {
                 TestAdsTrackingPixels.QUANTQAST_PIXEL_URL
             }
         },
-//        {
-//            "angrybirds",
+        {
+            "angrybirds",
+            "https://www.google-analytics.com/collect?"
 //            new String[]{
 //                TestAdsTrackingPixels.GA_PIXEL_URL
 //            }
-//        },
+        },
         {
             "lego",
             new String[]{
