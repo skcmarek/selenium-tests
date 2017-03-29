@@ -874,7 +874,7 @@ public class AdsDataProvider {
         {
             "angrybirds",
             new String[]{
-                "https://www.google-analytics.com/collect?"
+                "http://www.google-analytics.com/collect?"
             }
         }
 //        {
